@@ -64,6 +64,19 @@
     .ls-bracket{font-size:0.75rem;color:var(--t-muted);font-style:italic;margin-top:0.15rem;}
     .ls-badge{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:0.3rem 0.75rem;font-family:var(--font-head);font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t-muted);}
 
+    /* Certificates */
+    .cert-section{padding:2.5rem 0;border-top:1px solid var(--g-border);}
+    .cert-section h2{font-size:1rem;font-family:var(--font-head);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--t-muted);margin-bottom:1.2rem;}
+    .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;}
+    .cert-card{background:var(--bg-card);border:1px solid var(--g-border);border-radius:var(--radius-m);overflow:hidden;transition:border-color 0.2s;}
+    .cert-card:hover{border-color:var(--g-border2);}
+    .cert-img{width:100%;display:block;border-bottom:1px solid var(--g-border);}
+    .cert-info{padding:0.9rem 1rem;}
+    .cert-year{font-family:var(--font-head);font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.2rem;}
+    .cert-title{font-family:var(--font-head);font-size:0.88rem;font-weight:800;color:var(--t-primary);margin-bottom:0.15rem;}
+    .cert-score{font-family:var(--font-head);font-size:0.78rem;color:var(--t-secondary);}
+    .cert-pending{background:rgba(255,255,255,0.04);border:1px dashed rgba(255,255,255,0.1);border-radius:var(--radius-m);padding:1.5rem;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.4rem;color:var(--t-muted);font-family:var(--font-head);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;}
+
     .bio-section{padding:2.5rem 0;border-top:1px solid var(--g-border);}
     .bio-section h2{font-size:1rem;font-family:var(--font-head);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--t-muted);margin-bottom:1rem;}
     .bio-p{font-size:0.96rem;color:var(--t-secondary);line-height:1.85;margin-bottom:0.8rem;}
@@ -131,6 +144,38 @@
           </div>
           <div class="ls-badge">📊 Legacy Score</div>
         </div>
+      </div>
+    </div>
+
+    <!-- Certificates -->
+    <div class="cert-section">
+      <h2>🏅 Certificates</h2>
+      <div class="cert-grid">
+
+        <!-- 2024 Certificate -->
+        <div class="cert-card">
+          <img src="arvi-cert.png" alt="Arvi 2024 Speed Player Certificate" class="cert-img">
+          <div class="cert-info">
+            <div class="cert-year">2024</div>
+            <div class="cert-title">Speed Player</div>
+            <div class="cert-score">Score: 19,880 · Issued by Suika League</div>
+          </div>
+        </div>
+
+        <!-- 2025 Pending -->
+        <div class="cert-pending">
+          <span style="font-size:1.8rem;opacity:0.3;">🏅</span>
+          <span>2025 Certificate</span>
+          <span style="font-size:0.62rem;color:var(--t-muted);">Coming Soon</span>
+        </div>
+
+        <!-- 2026 Pending -->
+        <div class="cert-pending">
+          <span style="font-size:1.8rem;opacity:0.3;">🏅</span>
+          <span>2026 Certificate</span>
+          <span style="font-size:0.62rem;color:var(--t-muted);">Coming Soon</span>
+        </div>
+
       </div>
     </div>
 

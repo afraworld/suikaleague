@@ -1261,16 +1261,20 @@ const SUIKA = {
 
   /* ── Featured Spotlight Player ──────────────────────────────── */
   spotlight: {
-    name:         'Buzer',
-    avatar:       'buzer2.png',
+    name:         'Arvidius',
+    avatar:       'arvi-avatar.jpg',
     avatarEmoji:  '⭐',
-    role:         'competitive',
-    roleLabel:    'Competitive Player',
-    bestScore:    '26,249',
-    favFruitEmoji:'🍊',
-    favFruit:'Orange',
-    profileLink:  'players.html',
-    interviewLink:'magazine.html',
+    role:         'vip',
+    roleLabel:    'Founding Member',
+    badgeLabel:   '⭐ Community Origin',
+    stat1Value:   '22,000',
+    stat1Label:   'Legacy Score',
+    stat2Value:   '🍇',
+    stat2Text:    'Grape',
+    stat2Label:   'Fav. Fruit',
+    profileLink:  'player-arvi.html',
+    interviewLink:'magazine-story-name.html',
+    interviewLabel:'Read the Origin Story',
   },
 
   /* ── Recent News / Magazine Items ───────────────────────────── */
@@ -1456,7 +1460,7 @@ function renderSpotlight() {
       <span class="sec-hd-label">Player Spotlight</span>
     </div>
     <div style="text-align:center;margin-bottom:1rem;">
-      <span class="badge badge-green" style="margin-bottom:0.75rem;">⭐ Player of the Month</span>
+      <span class="badge badge-green" style="margin-bottom:0.75rem;">${s.badgeLabel||'⭐ Player of the Month'}</span>
       <div style="display:flex;justify-content:center;margin:0.5rem 0 0.75rem;">
         ${s.avatar
           ? `<div class="rgb-frame" style="border-radius:14px;"><img src="${s.avatar}" alt="${s.name}" style="width:110px;height:140px;object-fit:cover;object-position:top center;border-radius:11px;border:3px solid #06090a;display:block;"></div>`
@@ -1468,16 +1472,16 @@ function renderSpotlight() {
       <div class="spotlight-title">${s.roleLabel}</div>
       <div class="spotlight-stats">
         <div class="spotlight-stat">
-          <div class="spotlight-stat-v">${s.bestScore}</div>
-          <div class="spotlight-stat-l">Best Score</div>
+          <div class="spotlight-stat-v">${s.stat1Value||s.bestScore||'—'}</div>
+          <div class="spotlight-stat-l">${s.stat1Label||'Best Score'}</div>
         </div>
         <div class="spotlight-stat">
-          <div class="spotlight-stat-v">${s.favFruitEmoji} <span style="font-size:0.7rem;font-weight:600;color:var(--t-secondary);">${s.favFruit||''}</span></div>
-          <div class="spotlight-stat-l">Fav. Fruit</div>
+          <div class="spotlight-stat-v">${s.stat2Value||s.favFruitEmoji||'—'} <span style="font-size:0.7rem;font-weight:600;color:var(--t-secondary);">${s.stat2Text||s.favFruit||''}</span></div>
+          <div class="spotlight-stat-l">${s.stat2Label||'Fav. Fruit'}</div>
         </div>
       </div>
     </div>
-    <a href="${s.interviewLink}" class="btn btn-outline btn-block" style="margin-bottom:0.6rem;">📖 Read Interview</a>
+    <a href="${s.interviewLink}" class="btn btn-outline btn-block" style="margin-bottom:0.6rem;">📖 ${s.interviewLabel||'Read Interview'}</a>
     <a href="${s.profileLink}"   class="btn btn-ghost   btn-block btn-sm">View Profile</a>
     <div class="carousel-dots">
       <div class="c-dot on"></div>
