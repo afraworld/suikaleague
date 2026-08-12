@@ -1218,6 +1218,7 @@ const SUIKA = {
     roleLabel:    'Competitive Player',
     bestScore:    '26,249',
     favFruitEmoji:'🍊',
+    favFruit:'Orange',
     profileLink:  'players.html',
     interviewLink:'magazine.html',
   },
@@ -1262,13 +1263,13 @@ const SUIKA = {
     },
   ],
 
-  /* ── Leaderboard Top 5 ──────────────────────────────────────── */
+  /* ── Members-Only Leaderboard Top 5 ────────────────────────── */
   leaderboard: [
-    { rank:1, name:'SPUTN1X',       score:'38,432', emoji:'🍉', role:'Champion',   link:'players.html', isPlaceholder:false },
-    { rank:2, name:'BUZA',          score:'38,407', emoji:'🍉', role:'Competitive',link:'players.html', isPlaceholder:false },
-    { rank:3, name:'Rialsnogard',   score:'27,132', emoji:'🍓', role:'Competitive', avatar:'rialsnogard-avi.png', link:'players.html', isPlaceholder:false },
-    { rank:4, name:'チョコレート麦茶', score:'26,770', emoji:'🍵', role:'Regular', link:'players.html', isPlaceholder:false },
-    { rank:5, name:'buzer ~',       score:'26,249', emoji:'🍊', role:'Competitive',link:'players.html', isPlaceholder:false },
+    { rank:1, name:'SPUTN1X',     score:'38,432', emoji:'🍉', role:'Champion',    link:'leaderboard.html', isPlaceholder:false },
+    { rank:2, name:'BUZA',        score:'38,407', emoji:'🫐', role:'Competitive', link:'player-buza.html', isPlaceholder:false },
+    { rank:3, name:'Rialsnogard', score:'27,132', emoji:'🍓', role:'Competitive', avatar:'rialsnogard-avi.png', link:'players.html', isPlaceholder:false },
+    { rank:4, name:'buzer ~',     score:'26,249', emoji:'🍊', role:'Competitive', avatar:'buzer2.png', link:'player-buzer.html', isPlaceholder:false },
+    { rank:5, name:'~Hydro~',     score:'22,196', emoji:'💧', role:'Regular',     link:'players.html', isPlaceholder:false },
   ],
 
 };
@@ -1421,7 +1422,7 @@ function renderSpotlight() {
           <div class="spotlight-stat-l">Best Score</div>
         </div>
         <div class="spotlight-stat">
-          <div class="spotlight-stat-v">${s.favFruitEmoji}</div>
+          <div class="spotlight-stat-v">${s.favFruitEmoji} <span style="font-size:0.7rem;font-weight:600;color:var(--t-secondary);">${s.favFruit||''}</span></div>
           <div class="spotlight-stat-l">Fav. Fruit</div>
         </div>
       </div>
@@ -1487,13 +1488,12 @@ function renderLeaderboard() {
   `).join('');
   el.innerHTML = `
     <div class="sec-hd">
-      <span class="sec-hd-icon">👑</span>
-      <span class="sec-hd-label">Leaderboard Top 5</span>
+      <span class="sec-hd-icon">🏅</span>
+      <span class="sec-hd-label">Members Leaderboard</span>
       <a href="leaderboard.html" class="sec-hd-link">Full Board →</a>
     </div>
     <div class="lb-list">${rows}</div>
     <a href="leaderboard.html" class="btn btn-outline btn-block" style="margin-top:1.1rem;">View Full Leaderboard →</a>
-    <div class="placeholder">⚠️ Placeholder — real scores coming soon</div>
   `;
 }
 
