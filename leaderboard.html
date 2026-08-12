@@ -260,7 +260,23 @@
       </table>
     </div>
 
-    <!-- More players will be added as the community grows -->
+    <!-- Legacy / Pending Update Section -->
+    <div id="legacySection" style="margin-top:3rem;">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(74,222,128,0.06),rgba(251,191,36,0.18),rgba(74,222,128,0.06));"></div>
+        <div style="font-family:'Exo 2',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(251,191,36,0.55);flex-shrink:0;">📋 Legacy Scores / Pending Update</div>
+        <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(74,222,128,0.06),rgba(251,191,36,0.18),rgba(74,222,128,0.06));"></div>
+      </div>
+      <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.16);border-radius:14px;overflow:hidden;">
+        <div style="padding:0.75rem 1.1rem;background:rgba(251,191,36,0.06);border-bottom:1px solid rgba(251,191,36,0.12);font-family:'Exo 2',sans-serif;font-size:0.75rem;color:rgba(251,191,36,0.65);line-height:1.6;">
+          These scores are from an earlier period and are preserved here for the record. Players in this section have not yet submitted an updated score — their all-time best will appear here once they do.
+        </div>
+        <table class="lb-table" id="legacyTable">
+          <tbody id="legacyTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 </main>
 
@@ -285,7 +301,7 @@ const LEADERBOARD = {
     { rank:2,  name:'BUZA',             avatar:null, emoji:'🍉', score:'38,407', role:'competitive', member:true,  profileLink:'players.html' },
     { rank:3,  name:'Rialsnogard',      avatar:'rialsnogard-avi.png', emoji:'🍓', score:'27,132', role:'competitive', member:true,  profileLink:'players.html' },
     { rank:4,  name:'チョコレート麦茶', avatar:null, emoji:'🍵', score:'26,770', role:'regular',     member:false, profileLink:'players.html' },
-    { rank:5,  name:'buzer ~',          avatar:'buzer-avi.png', emoji:'🍊', score:'26,249', role:'competitive', member:true, profileLink:'players.html' },
+    { rank:5,  name:'buzer ~',          avatar:'buzer2.png', emoji:'🍊', score:'26,249', role:'competitive', member:true, profileLink:'players.html' },
     { rank:6,  name:'~Hydro~',          avatar:null, emoji:'💧', score:'22,196', role:'regular',     member:true,  profileLink:'players.html' },
     { rank:7,  name:'まさぴー',         avatar:null, emoji:'🍇', score:'18,506', role:'regular',     member:false, profileLink:'players.html' },
     { rank:8,  name:'-茶子-',           avatar:null, emoji:'🍒', score:'17,747', role:'regular',     member:false, profileLink:'players.html' },
@@ -320,6 +336,24 @@ const LEADERBOARD = {
 LEADERBOARD.members = LEADERBOARD.current
   .filter(p => p.member)
   .map((p, i) => ({ ...p, rank: i + 1 }));
+
+/* ================================================================
+   LEGACY SCORES  ←  Players with old/unupdated scores
+   ================================================================ */
+const LEGACY = [
+  {
+    name: 'Arvidius',
+    shortName: 'Arvi',
+    emoji: '⭐',
+    avatar: null,
+    score: '5,475',
+    role: 'vip',
+    note: 'Early community period — score pending update',
+    profileLink: 'player-arvi.html',
+    tags: ['💎 VIP', '⭐ Founding Member', '🤝 Friend of SL'],
+  },
+  // Add more legacy players here as needed
+];
 
 const ROLE_MAP = {
   champion:   { label:'🏆 #1 Player',       cls:'role-champion'   },
@@ -392,9 +426,42 @@ function renderTable() {
   }).join('');
 }
 
+function renderLegacy() {
+  const el = document.getElementById('legacyTableBody');
+  if (!el) return;
+  el.innerHTML = LEGACY.map(p => {
+    const tagHtml = p.tags.map(t =>
+      `<span style="display:inline-flex;align-items:center;padding:0.18rem 0.52rem;border-radius:50px;
+        font-size:0.6rem;font-weight:600;background:rgba(251,191,36,0.08);
+        border:1px solid rgba(251,191,36,0.18);color:rgba(251,191,36,0.75);margin-right:0.25rem;">${t}</span>`
+    ).join('');
+    return `
+      <tr class="lb-row" style="opacity:0.75;">
+        <td><span style="font-family:'Exo 2',sans-serif;font-weight:900;font-size:0.9rem;color:rgba(251,191,36,0.45);">—</span></td>
+        <td>
+          <div class="lb-player">
+            <div class="lb-av-sm" style="border-color:rgba(251,191,36,0.2);">${p.emoji}</div>
+            <div>
+              <div class="lb-pname-lg">${p.name} <span style="font-size:0.72rem;color:var(--t-muted);font-weight:400;">(${p.shortName})</span></div>
+              <div style="margin-top:0.2rem;">${tagHtml}</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <span style="font-family:'Exo 2',sans-serif;font-weight:900;font-size:1rem;color:var(--t-muted);">${p.score}</span>
+          <div style="font-size:0.65rem;color:var(--t-muted);font-style:italic;margin-top:0.15rem;">(early period)</div>
+        </td>
+        <td colspan="2"><span style="font-size:0.72rem;color:rgba(251,191,36,0.5);">${p.note}</span></td>
+        <td><a href="${p.profileLink}" style="font-size:0.75rem;color:var(--g-bright);font-weight:600;opacity:0.7;">Profile →</a></td>
+      </tr>
+    `;
+  }).join('');
+}
+
 document.addEventListener('DOMContentLoaded',() => {
   renderPodium();
   renderTable();
+  renderLegacy();
   window.addEventListener('scroll',()=>{
     document.getElementById('mainNav').classList.toggle('scrolled',scrollY>60);
   },{passive:true});

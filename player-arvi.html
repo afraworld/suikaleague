@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arvidius (Arvi) — Player Profile · Suika League</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900&family=Playfair+Display:ital,wght@1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-base:#06090a;--bg-card:rgba(10,18,20,0.82);--g-bright:#4ade80;--g-subtle:rgba(74,222,128,0.08);--g-border:rgba(74,222,128,0.18);--g-border2:rgba(74,222,128,0.38);--gold:#fbbf24;--t-primary:#edfff3;--t-secondary:#8da896;--t-muted:#4f6a57;--radius-s:8px;--radius-m:14px;--radius-l:22px;--ease:cubic-bezier(0.4,0,0.2,1);--fast:0.2s;--font-head:'Exo 2',system-ui,sans-serif;--font-serif:'Playfair Display',Georgia,serif;--font-body:'Inter',system-ui,sans-serif;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--bg-base);color:var(--t-primary);overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 55% 45% at 60% 20%,rgba(12,80,35,0.12) 0%,transparent 60%);}
+    h1,h2,h3{font-family:var(--font-head);font-weight:800;line-height:1.15;}
+
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;padding:0 2rem;background:rgba(4,7,8,0.82);backdrop-filter:blur(24px);border-bottom:1px solid var(--g-border);}
+    .nav.scrolled{background:rgba(3,5,6,0.97);}
+    .nav-inner{width:100%;max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+    .logo-mark{width:40px;height:40px;background:var(--g-subtle);border:1px solid var(--g-border);border-radius:var(--radius-m);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+    .logo-name{font-family:var(--font-head);font-weight:900;font-size:1rem;color:var(--g-bright);letter-spacing:0.06em;display:block;}
+    .logo-sub{font-family:var(--font-head);font-weight:600;font-size:0.55rem;color:var(--t-muted);letter-spacing:0.18em;text-transform:uppercase;display:block;}
+    .nav-links{display:flex;align-items:center;gap:0.1rem;list-style:none;flex:1;}
+    .nav-links a{display:block;padding:0.45rem 0.7rem;font-family:var(--font-head);font-weight:600;font-size:0.78rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--t-secondary);border-radius:var(--radius-s);transition:color var(--fast) var(--ease),background var(--fast) var(--ease);}
+    .nav-links a:hover,.nav-links a.active{color:var(--g-bright);background:var(--g-subtle);}
+    .nav-actions{margin-left:auto;}
+    .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1.2rem;font-family:var(--font-head);font-weight:700;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:50px;cursor:pointer;transition:all var(--fast) var(--ease);}
+    .btn-outline{background:transparent;color:var(--g-bright);border:1.5px solid var(--g-border);}
+    .btn-outline:hover{background:var(--g-subtle);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem;margin-left:auto;}
+    .hamburger span{width:20px;height:2px;background:var(--t-primary);border-radius:2px;}
+    @media(max-width:900px){.nav-links{display:none;}.hamburger{display:flex;}}
+
+    .profile-hero{position:relative;z-index:2;padding:110px 0 60px;}
+    .wrap{max-width:1000px;margin:0 auto;padding:0 2rem;}
+    .hero-back{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--font-head);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t-muted);margin-bottom:1.2rem;transition:color var(--fast) var(--ease);}
+    .hero-back:hover{color:var(--g-bright);}
+    .hero-grid{display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:start;}
+    .avi-ph{width:180px;height:180px;border-radius:var(--radius-l);background:linear-gradient(135deg,rgba(74,222,128,0.08),rgba(251,191,36,0.05));border:2px solid var(--g-border2);display:flex;align-items:center;justify-content:center;font-size:4rem;}
+
+    .hero-kicker{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--g-bright);opacity:0.75;margin-bottom:0.4rem;}
+    .hero-name{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:var(--t-primary);margin-bottom:0.2rem;}
+    .hero-aka{font-family:var(--font-head);font-size:0.85rem;color:var(--t-muted);margin-bottom:0.8rem;}
+    .hero-tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+    .tag{padding:0.28rem 0.7rem;border-radius:50px;font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;}
+    .tag-vip{background:rgba(74,222,128,0.1);border:1px solid var(--g-border2);color:var(--g-bright);}
+    .tag-gold{background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.35);color:var(--gold);}
+    .tag-friend{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--t-secondary);}
+
+    /* Founding contributor card */
+    .founder-contrib{background:linear-gradient(135deg,rgba(251,191,36,0.07),rgba(74,222,128,0.04));
+      border:1px solid rgba(251,191,36,0.3);border-radius:var(--radius-l);padding:1.4rem 1.6rem;margin-bottom:1.5rem;}
+    .fc-label{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;}
+    .fc-quote{font-family:var(--font-serif);font-size:1.2rem;font-style:italic;color:var(--t-primary);line-height:1.5;margin-bottom:0.5rem;}
+    .fc-sub{font-size:0.8rem;color:var(--t-muted);}
+
+    /* Legacy score */
+    .legacy-score{background:var(--bg-card);border:1px solid var(--g-border);border-radius:var(--radius-m);padding:0.9rem 1.2rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:0.5rem;}
+    .ls-left{}
+    .ls-label{font-family:var(--font-head);font-size:0.63rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--t-muted);margin-bottom:0.2rem;}
+    .ls-val{font-family:var(--font-head);font-size:1.4rem;font-weight:900;color:var(--t-secondary);}
+    .ls-bracket{font-size:0.75rem;color:var(--t-muted);font-style:italic;margin-top:0.15rem;}
+    .ls-badge{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:0.3rem 0.75rem;font-family:var(--font-head);font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t-muted);}
+
+    .bio-section{padding:2.5rem 0;border-top:1px solid var(--g-border);}
+    .bio-section h2{font-size:1rem;font-family:var(--font-head);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--t-muted);margin-bottom:1rem;}
+    .bio-p{font-size:0.96rem;color:var(--t-secondary);line-height:1.85;margin-bottom:0.8rem;}
+    .bio-p strong{color:var(--t-primary);}
+    .mag-link{display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;font-family:var(--font-head);font-weight:700;font-size:0.8rem;letter-spacing:0.06em;color:var(--g-bright);}
+    .mag-link:hover{text-decoration:underline;}
+
+    @media(max-width:640px){.hero-grid{grid-template-columns:1fr;}}
+
+    footer{position:relative;z-index:2;background:rgba(2,4,5,0.95);border-top:1px solid var(--g-border);padding:2rem;}
+    .foot-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .foot-logo{font-family:var(--font-head);font-weight:900;font-size:0.9rem;color:var(--g-bright);letter-spacing:0.1em;}
+    .foot-copy{font-size:0.72rem;color:var(--t-muted);}
+  </style>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><img src="logo-circle.png" alt="SL" style="width:34px;height:34px;border-radius:8px;object-fit:cover;"></div>
+      <div><span class="logo-name">SUIKA LEAGUE</span><span class="logo-sub">Official Community</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="players.html" class="active">Players</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="magazine.html">Magazine</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-actions"><a href="players.html" class="btn btn-outline">← All Players</a></div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="profile-hero">
+  <div class="wrap">
+    <a href="players.html" class="hero-back">← Players</a>
+    <div class="hero-grid">
+      <div>
+        <div class="avi-ph">⭐</div>
+        <p style="font-size:0.72rem;color:var(--t-muted);text-align:center;margin-top:0.5rem;">Avatar coming soon</p>
+      </div>
+      <div>
+        <div class="hero-kicker">💎 VIP · Founding Member · Friend of the League</div>
+        <h1 class="hero-name">Arvidius</h1>
+        <div class="hero-aka" style="margin-bottom:0.8rem;">Known as <strong style="color:var(--t-primary);">Arvi</strong></div>
+        <div class="hero-tags">
+          <span class="tag tag-vip">💎 VIP</span>
+          <span class="tag tag-gold">⭐ Founding Member</span>
+          <span class="tag tag-friend">🤝 Friend of SL</span>
+        </div>
+
+        <!-- The name card -->
+        <div class="founder-contrib">
+          <div class="fc-label">💡 Origin of Suika League</div>
+          <div class="fc-quote">"Suika League."</div>
+          <div class="fc-sub">Arvi suggested this name during the founding conversation. It stuck immediately — and has been the identity of this community ever since. <a href="magazine-story-name.html" class="mag-link" style="font-size:0.78rem;">Read the full story →</a></div>
+        </div>
+
+        <!-- Legacy score -->
+        <div class="legacy-score">
+          <div class="ls-left">
+            <div class="ls-label">Recorded Score</div>
+            <div class="ls-val">5,475</div>
+            <div class="ls-bracket">(Early period — score pending update)</div>
+          </div>
+          <div class="ls-badge">📊 Legacy Score</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bio-section">
+      <h2>About Arvi</h2>
+      <p class="bio-p">Arvi was one of the original ten friends who were playing Suika together before Suika League even had a name. When the time came to turn that circle into a proper group, it was Arvi who suggested the two words that became everything: <strong>Suika League</strong>.</p>
+      <p class="bio-p">That name — combining the game they loved with the competitive spirit the community was built around — captured something that a hundred other names wouldn't have. It felt right immediately and it still does today. Every tournament, every leaderboard entry, every new player who joins carries that name because of Arvi.</p>
+      <p class="bio-p">Arvi remains a community friend and part of the Suika League story. Their score on this profile is preserved from the early period of the community — an update is pending whenever they're ready to submit.</p>
+      <a href="magazine-story-name.html" class="mag-link">📖 Read "How Suika League Got Its Name" →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">SUIKA LEAGUE</div>
+    <div class="foot-copy">&copy; 2024 Suika League · <a href="players.html" style="color:var(--g-bright);">← Back to Players</a></div>
+  </div>
+</footer>
+<script>
+  const nav=document.getElementById('mainNav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+</script>
+</body>
+</html>
