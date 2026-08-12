@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUZA — Player Profile · Suika League</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-base:#06090a;--bg-card:rgba(10,18,20,0.82);--g-bright:#4ade80;--g-subtle:rgba(74,222,128,0.08);--g-border:rgba(74,222,128,0.18);--g-border2:rgba(74,222,128,0.38);--gold:#fbbf24;--t-primary:#edfff3;--t-secondary:#8da896;--t-muted:#4f6a57;--radius-s:8px;--radius-m:14px;--radius-l:22px;--ease:cubic-bezier(0.4,0,0.2,1);--fast:0.2s;--font-head:'Exo 2',system-ui,sans-serif;--font-body:'Inter',system-ui,sans-serif;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--bg-base);color:var(--t-primary);overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 55% 45% at 60% 20%,rgba(12,80,35,0.13) 0%,transparent 60%);}
+    h1,h2,h3{font-family:var(--font-head);font-weight:800;line-height:1.15;}
+
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;padding:0 2rem;background:rgba(4,7,8,0.82);backdrop-filter:blur(24px);border-bottom:1px solid var(--g-border);}
+    .nav.scrolled{background:rgba(3,5,6,0.97);}
+    .nav-inner{width:100%;max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+    .logo-mark{width:40px;height:40px;background:var(--g-subtle);border:1px solid var(--g-border);border-radius:var(--radius-m);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+    .logo-name{font-family:var(--font-head);font-weight:900;font-size:1rem;color:var(--g-bright);letter-spacing:0.06em;display:block;}
+    .logo-sub{font-family:var(--font-head);font-weight:600;font-size:0.55rem;color:var(--t-muted);letter-spacing:0.18em;text-transform:uppercase;display:block;}
+    .nav-links{display:flex;align-items:center;gap:0.1rem;list-style:none;flex:1;}
+    .nav-links a{display:block;padding:0.45rem 0.7rem;font-family:var(--font-head);font-weight:600;font-size:0.78rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--t-secondary);border-radius:var(--radius-s);transition:color var(--fast) var(--ease),background var(--fast) var(--ease);}
+    .nav-links a:hover,.nav-links a.active{color:var(--g-bright);background:var(--g-subtle);}
+    .nav-actions{margin-left:auto;}
+    .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1.2rem;font-family:var(--font-head);font-weight:700;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:50px;cursor:pointer;transition:all var(--fast) var(--ease);}
+    .btn-outline{background:transparent;color:var(--g-bright);border:1.5px solid var(--g-border);}
+    .btn-outline:hover{background:var(--g-subtle);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem;margin-left:auto;}
+    .hamburger span{width:20px;height:2px;background:var(--t-primary);border-radius:2px;}
+    @media(max-width:900px){.nav-links{display:none;}.hamburger{display:flex;}}
+
+    .profile-hero{position:relative;z-index:2;padding:110px 0 60px;}
+    .wrap{max-width:1000px;margin:0 auto;padding:0 2rem;}
+    .hero-grid{display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:start;}
+    .hero-back{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--font-head);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t-muted);margin-bottom:1.2rem;transition:color var(--fast) var(--ease);}
+    .hero-back:hover{color:var(--g-bright);}
+
+    /* Avatar placeholder with emoji */
+    .avi-ph{width:180px;height:180px;border-radius:var(--radius-l);background:var(--bg-card);
+      border:2px solid var(--g-border);display:flex;align-items:center;justify-content:center;
+      font-size:4rem;}
+
+    .hero-kicker{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--g-bright);opacity:0.75;margin-bottom:0.4rem;}
+    .hero-name{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:var(--t-primary);margin-bottom:0.4rem;}
+    .hero-tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+    .tag{padding:0.28rem 0.7rem;border-radius:50px;font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;}
+    .tag-competitive{background:rgba(74,222,128,0.1);border:1px solid var(--g-border2);color:var(--g-bright);}
+    .tag-friend{background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);color:var(--gold);}
+    .tag-lang{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--t-secondary);}
+
+    .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin-bottom:2rem;}
+    .stat-box{background:var(--bg-card);border:1px solid var(--g-border);border-radius:var(--radius-m);padding:1rem 1.1rem;text-align:center;}
+    .stat-val{font-family:var(--font-head);font-weight:900;font-size:1.35rem;color:var(--g-bright);line-height:1;}
+    .stat-lbl{font-size:0.65rem;color:var(--t-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.3rem;}
+
+    /* Friend of SL notice */
+    .friend-notice{background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.22);border-radius:var(--radius-m);padding:1rem 1.3rem;margin-bottom:1.5rem;display:flex;gap:0.75rem;align-items:flex-start;}
+    .friend-notice-icon{font-size:1.3rem;flex-shrink:0;}
+    .friend-notice-label{font-family:var(--font-head);font-size:0.66rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;}
+    .friend-notice-text{font-size:0.83rem;color:var(--t-secondary);line-height:1.6;}
+
+    /* Language cards */
+    .lang-row{display:flex;gap:0.6rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+    .lang-card{background:var(--bg-card);border:1px solid var(--g-border);border-radius:var(--radius-s);padding:0.5rem 0.9rem;display:flex;align-items:center;gap:0.45rem;}
+    .lang-flag{font-size:1.1rem;}
+    .lang-info{display:flex;flex-direction:column;}
+    .lang-name{font-family:var(--font-head);font-size:0.78rem;font-weight:700;color:var(--t-primary);}
+    .lang-level{font-size:0.65rem;color:var(--t-muted);}
+
+    .bio-section{padding:2.5rem 0;border-top:1px solid var(--g-border);}
+    .bio-section h2{font-size:1rem;font-family:var(--font-head);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--t-muted);margin-bottom:1rem;}
+    .bio-p{font-size:0.96rem;color:var(--t-secondary);line-height:1.85;margin-bottom:0.8rem;}
+
+    @media(max-width:640px){.hero-grid{grid-template-columns:1fr;}.stats-row{grid-template-columns:repeat(2,1fr);}}
+
+    footer{position:relative;z-index:2;background:rgba(2,4,5,0.95);border-top:1px solid var(--g-border);padding:2rem;}
+    .foot-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .foot-logo{font-family:var(--font-head);font-weight:900;font-size:0.9rem;color:var(--g-bright);letter-spacing:0.1em;}
+    .foot-copy{font-size:0.72rem;color:var(--t-muted);}
+  </style>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><img src="logo-circle.png" alt="SL" style="width:34px;height:34px;border-radius:8px;object-fit:cover;"></div>
+      <div><span class="logo-name">SUIKA LEAGUE</span><span class="logo-sub">Official Community</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="players.html" class="active">Players</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-actions"><a href="players.html" class="btn btn-outline">← All Players</a></div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="profile-hero">
+  <div class="wrap">
+    <a href="players.html" class="hero-back">← Players</a>
+    <div class="hero-grid">
+      <div>
+        <div class="avi-ph">🫐</div>
+        <p style="font-size:0.72rem;color:var(--t-muted);text-align:center;margin-top:0.5rem;">Avatar coming soon</p>
+      </div>
+      <div>
+        <div class="hero-kicker">⭐ Founding Member · 🤝 Friend of Suika League</div>
+        <h1 class="hero-name">BUZA</h1>
+        <div class="hero-tags">
+          <span class="tag tag-competitive">🎮 Competitive</span>
+          <span class="tag tag-friend">🤝 Friend of SL</span>
+          <span class="tag tag-lang">🇰🇷 Korean</span>
+        </div>
+
+        <!-- Friend notice -->
+        <div class="friend-notice">
+          <div class="friend-notice-icon">🤝</div>
+          <div>
+            <div class="friend-notice-label">⭐ Founding Member · 🤝 Friend of the League</div>
+            <div class="friend-notice-text">BUZA is one of the original founding members of Suika League and one of the strongest Suika players in the VRChat world. A community friend and regular presence in our sessions — BUZA helped shape what the league became from the very beginning.</div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-val">38,407</div>
+            <div class="stat-lbl">Best Score</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">#2</div>
+            <div class="stat-lbl">Global Rank</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">🍒</div>
+            <div class="stat-lbl">Fav. Fruit</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">🇰🇷</div>
+            <div class="stat-lbl">Origin</div>
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="lang-row">
+          <div class="lang-card">
+            <span class="lang-flag">🇰🇷</span>
+            <div class="lang-info">
+              <span class="lang-name">Korean</span>
+              <span class="lang-level">Native language</span>
+            </div>
+          </div>
+          <div class="lang-card">
+            <span class="lang-flag">🇬🇧</span>
+            <div class="lang-info">
+              <span class="lang-name">English</span>
+              <span class="lang-level">Currently learning</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bio-section">
+      <h2>About BUZA</h2>
+      <p class="bio-p">BUZA is one of the highest-scoring Suika players in VRChat, sitting at #2 on the global leaderboard with a score of 38,407. A regular presence in Suika League group sessions, BUZA plays with the kind of consistency and skill that makes the competition around them better.</p>
+      <p class="bio-p">Korean is BUZA's native language and they are currently learning English — communication happens across languages in Suika League, and that's never stopped anyone from playing great Suika together.</p>
+      <p class="bio-p">BUZA represents exactly the kind of player the Friends of the League category was created for — someone who belongs in the community's story even if they haven't signed up for the formal member roster.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">SUIKA LEAGUE</div>
+    <div class="foot-copy">&copy; 2024 Suika League · <a href="players.html" style="color:var(--g-bright);">← Back to Players</a></div>
+  </div>
+</footer>
+<script>
+  const nav=document.getElementById('mainNav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+</script>
+</body>
+</html>
