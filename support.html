@@ -143,28 +143,6 @@
     .btn-paypal:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,112,186,0.35);}
     .paypal-fine{font-size:0.72rem;color:var(--t-muted);margin-top:1rem;line-height:1.6;}
 
-    /* ── Transparency ── */
-    .s-transparency{padding:70px 0;border-bottom:1px solid var(--g-border);position:relative;z-index:2;}
-    .transparency-intro{font-size:0.94rem;color:var(--t-secondary);line-height:1.8;max-width:620px;margin-bottom:2.5rem;}
-    .timeline{display:flex;flex-direction:column;gap:0;}
-    .tl-item{display:grid;grid-template-columns:110px 1fr;gap:0 1.5rem;position:relative;}
-    .tl-item:not(:last-child)::before{content:'';position:absolute;left:105px;top:28px;bottom:-10px;
-      width:1px;background:var(--g-border);}
-    .tl-year{font-family:var(--font-head);font-weight:800;font-size:0.78rem;letter-spacing:0.08em;
-      color:var(--t-muted);padding-top:0.55rem;text-align:right;padding-right:0;flex-shrink:0;}
-    .tl-content{padding:0.4rem 0 1.6rem 0;}
-    .tl-dot{width:10px;height:10px;border-radius:50%;background:var(--g-mid);
-      box-shadow:0 0 8px var(--g-glow);position:absolute;left:100px;top:8px;}
-    .tl-dot.future{background:var(--t-muted);box-shadow:none;}
-    .tl-name{font-family:var(--font-head);font-weight:800;font-size:0.9rem;color:var(--t-primary);margin-bottom:0.2rem;}
-    .tl-note{font-size:0.8rem;color:var(--t-secondary);line-height:1.6;}
-    .tl-badge{display:inline-flex;align-items:center;gap:0.3rem;font-size:0.62rem;font-family:var(--font-head);
-      font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.15rem 0.5rem;
-      border-radius:50px;margin-left:0.5rem;}
-    .badge-done{background:rgba(74,222,128,0.1);color:var(--g-bright);border:1px solid rgba(74,222,128,0.25);}
-    .badge-soon{background:rgba(251,191,36,0.1);color:var(--gold);border:1px solid rgba(251,191,36,0.25);}
-    .badge-future{background:rgba(148,163,184,0.08);color:var(--t-muted);border:1px solid rgba(148,163,184,0.15);}
-
     /* ── Disclaimer ── */
     .s-disclaimer{padding:55px 0 70px;position:relative;z-index:2;}
     .disclaimer-box{background:rgba(10,18,20,0.7);border:1px solid rgba(74,222,128,0.1);
@@ -360,66 +338,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ── Transparency Timeline ── -->
-  <section class="s-transparency">
-    <div class="wrap">
-      <div class="s-header">
-        <div class="s-label">Accountability</div>
-        <h2 class="s-title">Where support has gone</h2>
-        <p class="transparency-intro">We want community support to go back into Suika League. As projects develop, we share major community-funded expenses and what they helped us create. This list will grow.</p>
-      </div>
-      <div class="timeline">
-
-        <div class="tl-item">
-          <div class="tl-year">2024</div>
-          <div class="tl-dot"></div>
-          <div class="tl-content">
-            <div class="tl-name">suikaleague.com domain <span class="tl-badge badge-done">✓ Done</span></div>
-            <div class="tl-note">Domain registered to give the league a permanent home online.</div>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-year">2025</div>
-          <div class="tl-dot"></div>
-          <div class="tl-content">
-            <div class="tl-name">SL Bot assets <span class="tl-badge badge-done">✓ Done</span></div>
-            <div class="tl-note">Community bot development and infrastructure to support league operations.</div>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-year">2026</div>
-          <div class="tl-dot"></div>
-          <div class="tl-content">
-            <div class="tl-name">Website rebuild <span class="tl-badge badge-done">✓ Done</span></div>
-            <div class="tl-note">Full website launched — player profiles, magazine, leaderboard, tournament history.</div>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-year">2026</div>
-          <div class="tl-dot future"></div>
-          <div class="tl-content">
-            <div class="tl-name">Tournament prizes <span class="tl-badge badge-soon">Upcoming</span></div>
-            <div class="tl-note">Community-funded prizes for official Suika League tournaments.</div>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-year">Future</div>
-          <div class="tl-dot future"></div>
-          <div class="tl-content">
-            <div class="tl-name">Suika League VRChat World <span class="tl-badge badge-future">Future goal</span></div>
-            <div class="tl-note">Building our own VRChat space — a dedicated home for the league and its community.</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
 
   <!-- ── GOD of Suika ── -->
   <section style="padding:65px 0;border-bottom:1px solid var(--g-border);position:relative;z-index:2;">
