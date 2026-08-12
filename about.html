@@ -3,380 +3,251 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About Suika League — The story of Afra (Yuliana Grasman), founder of the premier Suika Game community in VRChat.">
-  <meta property="og:title" content="Built at Full Speed — The Story Behind Suika League">
-  <meta property="og:description" content="The premiere editorial profile of Yuliana Grasman, founder of Suika League.">
+  <meta name="description" content="About Suika League — the official VRChat competitive community for Suika Game.">
   <title>About – Suika League</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700;800;900&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ================================================================
-       SUIKA LEAGUE — DESIGN TOKENS (shared across all pages)
-       ================================================================ */
     :root {
-      --bg-base: #06090a; --bg-mid: #0c1416; --bg-card: rgba(10,18,20,0.82);
-      --g-bright: #4ade80; --g-mid: #22c55e; --g-glow: rgba(74,222,128,0.45);
-      --g-subtle: rgba(74,222,128,0.08); --g-border: rgba(74,222,128,0.20);
-      --g-border2: rgba(74,222,128,0.35);
-      --gold: #fbbf24; --silver: #94a3b8; --discord: #5865F2;
-      --t-primary: #edfff3; --t-secondary: #8da896; --t-muted: #4f6a57;
-      --radius-s: 8px; --radius-m: 14px; --radius-l: 22px;
-      --ease: cubic-bezier(0.4,0,0.2,1); --fast: 0.2s; --mid: 0.35s;
-      --font-head: 'Exo 2', system-ui, sans-serif;
-      --font-body: 'Inter', system-ui, sans-serif;
-      --font-edit: 'Playfair Display', Georgia, serif;
+      --bg-base:#06090a; --bg-card:rgba(10,18,20,0.82);
+      --g-bright:#4ade80; --g-mid:#22c55e; --g-glow:rgba(74,222,128,0.45);
+      --g-subtle:rgba(74,222,128,0.08); --g-border:rgba(74,222,128,0.18); --g-border2:rgba(74,222,128,0.38);
+      --gold:#fbbf24; --discord:#5865F2;
+      --t-primary:#edfff3; --t-secondary:#8da896; --t-muted:#4f6a57;
+      --radius-s:8px; --radius-m:14px; --radius-l:22px;
+      --ease:cubic-bezier(0.4,0,0.2,1); --fast:0.2s;
+      --font-head:'Exo 2',system-ui,sans-serif; --font-body:'Inter',system-ui,sans-serif;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-body);
-      background: var(--bg-base);
-      color: var(--t-primary);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--bg-base);color:var(--t-primary);overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 55% 45% at 70% 20%,rgba(12,80,35,0.14) 0%,transparent 60%),
+                 radial-gradient(ellipse 40% 35% at 15% 80%,rgba(70,15,35,0.09) 0%,transparent 60%);}
+    h1,h2,h3{font-family:var(--font-head);font-weight:800;line-height:1.15;}
 
-    /* Background */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background:
-        radial-gradient(ellipse 55% 45% at 72% 18%, rgba(12,80,35,0.15) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 35% at 15% 75%, rgba(70,15,35,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 65% 40% at 50% 105%, rgba(8,55,22,0.18) 0%, transparent 55%);
-    }
-    body::after {
-      content: '';
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background-image: radial-gradient(circle, rgba(74,222,128,0.04) 1px, transparent 1px);
-      background-size: 32px 32px;
-    }
+    /* ── Nav ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;padding:0 2rem;
+      background:rgba(4,7,8,0.82);backdrop-filter:blur(24px);border-bottom:1px solid var(--g-border);}
+    .nav.scrolled{background:rgba(3,5,6,0.97);}
+    .nav-inner{width:100%;max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+    .logo-mark{width:40px;height:40px;background:var(--g-subtle);border:1px solid var(--g-border);border-radius:var(--radius-m);
+      display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .logo-name{font-family:var(--font-head);font-weight:900;font-size:1rem;color:var(--g-bright);letter-spacing:0.06em;display:block;}
+    .logo-sub{font-family:var(--font-head);font-weight:600;font-size:0.55rem;color:var(--t-muted);letter-spacing:0.18em;text-transform:uppercase;display:block;}
+    .nav-links{display:flex;align-items:center;gap:0.1rem;list-style:none;flex:1;}
+    .nav-links a{display:block;padding:0.45rem 0.7rem;font-family:var(--font-head);font-weight:600;font-size:0.78rem;
+      letter-spacing:0.05em;text-transform:uppercase;color:var(--t-secondary);border-radius:var(--radius-s);
+      transition:color var(--fast) var(--ease),background var(--fast) var(--ease);}
+    .nav-links a:hover,.nav-links a.active{color:var(--g-bright);background:var(--g-subtle);}
+    .nav-actions{margin-left:auto;display:flex;gap:0.5rem;}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.55rem 1.3rem;
+      font-family:var(--font-head);font-weight:700;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;
+      border:none;border-radius:50px;cursor:pointer;transition:all var(--fast) var(--ease);}
+    .btn:hover{transform:translateY(-2px);}
+    .btn-discord{background:var(--discord);color:#fff;}
+    .btn-outline{background:transparent;color:var(--g-bright);border:1.5px solid var(--g-border);}
+    .btn-outline:hover{background:var(--g-subtle);border-color:var(--g-border2);}
+    .btn-gold{background:rgba(251,191,36,0.12);color:var(--gold);border:1.5px solid rgba(251,191,36,0.3);}
+    .btn-gold:hover{background:rgba(251,191,36,0.22);border-color:rgba(251,191,36,0.55);}
+    .btn-lg{padding:0.85rem 2rem;font-size:0.88rem;}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem;margin-left:auto;}
+    .hamburger span{width:20px;height:2px;background:var(--t-primary);border-radius:2px;}
+    .mobile-drawer{display:none;position:fixed;top:68px;left:0;right:0;z-index:199;
+      background:rgba(3,6,7,0.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--g-border);padding:1rem;}
+    .mobile-drawer.open{display:block;}
+    .mobile-links{list-style:none;display:flex;flex-direction:column;gap:2px;}
+    .mobile-links a{display:block;padding:0.8rem 1rem;font-family:var(--font-head);font-weight:600;font-size:0.9rem;
+      letter-spacing:0.06em;text-transform:uppercase;color:var(--t-secondary);border-radius:var(--radius-s);}
+    .mobile-links a:hover{color:var(--g-bright);background:var(--g-subtle);}
+    @media(max-width:900px){.nav-links{display:none;}.hamburger{display:flex;}}
 
-    /* ================================================================
-       NAVIGATION (same across all pages)
-       ================================================================ */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 68px;
-      display: flex; align-items: center; padding: 0 2rem;
-      background: rgba(4,7,8,0.80); backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--g-border);
-      transition: background var(--mid) var(--ease);
-    }
-    .nav.scrolled { background: rgba(3,5,6,0.96); }
-    .nav-inner { width: 100%; max-width: 1380px; margin: 0 auto; display: flex; align-items: center; gap: 1.5rem; }
-    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .logo-mark {
-      width: 40px; height: 40px;
-      background: var(--g-subtle); border: 1px solid var(--g-border);
-      border-radius: var(--radius-m);
-      display: flex; align-items: center; justify-content: center;
-      filter: drop-shadow(0 0 10px var(--g-glow)); flex-shrink: 0;
-    }
-    .logo-name { display: block; font-family: var(--font-head); font-weight: 900; font-size: 1rem; color: var(--g-bright); text-shadow: 0 0 18px var(--g-glow); letter-spacing: 0.06em; }
-    .logo-sub  { display: block; font-family: var(--font-head); font-weight: 600; font-size: 0.55rem; color: var(--t-muted); letter-spacing: 0.18em; text-transform: uppercase; }
-    .nav-links { display: flex; align-items: center; gap: 0.1rem; list-style: none; flex: 1; }
-    .nav-links a { display: block; padding: 0.45rem 0.7rem; font-family: var(--font-head); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--t-secondary); border-radius: var(--radius-s); transition: color var(--fast) var(--ease), background var(--fast) var(--ease); }
-    .nav-links a:hover, .nav-links a.active { color: var(--g-bright); background: var(--g-subtle); }
-    .nav-actions { margin-left: auto; display: flex; align-items: center; gap: 0.75rem; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.6rem 1.4rem; font-family: var(--font-head); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; border: none; border-radius: 50px; cursor: pointer; transition: transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease); white-space: nowrap; }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-discord { background: var(--discord); color: #fff; box-shadow: 0 0 20px rgba(88,101,242,0.28); }
-    .btn-discord:hover { background: #4752c4; box-shadow: 0 0 30px rgba(88,101,242,0.45); }
-    .btn-sm { padding: 0.42rem 1rem; font-size: 0.72rem; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 0.5rem; margin-left: auto; }
-    .hamburger span { width: 20px; height: 2px; background: var(--t-primary); border-radius: 2px; transition: var(--fast) var(--ease); }
-    .mobile-drawer { display: none; position: fixed; top: 68px; left: 0; right: 0; z-index: 199; background: rgba(3,6,7,0.98); backdrop-filter: blur(20px); border-bottom: 1px solid var(--g-border); padding: 1rem; }
-    .mobile-drawer.open { display: block; }
-    .mobile-links { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-    .mobile-links a { display: block; padding: 0.8rem 1rem; font-family: var(--font-head); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--t-secondary); border-radius: var(--radius-s); transition: color var(--fast) var(--ease), background var(--fast) var(--ease); }
-    .mobile-links a:hover { color: var(--g-bright); background: var(--g-subtle); }
+    /* ── Page Shell ── */
+    .page{padding-top:68px;}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 2rem;}
 
-    @media(max-width:900px) {
-      .nav-links, .nav-actions { display: none; }
-      .hamburger { display: flex; }
-    }
+    /* ════════════════════════════════════════
+       SECTION 1 — WHAT IS + HOW IT WORKS
+       Split layout: left copy / right platform cards
+    ════════════════════════════════════════ */
+    .s-intro{position:relative;z-index:2;padding:80px 0 70px;border-bottom:1px solid var(--g-border);}
+    .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+    .intro-eyebrow{display:inline-flex;align-items:center;gap:0.4rem;background:var(--g-subtle);
+      border:1px solid var(--g-border);border-radius:50px;padding:0.3rem 0.8rem;
+      font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+      color:var(--g-bright);margin-bottom:1rem;}
+    .intro-title{font-size:clamp(1.9rem,3.5vw,2.7rem);font-weight:900;color:var(--t-primary);margin-bottom:1.2rem;}
+    .intro-title em{color:var(--g-bright);font-style:normal;}
+    .intro-body p{font-size:0.97rem;color:var(--t-secondary);line-height:1.85;margin-bottom:0.9rem;}
+    .intro-body p:last-child{margin-bottom:0;}
+    .goal-row{display:flex;align-items:center;gap:0.9rem;margin-top:1.5rem;flex-wrap:wrap;}
+    .goal-chip{font-family:var(--font-head);font-weight:800;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+      padding:0.4rem 0.9rem;border-radius:50px;border:1px solid var(--g-border2);color:var(--g-bright);background:var(--g-subtle);}
 
-    /* ================================================================
-       FOOTER
-       ================================================================ */
-    footer {
-      position: relative; z-index: 2;
-      border-top: 1px solid var(--g-border);
-      padding: 2.5rem 2rem;
-      text-align: center;
-    }
-    .foot-inner { max-width: 900px; margin: 0 auto; }
-    .foot-logo { font-family: var(--font-head); font-weight: 900; font-size: 1.1rem; color: var(--g-bright); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
-    .foot-links { display: flex; justify-content: center; gap: 2rem; margin: 1rem 0; flex-wrap: wrap; }
-    .foot-links a { font-size: 0.8rem; color: var(--t-muted); letter-spacing: 0.04em; transition: color var(--fast) var(--ease); }
-    .foot-links a:hover { color: var(--g-bright); }
-    .foot-copy { font-size: 0.75rem; color: var(--t-muted); }
-    .foot-socials { display: flex; justify-content: center; gap: 0.6rem; margin: 1rem 0; }
-    .fs-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--g-subtle); border: 1px solid var(--g-border); display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: background var(--fast) var(--ease), border-color var(--fast) var(--ease), transform var(--fast) var(--ease); }
-    .fs-icon:hover { background: var(--g-border); border-color: var(--g-border2); transform: translateY(-2px); }
+    /* Platform cards stack */
+    .platform-stack{display:flex;flex-direction:column;gap:0.75rem;}
+    .p-card{background:var(--bg-card);border:1px solid var(--g-border);border-radius:var(--radius-m);
+      padding:1.2rem 1.4rem;backdrop-filter:blur(16px);display:flex;gap:1rem;align-items:flex-start;
+      transition:border-color var(--fast) var(--ease);}
+    .p-card:hover{border-color:var(--g-border2);}
+    .p-card-icon{font-size:1.5rem;flex-shrink:0;margin-top:1px;}
+    .p-card-name{font-family:var(--font-head);font-weight:800;font-size:0.88rem;letter-spacing:0.04em;
+      color:var(--g-bright);margin-bottom:0.3rem;}
+    .p-card p{font-size:0.82rem;color:var(--t-secondary);line-height:1.65;}
+    @media(max-width:800px){.intro-grid{grid-template-columns:1fr;gap:2.5rem;}}
 
-    /* ================================================================
-       EDITORIAL LAYOUT — THE SPECIAL STUFF FOR THIS PAGE
-       ================================================================ */
+    /* ════════════════════════════════════════
+       SECTION 2 — ROLES
+       Two tiers, premium role cards
+    ════════════════════════════════════════ */
+    .s-roles{position:relative;z-index:2;padding:70px 0;border-bottom:1px solid var(--g-border);}
+    .s-header{margin-bottom:2.5rem;}
+    .s-label{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--g-bright);opacity:0.75;margin-bottom:0.5rem;}
+    .s-title{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:900;color:var(--t-primary);}
+    .s-sub{font-size:0.94rem;color:var(--t-secondary);margin-top:0.5rem;line-height:1.7;max-width:600px;}
 
-    /* Page intro / banner */
-    .ed-banner {
-      position: relative; z-index: 2;
-      padding: 130px 2rem 0;
-      text-align: center;
-    }
-    .ed-kicker {
-      display: inline-block;
-      font-family: var(--font-head); font-size: 0.68rem; font-weight: 700;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--g-bright);
-      border-top: 1px solid var(--g-border2); border-bottom: 1px solid var(--g-border2);
-      padding: 0.3rem 1.2rem; margin-bottom: 1.5rem;
-    }
-    .ed-headline {
-      font-family: var(--font-edit);
-      font-size: clamp(2.4rem, 6vw, 5.2rem);
-      font-weight: 900; line-height: 1.05;
-      color: var(--t-primary);
-      letter-spacing: -0.01em;
-      max-width: 860px; margin: 0 auto 1.2rem;
-    }
-    .ed-headline em { font-style: italic; color: var(--g-bright); }
-    .ed-deck {
-      font-family: var(--font-edit); font-style: italic;
-      font-size: clamp(1rem, 2.2vw, 1.25rem);
-      color: var(--t-secondary);
-      max-width: 660px; margin: 0 auto 2rem;
-      line-height: 1.55;
-    }
-    .ed-byline {
-      display: flex; align-items: center; justify-content: center; gap: 1.2rem;
-      font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--t-muted); border-top: 1px solid var(--g-border);
-      padding-top: 1.2rem; max-width: 500px; margin: 0 auto 0;
-    }
-    .ed-byline-name { color: var(--g-bright); font-weight: 600; }
-    .ed-byline-sep { color: var(--t-muted); opacity: 0.4; }
+    .roles-tier{margin-bottom:2.2rem;}
+    .tier-label{font-family:var(--font-head);font-size:0.68rem;font-weight:700;letter-spacing:0.14em;
+      text-transform:uppercase;color:var(--t-muted);margin-bottom:1rem;padding-bottom:0.5rem;
+      border-bottom:1px solid rgba(74,222,128,0.1);}
+    .role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.7rem;}
+    .role-card{background:var(--bg-card);border:1px solid var(--g-border);border-radius:var(--radius-m);
+      padding:1rem 1.15rem;position:relative;overflow:hidden;
+      transition:border-color var(--fast) var(--ease),transform var(--fast) var(--ease);}
+    .role-card:hover{border-color:var(--g-border2);transform:translateY(-2px);}
+    .role-card::before{content:'';position:absolute;inset:0;opacity:0;
+      background:linear-gradient(135deg,var(--g-subtle),transparent 60%);
+      transition:opacity var(--fast) var(--ease);}
+    .role-card:hover::before{opacity:1;}
+    .role-icon{font-size:1.4rem;margin-bottom:0.5rem;display:block;}
+    .role-name{font-family:var(--font-head);font-weight:800;font-size:0.85rem;color:var(--t-primary);margin-bottom:0.3rem;}
+    .role-desc{font-size:0.78rem;color:var(--t-secondary);line-height:1.6;position:relative;}
+    /* Award tier */
+    .role-card.award{border-color:rgba(251,191,36,0.18);}
+    .role-card.award .role-name{color:var(--gold);}
+    .role-card.award::before{background:linear-gradient(135deg,rgba(251,191,36,0.06),transparent 60%);}
+    .role-card.award:hover{border-color:rgba(251,191,36,0.4);}
+    .roles-note{font-size:0.8rem;color:var(--t-muted);font-style:italic;margin-top:0.5rem;}
 
-    /* Full-width divider image / portrait strip */
-    .ed-full-img {
-      position: relative; z-index: 2;
-      width: 100%; margin: 3rem 0 0;
-      max-height: 480px; overflow: hidden;
-    }
-    .ed-full-img img { width: 100%; height: 100%; object-fit: cover; }
-    .ed-full-img .img-placeholder {
-      width: 100%; height: 380px;
-      background: linear-gradient(135deg, rgba(10,28,16,0.9) 0%, rgba(4,9,11,0.95) 100%);
-      border-top: 1px solid var(--g-border); border-bottom: 1px solid var(--g-border);
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 0.75rem;
-    }
-    .img-ph-label {
-      font-family: var(--font-head); font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase; color: var(--t-muted);
-    }
-    .img-caption {
-      position: relative; z-index: 2;
-      max-width: 900px; margin: 0 auto;
-      padding: 0.65rem 2rem;
-      font-size: 0.78rem; font-style: italic; color: var(--t-muted);
-      border-bottom: 1px solid var(--g-border);
-    }
+    /* ════════════════════════════════════════
+       SECTION 3 — LEARN  (Discord CTA)
+    ════════════════════════════════════════ */
+    .s-learn{position:relative;z-index:2;padding:70px 0;border-bottom:1px solid var(--g-border);}
+    .learn-card{background:linear-gradient(135deg,rgba(88,101,242,0.12) 0%,rgba(74,222,128,0.05) 100%);
+      border:1px solid rgba(88,101,242,0.25);border-radius:var(--radius-l);padding:3rem 3.5rem;
+      display:flex;gap:3rem;align-items:center;backdrop-filter:blur(20px);}
+    .learn-text{flex:1;}
+    .learn-text h3{font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:900;color:var(--t-primary);margin-bottom:0.8rem;}
+    .learn-text p{font-size:0.95rem;color:var(--t-secondary);line-height:1.8;margin-bottom:0.7rem;}
+    .learn-cta{flex-shrink:0;display:flex;flex-direction:column;gap:0.6rem;align-items:center;}
+    .learn-icon{font-size:3.5rem;line-height:1;}
+    @media(max-width:680px){.learn-card{flex-direction:column;padding:2rem;text-align:center;}
+      .learn-cta{flex-direction:row;}}
 
-    /* Inline portrait (half-width) */
-    .ed-inline-img {
-      float: right; width: 42%; margin: 0 0 1.5rem 2.2rem;
-    }
-    .ed-inline-img .img-placeholder {
-      width: 100%; aspect-ratio: 3/4;
-      background: linear-gradient(135deg, rgba(10,28,16,0.88) 0%, rgba(4,9,11,0.95) 100%);
-      border: 1px solid var(--g-border); border-radius: var(--radius-m);
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 0.6rem;
-    }
-    .ed-inline-img .img-caption {
-      padding: 0.5rem 0; border-bottom: none; border-top: 1px solid var(--g-border);
-      margin: 0;
-    }
+    /* ════════════════════════════════════════
+       SECTION 4 — PHILOSOPHY  (pull-quote)
+    ════════════════════════════════════════ */
+    .s-philosophy{position:relative;z-index:2;padding:80px 0;border-bottom:1px solid var(--g-border);}
+    .phil-inner{max-width:820px;margin:0 auto;text-align:center;}
+    .phil-opening{font-family:var(--font-head);font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:900;
+      color:var(--t-primary);line-height:1.25;margin-bottom:2.5rem;letter-spacing:-0.01em;}
+    .phil-opening em{color:var(--g-bright);font-style:normal;}
+    .phil-divider{width:60px;height:3px;background:linear-gradient(90deg,var(--g-bright),transparent);
+      border-radius:2px;margin:0 auto 2.5rem;}
+    .phil-body{display:flex;flex-direction:column;gap:1rem;}
+    .phil-body p{font-size:0.97rem;color:var(--t-secondary);line-height:1.9;text-align:left;}
+    .phil-body strong{color:var(--t-primary);}
+    .phil-closing{font-family:var(--font-head);font-size:1.05rem;font-weight:800;font-style:italic;
+      color:var(--g-bright);margin-top:2rem;text-align:center;}
+    .phil-closing::before{content:'"';opacity:0.4;font-size:1.5em;line-height:0;vertical-align:-0.25em;}
+    .phil-closing::after{content:'"';opacity:0.4;font-size:1.5em;line-height:0;vertical-align:-0.25em;}
 
-    /* Main article body */
-    .ed-body {
-      position: relative; z-index: 2;
-      max-width: 900px; margin: 0 auto;
-      padding: 3rem 2rem 5rem;
-    }
+    /* ════════════════════════════════════════
+       SECTION 5 — GET INVOLVED  (button-first)
+    ════════════════════════════════════════ */
+    .s-involve{position:relative;z-index:2;padding:70px 0;border-bottom:1px solid var(--g-border);}
+    .involve-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;}
+    .involve-left h3{font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:900;color:var(--t-primary);margin-bottom:0.8rem;}
+    .involve-left p{font-size:0.94rem;color:var(--t-secondary);line-height:1.8;margin-bottom:1.5rem;}
+    .involve-cta-stack{display:flex;flex-direction:column;gap:0.7rem;}
+    .involve-btn{display:flex;align-items:center;gap:0.85rem;padding:0.85rem 1.3rem;
+      border-radius:var(--radius-m);border:1.5px solid var(--g-border);background:var(--g-subtle);
+      font-family:var(--font-head);font-weight:700;font-size:0.82rem;letter-spacing:0.04em;
+      color:var(--t-primary);cursor:pointer;transition:all var(--fast) var(--ease);}
+    .involve-btn:hover{border-color:var(--g-border2);background:rgba(74,222,128,0.13);transform:translateX(4px);}
+    .involve-btn.discord{border-color:rgba(88,101,242,0.35);background:rgba(88,101,242,0.08);}
+    .involve-btn.discord:hover{background:rgba(88,101,242,0.18);border-color:rgba(88,101,242,0.55);}
+    .involve-btn-icon{font-size:1.2rem;flex-shrink:0;}
+    .involve-btn-text{display:flex;flex-direction:column;gap:1px;}
+    .involve-btn-title{font-size:0.82rem;font-weight:700;}
+    .involve-btn-sub{font-size:0.72rem;font-weight:400;color:var(--t-muted);}
+    .involve-right{display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;}
+    .way-chip{background:var(--bg-card);border:1px solid var(--g-border);border-radius:var(--radius-m);
+      padding:0.9rem 1rem;display:flex;gap:0.6rem;align-items:flex-start;
+      transition:border-color var(--fast) var(--ease);}
+    .way-chip:hover{border-color:var(--g-border2);}
+    .way-em{font-size:1.2rem;flex-shrink:0;margin-top:1px;}
+    .way-body-title{font-family:var(--font-head);font-weight:700;font-size:0.8rem;color:var(--t-primary);margin-bottom:0.2rem;}
+    .way-body-desc{font-size:0.74rem;color:var(--t-secondary);line-height:1.55;}
+    @media(max-width:760px){.involve-layout{grid-template-columns:1fr;gap:2rem;}
+      .involve-right{grid-template-columns:1fr;}}
 
-    /* Two-column newspaper layout */
-    .ed-columns {
-      column-count: 2;
-      column-gap: 2.8rem;
-      column-rule: 1px solid var(--g-border);
-    }
-    .ed-columns p {
-      font-size: 1rem; line-height: 1.78;
-      color: #c8e6d0;
-      margin-bottom: 1.2rem;
-      break-inside: avoid-column;
-    }
-    /* Drop cap on first paragraph */
-    .ed-columns > p:first-child::first-letter {
-      font-family: var(--font-edit);
-      font-size: 4.5rem; font-weight: 700;
-      float: left; line-height: 0.82;
-      margin: 0.08em 0.1em 0 0;
-      color: var(--g-bright);
-      text-shadow: 0 0 28px var(--g-glow);
-    }
+    /* ════════════════════════════════════════
+       SECTION 6 — FOUNDER  (editorial teaser)
+    ════════════════════════════════════════ */
+    .s-founder{position:relative;z-index:2;padding:70px 0 90px;}
+    .founder-editorial{position:relative;background:var(--bg-card);border:1px solid var(--g-border2);
+      border-radius:var(--radius-l);overflow:hidden;backdrop-filter:blur(24px);}
+    .founder-editorial::before{content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(74,222,128,0.04) 0%,transparent 50%,rgba(251,191,36,0.03) 100%);
+      pointer-events:none;}
+    .founder-inner{display:grid;grid-template-columns:auto 1fr auto;gap:0;align-items:stretch;}
+    /* Left accent stripe */
+    .founder-stripe{width:4px;background:linear-gradient(180deg,var(--g-bright),var(--gold) 70%,transparent);}
+    /* Center content */
+    .founder-content{padding:2.8rem 3rem;}
+    .founder-kicker{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--g-bright);opacity:0.8;margin-bottom:0.6rem;}
+    .founder-name{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:var(--t-primary);margin-bottom:0.2rem;}
+    .founder-role{font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--t-muted);margin-bottom:1.2rem;}
+    .founder-bio{font-size:0.96rem;color:var(--t-secondary);line-height:1.85;margin-bottom:1.4rem;max-width:600px;}
+    .founder-bio p{margin-bottom:0.75rem;}
+    .founder-bio p:last-child{margin-bottom:0;}
+    .founder-bio strong{color:var(--t-primary);}
+    .founder-mag-link{display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.25rem;
+      font-family:var(--font-head);font-weight:700;font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;
+      color:var(--gold);transition:gap var(--fast) var(--ease);}
+    .founder-mag-link:hover{gap:0.9rem;}
+    .founder-mag-link::after{content:'→';}
+    /* Right photo panel */
+    .founder-photo-panel{width:220px;flex-shrink:0;background:linear-gradient(160deg,rgba(12,50,22,0.7),rgba(6,9,10,0.9));
+      display:flex;align-items:center;justify-content:center;border-left:1px solid var(--g-border);
+      position:relative;overflow:hidden;}
+    .founder-photo-panel img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+    .founder-photo-ph{color:var(--t-muted);font-size:0.75rem;text-align:center;padding:1rem;line-height:1.5;}
+    .mag-badge{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);
+      background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.35);border-radius:50px;
+      padding:0.3rem 0.75rem;font-family:var(--font-head);font-size:0.62rem;font-weight:700;
+      letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);white-space:nowrap;}
+    @media(max-width:760px){.founder-inner{grid-template-columns:4px 1fr;}.founder-photo-panel{display:none;}}
+    @media(max-width:520px){.founder-content{padding:1.8rem 1.6rem;}}
 
-    /* Section break between column groups */
-    .ed-section {
-      column-count: 1;
-      margin: 2.5rem 0 0;
-      break-before: column;
-    }
-    .ed-section-head {
-      font-family: var(--font-edit);
-      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-      font-weight: 700; line-height: 1.15;
-      color: var(--t-primary);
-      margin-bottom: 1rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 2px solid var(--g-border2);
-    }
-    .ed-section-head + .ed-columns { margin-top: 0; }
-
-    /* Pull quote */
-    .pull-quote {
-      column-span: all;
-      margin: 2rem 0;
-      padding: 1.8rem 2.4rem;
-      border-left: 4px solid var(--g-bright);
-      background: rgba(74,222,128,0.05);
-      border-radius: 0 var(--radius-m) var(--radius-m) 0;
-      break-inside: avoid;
-    }
-    .pull-quote blockquote {
-      font-family: var(--font-edit); font-style: italic;
-      font-size: clamp(1.15rem, 2.8vw, 1.5rem);
-      font-weight: 500; line-height: 1.4;
-      color: var(--t-primary);
-      quotes: none;
-    }
-    .pull-quote cite {
-      display: block; margin-top: 0.75rem;
-      font-family: var(--font-head); font-style: normal;
-      font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--g-bright);
-    }
-
-    /* Between-column image (full-width break) */
-    .ed-break {
-      column-span: all;
-      margin: 2rem 0;
-    }
-    .ed-break .img-placeholder {
-      width: 100%; height: 240px;
-      background: linear-gradient(135deg, rgba(10,28,16,0.88) 0%, rgba(4,9,11,0.95) 100%);
-      border: 1px solid var(--g-border); border-radius: var(--radius-m);
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 0.6rem;
-    }
-    .ed-break .img-caption {
-      margin: 0; padding: 0.5rem 0;
-      border: none; border-top: 1px solid var(--g-border);
-    }
-
-    /* Founder bio card */
-    .founder-card {
-      margin-top: 3.5rem;
-      padding: 2.2rem;
-      background: var(--bg-card);
-      border: 1px solid var(--g-border);
-      border-radius: var(--radius-l);
-      backdrop-filter: blur(20px);
-      display: flex; gap: 2rem; align-items: flex-start;
-    }
-    .founder-avatar {
-      width: 120px; height: 120px; flex-shrink: 0;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(74,222,128,0.2), rgba(34,197,94,0.1));
-      border: 2px solid var(--g-border2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.8rem;
-      overflow: hidden;
-    }
-    .founder-info h3 {
-      font-family: var(--font-head); font-weight: 900; font-size: 1.15rem;
-      color: var(--g-bright); letter-spacing: 0.04em; margin-bottom: 0.15rem;
-    }
-    .founder-info .founder-title {
-      font-size: 0.78rem; color: var(--t-muted); letter-spacing: 0.08em;
-      text-transform: uppercase; margin-bottom: 0.75rem;
-    }
-    .founder-info p { font-size: 0.9rem; color: var(--t-secondary); line-height: 1.6; margin-bottom: 0.75rem; }
-    .founder-links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.5rem; }
-    .founder-link {
-      display: inline-flex; align-items: center; gap: 0.35rem;
-      padding: 0.3rem 0.8rem;
-      background: var(--g-subtle); border: 1px solid var(--g-border);
-      border-radius: 50px; font-size: 0.75rem; font-weight: 600; color: var(--g-bright);
-      transition: background var(--fast) var(--ease), border-color var(--fast) var(--ease);
-    }
-    .founder-link:hover { background: var(--g-border); border-color: var(--g-border2); }
-
-    /* Video embed placeholder */
-    .ed-video {
-      margin-top: 3rem;
-      padding: 2rem;
-      border: 1px solid var(--g-border);
-      border-radius: var(--radius-l);
-      background: var(--bg-card);
-      text-align: center;
-    }
-    .ed-video-ph {
-      width: 100%; height: 320px;
-      background: rgba(4,9,11,0.9);
-      border-radius: var(--radius-m);
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 0.75rem; margin-bottom: 0.75rem;
-      border: 1px dashed var(--g-border);
-    }
-    .ed-video-label {
-      font-family: var(--font-head); font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.16em; text-transform: uppercase; color: var(--t-muted);
-    }
-
-    /* CTA strip */
-    .ed-cta {
-      margin-top: 3rem;
-      padding: 2.5rem;
-      background: var(--bg-card); border: 1px solid var(--g-border);
-      border-radius: var(--radius-l); text-align: center;
-      backdrop-filter: blur(20px);
-    }
-    .ed-cta h3 {
-      font-family: var(--font-head); font-size: 1.4rem; font-weight: 900;
-      color: var(--g-bright); margin-bottom: 0.5rem;
-    }
-    .ed-cta p { font-size: 0.9rem; color: var(--t-secondary); margin-bottom: 1.25rem; }
-
-    @media(max-width:700px) {
-      .ed-columns { column-count: 1; }
-      .ed-inline-img { float: none; width: 100%; margin: 0 0 1.5rem; }
-      .founder-card { flex-direction: column; align-items: center; text-align: center; }
-      .founder-links { justify-content: center; }
-    }
+    /* ── Footer ── */
+    footer{position:relative;z-index:2;background:rgba(2,4,5,0.95);border-top:1px solid var(--g-border);padding:2rem;}
+    .foot-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .foot-logo{font-family:var(--font-head);font-weight:900;font-size:0.9rem;color:var(--g-bright);letter-spacing:0.1em;}
+    .foot-links{display:flex;gap:1.2rem;flex-wrap:wrap;}
+    .foot-links a{font-size:0.75rem;color:var(--t-muted);letter-spacing:0.06em;text-transform:uppercase;}
+    .foot-links a:hover{color:var(--g-bright);}
+    .foot-copy{font-size:0.72rem;color:var(--t-muted);}
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav" id="mainNav">
   <div class="nav-inner">
     <a href="index.html" class="logo">
@@ -395,15 +266,12 @@
       <li><a href="about.html" class="active">About</a></li>
     </ul>
     <div class="nav-actions">
-      <a href="https://discord.gg/7frwwTJC54" class="btn btn-discord btn-sm">💬 Join Discord</a>
+      <a href="https://discord.gg/7frwwTJC54" class="btn btn-discord">💬 Join Discord</a>
     </div>
-    <div class="hamburger" onclick="toggleDrawer()" id="hamburger">
-      <span></span><span></span><span></span>
-    </div>
+    <div class="hamburger" onclick="toggleDrawer()" id="hamburger"><span></span><span></span><span></span></div>
   </div>
 </nav>
 
-<!-- Mobile Drawer -->
 <div class="mobile-drawer" id="mobileDrawer">
   <ul class="mobile-links">
     <li><a href="index.html">Home</a></li>
@@ -417,196 +285,299 @@
     <li><a href="about.html">About</a></li>
   </ul>
   <div style="padding:1rem 0 0;display:flex;gap:0.75rem;">
-    <a href="https://discord.gg/7frwwTJC54" class="btn btn-discord btn-sm" style="flex:1;justify-content:center;">💬 Join Discord</a>
-    <a href="https://vrc.group/SUIKA.5062" class="btn btn-sm" style="flex:1;justify-content:center;background:var(--g-subtle);border:1px solid var(--g-border);color:var(--g-bright);">VRChat Group</a>
+    <a href="https://discord.gg/7frwwTJC54" class="btn btn-discord" style="flex:1;justify-content:center;">💬 Join Discord</a>
+    <a href="https://vrc.group/SUIKA.5062" class="btn btn-outline" style="flex:1;justify-content:center;">🌐 VRChat</a>
   </div>
 </div>
 
-<!-- ================================================================
-     EDITORIAL BANNER
-     ================================================================ -->
-<div class="ed-banner">
-  <div class="ed-kicker">Founder's Story &nbsp;·&nbsp; Issue No. 1 &nbsp;·&nbsp; Suika League</div>
-  <h1 class="ed-headline">Built at<br><em>Full Speed</em></h1>
-  <p class="ed-deck">
-    A drifter. A model. An actress. How one woman built the most competitive Suika Game
-    community in VRChat — and made it feel like home for 600+ players worldwide.
-  </p>
-  <div class="ed-byline">
-    <span>By <span class="ed-byline-name">Suika League Editorial</span></span>
-    <span class="ed-byline-sep">|</span>
-    <span>Community Feature</span>
-    <span class="ed-byline-sep">|</span>
-    <span>2024</span>
-  </div>
-</div>
+<div class="page">
 
-<!-- Full-width hero image (founder photo) -->
-<div class="ed-full-img">
-  <div class="img-placeholder">
-    <div style="font-size:3rem;opacity:0.3;">&#9651;</div>
-    <div class="img-ph-label">Founder photograph — to be added</div>
-    <div style="font-size:0.7rem;color:var(--t-muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.25rem;">Replace with: Afra / Yuliana Grasman portrait</div>
-  </div>
-</div>
-<div class="img-caption">
-  Yuliana Grasman — racer, actress, and founder of Suika League — photographed [location, year].
-</div>
+  <!-- ══════════════════════════════
+       § 1 — WHAT IS + HOW IT WORKS
+  ══════════════════════════════ -->
+  <section class="s-intro">
+    <div class="wrap">
+      <div class="intro-grid">
 
-<!-- ================================================================
-     EDITORIAL BODY
-     ================================================================ -->
-<div class="ed-body">
+        <!-- Left: what is SL -->
+        <div>
+          <div class="intro-eyebrow">🍉 Who We Are</div>
+          <h1 class="intro-title">Suika League is a <em>VRChat community</em> built around Suika Game.</h1>
+          <div class="intro-body">
+            <p>What begins as a simple fruit-merging game quickly becomes something surprisingly competitive. Players develop positioning, consistency, timing and strategy — and discover they can push their scores much further than they expected.</p>
+            <p>Suika League brings together new players, regulars, competitive players, teachers, creators and contributors in one place. Whether you're discovering the game for the first time or already chasing the top of the leaderboard, there's a place for you here.</p>
+          </div>
+          <div class="goal-row">
+            <span class="goal-chip">Play</span>
+            <span class="goal-chip">Connect</span>
+            <span class="goal-chip">Compete</span>
+            <span class="goal-chip">Grow</span>
+          </div>
+        </div>
 
-  <!-- ── PART ONE: THE BEGINNING ─────────────────────────────── -->
-  <div class="ed-section-head">The Unexpected Origin</div>
+        <!-- Right: platform cards -->
+        <div class="platform-stack">
+          <div class="p-card">
+            <div class="p-card-icon">🎮</div>
+            <div>
+              <div class="p-card-name">VRChat</div>
+              <p class="p-card-desc">Where we meet, play, practice and compete. Public instances welcome new players; Group+ sessions give members controlled practice and streaming space.</p>
+            </div>
+          </div>
+          <div class="p-card">
+            <div class="p-card-icon">💬</div>
+            <div>
+              <div class="p-card-name">Discord</div>
+              <p class="p-card-desc">The active home — where members learn, share gameplay, submit scores, organize events and stay updated. Everything live happens here.</p>
+            </div>
+          </div>
+          <div class="p-card">
+            <div class="p-card-icon">🌐</div>
+            <div>
+              <div class="p-card-name">suikaleague.com</div>
+              <p class="p-card-desc">Our public archive. Player profiles, rankings, tournaments, interviews, community stories and the history we're building together.</p>
+            </div>
+          </div>
+        </div>
 
-  <div class="ed-columns">
-
-    <p>There is a particular kind of person who walks into a room they were never supposed to enter and, by the time they leave, has made it theirs. Yuliana Grasman — known to the VRChat world simply as Afra — is that kind of person. The founder of Suika League didn't set out to build a gaming community. She wasn't even a gamer. She was a professional drifter.</p>
-
-    <p>Grasman became something of a quiet record-setter long before she ever touched a watermelon-puzzle game. She is the first woman in the world to perform freestyle drift with a 4x4 vehicle. She drove on two wheels in a category where, previously, no woman had. She raced in the UAE, competed in mudcross festivals, and won gold. The instinct that drew her to competitive gaming wasn't new — it was simply redirected.</p>
-
-    <p>"I've always gravitated toward things people said couldn't be done," Grasman says. "Not because I wanted to prove something to anyone in particular. Because I genuinely wanted to see what was on the other side of the barrier."</p>
-
-    <div class="pull-quote">
-      <blockquote>
-        "A healthy competitive community shouldn't protect the people at the top. It should constantly create new people capable of reaching them."
-      </blockquote>
-      <cite>— Afra (Yuliana Grasman), Founder, Suika League</cite>
-    </div>
-
-    <p>VRChat found her the way many things find restless people: sideways. She had been exploring virtual reality as an extension of the performance work she had been doing on screen — acting, modeling, appearing alongside names like Shah Rukh Khan in Bollywood productions, and taking roles in the Emirati film circuit that cast her across genres and languages.</p>
-
-    <p>Virtual reality offered something cinema didn't: immediacy. There were no directors, no scripts, no waiting for the light to change. There was just a space and whoever showed up in it. For Grasman, that was enough to keep her coming back. The specific game — Suika, a deceptively simple fruit-merging puzzle with an iron grip on anyone who takes it seriously — caught her the same way competitive drifting had. Quietly, then completely.</p>
-
-    <div class="ed-break">
-      <div class="img-placeholder">
-        <div style="font-size:2rem;opacity:0.3;">&#9651;</div>
-        <div class="img-ph-label">Photo — to be added</div>
-        <div style="font-size:0.68rem;color:var(--t-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.2rem;">Racing / early career photograph</div>
-      </div>
-      <div class="img-caption">Grasman competing in the UAE — gold medalist, freestyle drift and mudcross. [Photo to be added]</div>
-    </div>
-
-  </div><!-- /.ed-columns -->
-
-  <!-- ── PART TWO: BUILDING IT ──────────────────────────────── -->
-  <div class="ed-section-head" style="margin-top:3rem;">Building Something Worth Losing At</div>
-
-  <div class="ed-columns">
-
-    <p>The idea for Suika League didn't arrive as a business plan or a structured proposal. It arrived as a frustration. Grasman had been playing Suika Game in Melon &amp; Chill — the VRChat world that serves as the game's social home — and noticed something that bothered her. The competitive layer was missing.</p>
-
-    <p>People played casually. They gathered, they merged fruit, they left. There were no records being kept, no rankings, no incentive to push beyond what was comfortable. For someone who had spent her career at the intersection of discipline and competition, this felt like a missed opportunity.</p>
-
-    <p>"Games are at their best when they make you want to get better," she explains. "Not better than someone else necessarily — better than the version of yourself who sat down five minutes ago. That's what competition gives you. That's what I wanted to give Suika."</p>
-
-    <div class="pull-quote">
-      <blockquote>
-        "I wanted somebody to beat me. Not because I wanted to lose. Because I wanted the level around me to rise."
-      </blockquote>
-      <cite>— Afra (Yuliana Grasman)</cite>
-    </div>
-
-    <p>She began organizing. Keeping track of scores. Sharing results. Inviting people to try. The community formed organically around the structure she created, not the other way around. Within a relatively short period, the Discord had players, the leaderboard had names, and the name Suika League had come to mean something specific: this was where the serious players went.</p>
-
-    <p>What distinguished her approach from the beginning was the role system. Rather than treating all players as equal participants in an undifferentiated mass, Suika League assigned roles that reflected how people actually engaged. The Champion, the Competitive, the Sensei, the Host, the New Player — a taxonomy that acknowledged that communities are ecosystems, not populations, and that each type of member adds something the others can't.</p>
-
-    <div class="ed-inline-img">
-      <div class="img-placeholder">
-        <div style="font-size:1.8rem;opacity:0.25;">&#9651;</div>
-        <div class="img-ph-label">Portrait — to be added</div>
-        <div style="font-size:0.66rem;color:var(--t-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.15rem;">Founder in VRChat</div>
-      </div>
-      <div class="img-caption">Afra in Melon &amp; Chill, the VRChat world where Suika League was born. [Screenshot to be added]</div>
-    </div>
-
-    <p>"A Sensei isn't just a good player. A Sensei is someone the community can learn from," Grasman notes. "That distinction matters. If you're only measuring scores, you miss all the invisible work that makes a community actually function."</p>
-
-    <p>The tournaments followed. Then the magazine. Then the formal recognition of a leaderboard that tracked not just current scores but the arc of improvement. Each addition reflected the same underlying philosophy: that the things worth doing in a community are worth documenting, and that the people who show up deserve more than anonymity.</p>
-
-  </div><!-- /.ed-columns -->
-
-  <!-- ── PART THREE: WHAT IT BECAME ─────────────────────────── -->
-  <div class="ed-section-head" style="margin-top:3rem;">What It Became</div>
-
-  <div class="ed-columns">
-
-    <p>Suika League grew. Players from different countries found their way to the Discord, to the leaderboard, to the weekly gatherings in Melon &amp; Chill. People who had never met in person and likely never would found themselves genuinely invested in each other's progress. The #1 ranking changed hands. Scores that once seemed unreachable became targets.</p>
-
-    <p>What Grasman built is, in its own way, a proof of concept. The concept being: you can take something small — a fruit puzzle game on a VRChat stage — and build a structure around it serious enough that people rise to it. You don't need a massive budget or corporate backing. You need someone willing to keep showing up and keep the records.</p>
-
-    <p>She has done both. And she has done it while maintaining the other threads of her life — the performance work, the racing history, the personality that doesn't settle into any single category. This, too, seems intentional.</p>
-
-    <div class="pull-quote">
-      <blockquote>
-        "The community didn't disappear because its founder wasn't standing in the middle of it. That's how you know it's real."
-      </blockquote>
-      <cite>— Afra (Yuliana Grasman)</cite>
-    </div>
-
-    <p>"I don't want Suika League to be about me," she says plainly. "I want it to be about the players who show up every week and put in the work. My job is to make sure the structure is there when they arrive."</p>
-
-    <p>The structure is there. The players keep arriving. And the scores — week by week, session by session — keep going up. Which is, in the end, exactly the point.</p>
-
-  </div><!-- /.ed-columns -->
-
-  <!-- ── FOUNDER VIDEO ───────────────────────────────────────── -->
-  <div class="ed-video">
-    <div class="ed-video-ph">
-      <div style="font-size:2.5rem;opacity:0.25;">▶</div>
-      <div class="ed-video-label">Founder interview / media — to be added</div>
-      <div style="font-size:0.7rem;color:var(--t-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.15rem;">Paste a YouTube or VRChat recording embed here</div>
-    </div>
-    <div style="font-size:0.78rem;font-style:italic;color:var(--t-muted);">Video feature with Afra (Yuliana Grasman) — coming soon.</div>
-  </div>
-
-  <!-- ── FOUNDER BIO CARD ────────────────────────────────────── -->
-  <div class="founder-card">
-    <div class="founder-avatar">
-      <!-- TODO: Replace with founder's actual photo -->
-      <span style="opacity:0.35;font-size:2.5rem;">&#9651;</span>
-    </div>
-    <div class="founder-info">
-      <h3>Afra · Yuliana Grasman</h3>
-      <div class="founder-title">Founder &amp; Commissioner, Suika League &nbsp;·&nbsp; Dubai, UAE</div>
-      <p>
-        Racer, model, actress, and community builder. First woman in the world to perform freestyle drift with a 4x4 vehicle. Gold medalist in UAE mudcross. Actress (IMDb). Founder of Suika League — the competitive Suika Game community in VRChat.
-      </p>
-      <div class="founder-links">
-        <a href="https://www.instagram.com/afraworld8/" class="founder-link" target="_blank" rel="noopener">
-          <span>📷</span> @afraworld8
-        </a>
-        <a href="https://www.youtube.com/@AfraWorld" class="founder-link" target="_blank" rel="noopener">
-          <span>▶</span> YouTube — Afra World
-        </a>
-        <a href="https://www.imdb.com/name/nm12341828/" class="founder-link" target="_blank" rel="noopener">
-          <span>🎬</span> IMDb
-        </a>
-        <a href="https://discord.gg/7frwwTJC54" class="founder-link" target="_blank" rel="noopener">
-          <span>💬</span> Discord — Suika League
-        </a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ── JOIN CTA ────────────────────────────────────────────── -->
-  <div class="ed-cta">
-    <h3>Join the League</h3>
-    <p>Step into Melon &amp; Chill on VRChat. Find your rank. Meet the community. The leaderboard is waiting.</p>
-    <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
-      <a href="https://discord.gg/7frwwTJC54" class="btn btn-discord" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.8rem;background:var(--discord);color:#fff;border-radius:50px;font-family:var(--font-head);font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;">💬 Join Discord</a>
-      <a href="https://vrc.group/SUIKA.5062" class="btn" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.8rem;background:var(--g-subtle);border:1.5px solid var(--g-border);color:var(--g-bright);border-radius:50px;font-family:var(--font-head);font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;">🌐 VRChat Group</a>
-      <a href="leaderboard.html" class="btn" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.8rem;background:transparent;border:1.5px solid var(--g-border);color:var(--t-secondary);border-radius:50px;font-family:var(--font-head);font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;">View Leaderboard</a>
+  <!-- ══════════════════════════════
+       § 2 — ROLES & RECOGNITION
+  ══════════════════════════════ -->
+  <section class="s-roles">
+    <div class="wrap">
+      <div class="s-header">
+        <div class="s-label">Recognition</div>
+        <h2 class="s-title">Roles &amp; Recognition</h2>
+        <p class="s-sub">Roles help players identify how they participate and recognize people who contribute. Some you choose yourself — others are earned.</p>
+      </div>
+
+      <!-- Tier 1: self-assigned -->
+      <div class="roles-tier">
+        <div class="tier-label">Self-Assigned — choose what fits where you are now</div>
+        <div class="role-grid">
+          <div class="role-card">
+            <span class="role-icon">🌱</span>
+            <div class="role-name">New Player</div>
+            <div class="role-desc">For players who are new to Suika or still learning the game.</div>
+          </div>
+          <div class="role-card">
+            <span class="role-icon">🍉</span>
+            <div class="role-name">Suika Regular</div>
+            <div class="role-desc">For players who regularly play and participate in community life.</div>
+          </div>
+          <div class="role-card">
+            <span class="role-icon">🎮</span>
+            <div class="role-name">Competitive Player</div>
+            <div class="role-desc">For players focused on improving their score and competing at a higher level.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tier 2: awarded -->
+      <div class="roles-tier">
+        <div class="tier-label">Recognition Roles — awarded for achievement or genuine contribution</div>
+        <div class="role-grid">
+          <div class="role-card award">
+            <span class="role-icon">👑</span>
+            <div class="role-name">#1 Player</div>
+            <div class="role-desc">Recognition of current competitive achievement.</div>
+          </div>
+          <div class="role-card award">
+            <span class="role-icon">🧑‍🏫</span>
+            <div class="role-name">Suika Sensei</div>
+            <div class="role-desc">Players who invest time teaching and helping others improve.</div>
+          </div>
+          <div class="role-card award">
+            <span class="role-icon">💎</span>
+            <div class="role-name">VIP</div>
+            <div class="role-desc">Meaningful long-term contribution to Suika League.</div>
+          </div>
+          <div class="role-card award">
+            <span class="role-icon">📸</span>
+            <div class="role-name">Media Contributor</div>
+            <div class="role-desc">Members who document the community through photography, video or media.</div>
+          </div>
+          <div class="role-card award">
+            <span class="role-icon">🎪</span>
+            <div class="role-name">Event Host</div>
+            <div class="role-desc">Members who organize or lead official community events.</div>
+          </div>
+        </div>
+        <p class="roles-note">Special roles are designed to recognize real contribution — not popularity.</p>
+      </div>
     </div>
-  </div>
+  </section>
 
-</div><!-- /.ed-body -->
+  <!-- ══════════════════════════════
+       § 3 — LEARN  (Discord CTA)
+  ══════════════════════════════ -->
+  <section class="s-learn">
+    <div class="wrap">
+      <div class="learn-card">
+        <div class="learn-text">
+          <h3>Learn &amp; Improve</h3>
+          <p>Suika League isn't only about high scores. One of our main goals is helping players understand the game and discover their own potential.</p>
+          <p>Experienced members and Suika Sensei share strategies, gameplay knowledge and advice directly with other players. Whether you're trying to make your first watermelon or push a strong score even higher — you'll find people willing to share what they know.</p>
+          <p style="color:var(--t-muted);font-size:0.85rem;">Our learning resources, gameplay discussions and library live in Discord, so players can ask questions and learn from each other in real time.</p>
+        </div>
+        <div class="learn-cta">
+          <div class="learn-icon">💬</div>
+          <a href="https://discord.gg/7frwwTJC54" target="_blank" rel="noopener" class="btn btn-discord btn-lg">Join &amp; Learn</a>
+          <span style="font-size:0.72rem;color:var(--t-muted);text-align:center;margin-top:0.25rem;">Free · Open to all levels</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- ================================================================
-     FOOTER
-     ================================================================ -->
+  <!-- ══════════════════════════════
+       § 4 — PHILOSOPHY  (pull-quote)
+  ══════════════════════════════ -->
+  <section class="s-philosophy">
+    <div class="wrap">
+      <div class="phil-inner">
+        <p class="phil-opening">Competition should make a community <em>stronger</em> — not smaller.</p>
+        <div class="phil-divider"></div>
+        <div class="phil-body">
+          <p>We believe strong players should have opportunities to challenge each other, while new players should have opportunities to learn from the people ahead of them.</p>
+          <p><strong>Success inside Suika League isn't measured only by a leaderboard position.</strong> Teaching someone, opening an instance, hosting an event, sharing knowledge, creating something useful or helping the community grow can matter just as much.</p>
+          <p>We want people to have room to improve, contribute and eventually help somebody else do the same.</p>
+        </div>
+        <div class="phil-closing">The goal isn't to protect the top. It's to keep raising the level of everyone around it.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       § 5 — GET INVOLVED
+  ══════════════════════════════ -->
+  <section class="s-involve">
+    <div class="wrap">
+      <div class="involve-layout">
+
+        <!-- Left: title + CTA buttons -->
+        <div class="involve-left">
+          <h2>Get<br>Involved</h2>
+          <p>There are many ways to become part of Suika League — playing is just the start.</p>
+          <div class="involve-cta-stack">
+            <a href="https://discord.gg/7frwwTJC54" target="_blank" rel="noopener" class="involve-btn discord">
+              <span class="involve-btn-icon">💬</span>
+              <div class="involve-btn-text">
+                <span class="involve-btn-title">Join Discord</span>
+                <span class="involve-btn-sub">Talk, learn, and follow community updates</span>
+              </div>
+            </a>
+            <a href="https://vrc.group/SUIKA.5062" target="_blank" rel="noopener" class="involve-btn">
+              <span class="involve-btn-icon">🌐</span>
+              <div class="involve-btn-text">
+                <span class="involve-btn-title">Find Us in VRChat</span>
+                <span class="involve-btn-sub">Join the group and meet players in-world</span>
+              </div>
+            </a>
+            <a href="players.html" class="involve-btn">
+              <span class="involve-btn-icon">👤</span>
+              <div class="involve-btn-text">
+                <span class="involve-btn-title">Player Profiles</span>
+                <span class="involve-btn-sub">Submit your avatar and score to be featured</span>
+              </div>
+            </a>
+            <a href="tournaments.html" class="involve-btn">
+              <span class="involve-btn-icon">🏆</span>
+              <div class="involve-btn-text">
+                <span class="involve-btn-title">Tournaments</span>
+                <span class="involve-btn-sub">Compete and become part of our history</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: other ways to contribute -->
+        <div class="involve-right">
+          <div class="way-chip">
+            <span class="way-em">🧑‍🏫</span>
+            <div>
+              <div class="way-body-title">Learn &amp; Teach</div>
+              <div class="way-body-desc">Ask for help — or share your knowledge with the next person.</div>
+            </div>
+          </div>
+          <div class="way-chip">
+            <span class="way-em">📸</span>
+            <div>
+              <div class="way-body-title">Media</div>
+              <div class="way-body-desc">Photography, video, clips — document what happens in the league.</div>
+            </div>
+          </div>
+          <div class="way-chip">
+            <span class="way-em">🎪</span>
+            <div>
+              <div class="way-body-title">Host Events</div>
+              <div class="way-body-desc">Organize sessions, open practice instances or run community activities.</div>
+            </div>
+          </div>
+          <div class="way-chip">
+            <span class="way-em">🛠</span>
+            <div>
+              <div class="way-body-title">Build &amp; Create</div>
+              <div class="way-body-desc">World building, avatars, ideas, sponsorships — all part of what grows the league.</div>
+            </div>
+          </div>
+          <div class="way-chip">
+            <span class="way-em">✍️</span>
+            <div>
+              <div class="way-body-title">Magazine</div>
+              <div class="way-body-desc">Interviews, player stories, tournament recaps — your story can be here.</div>
+            </div>
+          </div>
+          <div class="way-chip">
+            <span class="way-em">🤝</span>
+            <div>
+              <div class="way-body-title">Collaborate</div>
+              <div class="way-body-desc">Cross-community projects and creator collabs are always open.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       § 6 — FOUNDER  (editorial teaser)
+  ══════════════════════════════ -->
+  <section class="s-founder">
+    <div class="wrap">
+      <div class="s-header" style="margin-bottom:1.8rem;">
+        <div class="s-label">Founder</div>
+        <h2 class="s-title">Meet Afra</h2>
+      </div>
+      <div class="founder-editorial">
+        <div class="founder-inner">
+          <div class="founder-stripe"></div>
+          <div class="founder-content">
+            <div class="founder-kicker">Founder &amp; Community Director</div>
+            <h3 class="founder-name">Afra</h3>
+            <div class="founder-role">Suika League · Est. 2024</div>
+            <div class="founder-bio">
+              <p>Afra founded Suika League around a simple belief: <strong>competition becomes more meaningful when it helps other people grow too.</strong></p>
+              <p>With a life shaped by motorsport, creative work, gaming, international migration and community building, she created Suika League as a place where new players can learn, strong players can challenge one another and contributors can be recognized for the time, knowledge and creativity they bring.</p>
+            </div>
+            <a href="magazine.html" class="founder-mag-link">Read the full founder story in Magazine</a>
+          </div>
+          <div class="founder-photo-panel">
+            <!-- Replace src with actual photo when ready -->
+            <div class="founder-photo-ph">📷<br><br>Photo<br>coming soon</div>
+            <div class="mag-badge">📖 Cover Story</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /.page -->
+
 <footer>
   <div class="foot-inner">
     <div class="foot-logo">SUIKA LEAGUE</div>
@@ -618,23 +589,15 @@
       <a href="magazine.html">Magazine</a>
       <a href="about.html">About</a>
     </div>
-    <div class="foot-socials">
-      <a href="https://discord.gg/7frwwTJC54" class="fs-icon" title="Discord" target="_blank" rel="noopener">💬</a>
-    </div>
-    <div class="foot-copy">&copy; 2024 Suika League · All rights reserved · Founded by Afra (Yuliana Grasman)</div>
+    <div class="foot-copy">&copy; 2024 Suika League · Founded by Afra</div>
   </div>
 </footer>
 
 <script>
-  /* Nav scroll */
   const nav = document.getElementById('mainNav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  });
-  /* Hamburger */
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
   function toggleDrawer() {
     document.getElementById('mobileDrawer').classList.toggle('open');
-    document.getElementById('hamburger').classList.toggle('open');
   }
 </script>
 </body>
