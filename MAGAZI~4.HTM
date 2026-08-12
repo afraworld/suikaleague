@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How Suika League Got Its Name — and its culture. Suika League Magazine.">
+  <title>How Suika League Got Its Name – Magazine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base:#06090a; --bg-card:rgba(10,18,20,0.82);
+      --g-bright:#4ade80; --g-glow:rgba(74,222,128,0.45);
+      --g-subtle:rgba(74,222,128,0.08); --g-border:rgba(74,222,128,0.18); --g-border2:rgba(74,222,128,0.38);
+      --gold:#fbbf24; --discord:#5865F2;
+      --t-primary:#edfff3; --t-secondary:#8da896; --t-muted:#4f6a57;
+      --radius-s:8px; --radius-m:14px; --radius-l:22px;
+      --ease:cubic-bezier(0.4,0,0.2,1); --fast:0.2s;
+      --font-head:'Exo 2',system-ui,sans-serif;
+      --font-serif:'Playfair Display',Georgia,serif;
+      --font-body:'Inter',system-ui,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--bg-base);color:var(--t-primary);overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 55% 45% at 60% 15%,rgba(12,80,35,0.13) 0%,transparent 60%);}
+
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;padding:0 2rem;
+      background:rgba(4,7,8,0.82);backdrop-filter:blur(24px);border-bottom:1px solid var(--g-border);}
+    .nav.scrolled{background:rgba(3,5,6,0.97);}
+    .nav-inner{width:100%;max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+    .logo-mark{width:40px;height:40px;background:var(--g-subtle);border:1px solid var(--g-border);border-radius:var(--radius-m);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+    .logo-name{font-family:var(--font-head);font-weight:900;font-size:1rem;color:var(--g-bright);letter-spacing:0.06em;display:block;}
+    .logo-sub{font-family:var(--font-head);font-weight:600;font-size:0.55rem;color:var(--t-muted);letter-spacing:0.18em;text-transform:uppercase;display:block;}
+    .nav-links{display:flex;align-items:center;gap:0.1rem;list-style:none;flex:1;}
+    .nav-links a{display:block;padding:0.45rem 0.7rem;font-family:var(--font-head);font-weight:600;font-size:0.78rem;
+      letter-spacing:0.05em;text-transform:uppercase;color:var(--t-secondary);border-radius:var(--radius-s);
+      transition:color var(--fast) var(--ease),background var(--fast) var(--ease);}
+    .nav-links a:hover,.nav-links a.active{color:var(--g-bright);background:var(--g-subtle);}
+    .nav-actions{margin-left:auto;}
+    .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1.2rem;
+      font-family:var(--font-head);font-weight:700;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;
+      border:none;border-radius:50px;cursor:pointer;transition:all var(--fast) var(--ease);}
+    .btn-outline{background:transparent;color:var(--g-bright);border:1.5px solid var(--g-border);}
+    .btn-outline:hover{background:var(--g-subtle);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem;margin-left:auto;}
+    .hamburger span{width:20px;height:2px;background:var(--t-primary);border-radius:2px;}
+    @media(max-width:900px){.nav-links{display:none;}.hamburger{display:flex;}}
+
+    .back-bar{background:rgba(3,5,6,0.9);border-bottom:1px solid var(--g-border);
+      position:sticky;top:68px;z-index:100;padding:0.6rem 2rem;}
+    .back-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:0.75rem;}
+    .back-link{font-family:var(--font-head);font-size:0.7rem;font-weight:700;letter-spacing:0.08em;
+      text-transform:uppercase;color:var(--t-muted);transition:color var(--fast) var(--ease);}
+    .back-link:hover{color:var(--g-bright);}
+    .back-sep{color:var(--g-border2);}
+    .back-current{font-family:var(--font-head);font-size:0.7rem;color:var(--t-muted);}
+
+    /* Article */
+    .article{max-width:760px;margin:0 auto;padding:5rem 2rem 6rem;position:relative;z-index:2;}
+
+    /* Header */
+    .art-kicker{display:inline-flex;align-items:center;gap:0.5rem;margin-top:68px;
+      font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+      color:var(--g-bright);margin-bottom:1rem;}
+    .art-kicker::before{content:'';width:20px;height:1.5px;background:var(--g-bright);border-radius:2px;}
+    .art-title{font-family:var(--font-serif);font-size:clamp(2rem,5vw,3.4rem);font-weight:800;
+      line-height:1.12;color:var(--t-primary);margin-bottom:1rem;letter-spacing:-0.015em;}
+    .art-title em{color:var(--g-bright);font-style:italic;}
+    .art-deck{font-size:1.08rem;color:var(--t-secondary);line-height:1.8;margin-bottom:1.5rem;font-style:italic;
+      border-left:3px solid var(--g-border2);padding-left:1.2rem;}
+    .art-meta{display:flex;align-items:center;gap:0.9rem;padding-bottom:2.2rem;border-bottom:1px solid var(--g-border);margin-bottom:2.5rem;flex-wrap:wrap;}
+    .meta-by{font-size:0.82rem;font-weight:600;color:var(--t-primary);}
+    .meta-date{font-size:0.78rem;color:var(--t-muted);}
+    .meta-dot{color:var(--g-border2);}
+
+    /* Body text */
+    .art-body p{font-size:1.04rem;color:var(--t-secondary);line-height:1.98;margin-bottom:1.45rem;}
+    .art-body p:last-child{margin-bottom:0;}
+    .art-body strong{color:var(--t-primary);}
+
+    /* Drop cap */
+    .art-body > p:first-child::first-letter{
+      font-family:var(--font-serif);font-size:4.5rem;font-weight:800;
+      float:left;line-height:0.76;margin-right:0.1em;margin-top:0.06em;color:var(--g-bright);}
+
+    /* Accent moment — name reveal */
+    .name-reveal{text-align:center;margin:3rem 0;padding:2.5rem 2rem;
+      background:linear-gradient(135deg,rgba(74,222,128,0.06),rgba(251,191,36,0.04));
+      border:1px solid var(--g-border2);border-radius:var(--radius-l);}
+    .name-reveal-word{font-family:var(--font-serif);font-size:clamp(2.5rem,6vw,4rem);
+      font-weight:800;font-style:italic;color:var(--g-bright);
+      text-shadow:0 0 40px rgba(74,222,128,0.4);letter-spacing:0.03em;}
+    .name-reveal-sub{font-family:var(--font-head);font-size:0.72rem;font-weight:700;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--t-muted);margin-top:0.6rem;}
+
+    /* Pull quote */
+    .pull{margin:3rem 0;padding:1.8rem 1.8rem 1.8rem 2.2rem;border-left:3px solid var(--g-bright);position:relative;}
+    .pull::before{content:'\201C';position:absolute;top:-0.3rem;left:1.6rem;
+      font-family:var(--font-serif);font-size:4.5rem;color:var(--g-bright);opacity:0.18;line-height:1;}
+    .pull p{font-family:var(--font-serif);font-size:1.25rem;font-style:italic;color:var(--t-primary);line-height:1.6;margin:0;}
+
+    /* Section divider */
+    .art-divider{display:flex;align-items:center;gap:1rem;margin:3rem 0;}
+    .art-divider::before,.art-divider::after{content:'';flex:1;height:1px;background:var(--g-border);}
+    .art-divider span{font-size:1rem;color:var(--g-border2);}
+
+    /* Highlight sentence */
+    .hl{color:var(--g-bright);font-weight:600;}
+
+    /* Credit box — Arvi */
+    .credit-box{background:var(--bg-card);border:1px solid var(--g-border2);border-radius:var(--radius-m);
+      padding:1.3rem 1.5rem;margin:2.5rem 0;display:flex;gap:1rem;align-items:flex-start;}
+    .credit-icon{font-size:1.8rem;flex-shrink:0;margin-top:2px;}
+    .credit-label{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.14em;
+      text-transform:uppercase;color:var(--g-bright);margin-bottom:0.3rem;}
+    .credit-name{font-family:var(--font-head);font-weight:900;font-size:1rem;color:var(--t-primary);margin-bottom:0.3rem;}
+    .credit-desc{font-size:0.85rem;color:var(--t-secondary);line-height:1.6;}
+
+    /* Closing line */
+    .art-closing{font-family:var(--font-head);font-size:1rem;font-weight:800;font-style:italic;
+      color:var(--g-bright);text-align:center;margin-top:2.5rem;padding:1.5rem;
+      border-top:1px solid var(--g-border);border-bottom:1px solid var(--g-border);}
+
+    /* End nav */
+    .art-end{margin-top:3.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .end-back{font-family:var(--font-head);font-size:0.74rem;font-weight:700;letter-spacing:0.06em;
+      text-transform:uppercase;color:var(--t-muted);}
+    .end-back:hover{color:var(--g-bright);}
+    .end-next{background:var(--bg-card);border:1px solid var(--g-border);border-radius:var(--radius-m);
+      padding:1rem 1.4rem;display:flex;gap:1rem;align-items:center;transition:border-color var(--fast) var(--ease);}
+    .end-next:hover{border-color:var(--g-border2);}
+    .end-next-label{font-family:var(--font-head);font-size:0.62rem;font-weight:700;letter-spacing:0.12em;
+      text-transform:uppercase;color:var(--t-muted);margin-bottom:0.3rem;}
+    .end-next-title{font-family:var(--font-serif);font-size:0.98rem;font-weight:700;color:var(--t-primary);}
+    .end-next-arrow{color:var(--g-bright);font-size:1.2rem;margin-left:auto;flex-shrink:0;}
+
+    footer{position:relative;z-index:2;background:rgba(2,4,5,0.95);border-top:1px solid var(--g-border);padding:2rem;}
+    .foot-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .foot-logo{font-family:var(--font-head);font-weight:900;font-size:0.9rem;color:var(--g-bright);letter-spacing:0.1em;}
+    .foot-links{display:flex;gap:1.2rem;}
+    .foot-links a{font-size:0.75rem;color:var(--t-muted);letter-spacing:0.06em;text-transform:uppercase;}
+    .foot-links a:hover{color:var(--g-bright);}
+    .foot-copy{font-size:0.72rem;color:var(--t-muted);}
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><img src="logo-circle.png" alt="SL" style="width:34px;height:34px;border-radius:8px;object-fit:cover;"></div>
+      <div><span class="logo-name">SUIKA LEAGUE</span><span class="logo-sub">Official Community</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tournaments.html">Tournaments</a></li>
+      <li><a href="players.html">Players</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="magazine.html" class="active">Magazine</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-actions"><a href="magazine.html" class="btn btn-outline">← All Articles</a></div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="back-bar">
+  <div class="back-inner">
+    <a href="magazine.html" class="back-link">← Magazine</a>
+    <span class="back-sep">/</span>
+    <span class="back-current">Origin Story</span>
+  </div>
+</div>
+
+<article class="article">
+
+  <div class="art-kicker">Suika League Magazine &nbsp;·&nbsp; Origin Story</div>
+  <h1 class="art-title">How Suika League Got Its <em>Name</em> — And Its Culture</h1>
+  <p class="art-deck">It started with ten friends, a game, and one simple belief: the people who were going to be part of this should have a say in what it became.</p>
+  <div class="art-meta">
+    <span class="meta-by">Written by Afra</span>
+    <span class="meta-dot">·</span>
+    <span class="meta-date">Founder's Story</span>
+    <span class="meta-dot">·</span>
+    <span class="meta-date">Suika League Origins</span>
+  </div>
+
+  <div class="art-body">
+
+    <p>Before Suika League became a large community, we were just a small circle of around ten friends. We played together, spent time in VRChat, watched anime, movies and series, and simply enjoyed having a place where everyone knew each other.</p>
+
+    <p>When I decided it was time to turn that little circle into an actual group, I could have simply created it, chosen the name myself and invited everyone afterward.</p>
+
+    <p>But that wasn't how I wanted it to begin.</p>
+
+    <p>I wanted the group to feel like <strong>our home</strong> — not something people were merely joining after all the important decisions had already been made. So I told everyone what I was planning and invited them to brainstorm the name with me.</p>
+
+  </div>
+
+  <div class="name-reveal">
+    <div class="name-reveal-word">Suika League</div>
+    <div class="name-reveal-sub">suggested by Arvi · born from a conversation · built into everything</div>
+  </div>
+
+  <div class="art-body">
+
+    <p>My friend Arvi suggested several possibilities, and while we were discussing them together, he came up with it: <span class="hl">Suika League</span>.</p>
+
+    <p>Suika came naturally from the game that had brought us together. League connected beautifully with the competitive world I came from — racing, rankings, improvement and the idea of people challenging one another to become better. The name felt right immediately.</p>
+
+    <div class="credit-box">
+      <img src="story-name-hero.png" alt="Arvidius" style="width:70px;height:70px;border-radius:12px;object-fit:cover;object-position:top center;flex-shrink:0;border:1px solid var(--g-border2);">
+      <div>
+        <div class="credit-label">💡 The Name Behind the Name</div>
+        <div class="credit-name">Arvi (Arvidius)</div>
+        <div class="credit-desc">One of the original ten. Arvi suggested "Suika League" during the founding conversation — a name that connected the game to the competitive spirit at the heart of what we were building. His contribution lives in every instance, every tournament, every player profile. <a href="player-arvi.html" style="color:var(--g-bright);font-weight:600;">View Profile →</a></div>
+      </div>
+    </div>
+
+    <p>And in many ways, the way we chose it became a small example of how Suika League would continue to grow.</p>
+
+    <div class="pull">
+      <p>I founded the community and continued shaping its direction, but I never wanted every useful idea, project or solution to have to come from me.</p>
+    </div>
+
+    <p>As the group developed, different people began bringing their own skills into it. When we needed more reliable ways to keep instances open, one member stepped forward and created what eventually became our <strong>Suika League bot</strong>.</p>
+
+    <p>At first, its job was simple: help hold our instances. But it kept evolving. Over time, the bot gained its own branded avatar created specifically for Suika League, visible SL elements inside the world, our community tent, additional screens and other fun assets that made our instances feel increasingly like our own space.</p>
+
+    <p>Other members helped keep instances alive, create assets, solve problems and develop ideas when I couldn't personally be present.</p>
+
+  </div>
+
+  <div class="art-divider"><span>🍉</span></div>
+
+  <div class="art-body">
+
+    <p>That is something I have always wanted to preserve.</p>
+
+    <p>Suika League has direction and leadership, but it also has room for people to leave something of themselves inside it. When someone teaches players, builds something, hosts an event, maintains an instance, creates media, sponsors a project or brings an idea that improves the community — <span class="hl">that contribution becomes part of our history.</span></p>
+
+    <p>The community didn't grow because one person tried to do everything. It grew because there was a vision — and people were given room to help shape how that vision became real.</p>
+
+  </div>
+
+  <div class="art-closing">Suika League was founded with direction, but built through participation.</div>
+
+  <!-- End nav -->
+  <div class="art-end">
+    <a href="magazine.html" class="end-back">← Back to Magazine</a>
+    <a href="magazine-story-founder.html" class="end-next">
+      <div>
+        <div class="end-next-label">Also Read</div>
+        <div class="end-next-title">Built at Full Speed — The Founder Story</div>
+      </div>
+      <div class="end-next-arrow">→</div>
+    </a>
+  </div>
+
+</article>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">SUIKA LEAGUE</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="magazine.html">Magazine</a>
+      <a href="players.html">Players</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="foot-copy">&copy; 2024 Suika League Magazine · Founded by Afra</div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+</script>
+</body>
+</html>
