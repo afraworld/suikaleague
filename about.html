@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Suika League — The story of Afra (Yuliana Grasman), founder of the premier Suika Game community in VRChat.">
+  <meta property="og:title" content="From Racetracks to Watermelons — The Story Behind Suika League">
+  <meta property="og:description" content="The premiere editorial profile of Yuliana Grasman, founder of Suika League.">
+  <title>About – Suika League</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700;800;900&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    /* ================================================================
+       SUIKA LEAGUE — DESIGN TOKENS (shared across all pages)
+       ================================================================ */
+    :root {
+      --bg-base: #06090a; --bg-mid: #0c1416; --bg-card: rgba(10,18,20,0.82);
+      --g-bright: #4ade80; --g-mid: #22c55e; --g-glow: rgba(74,222,128,0.45);
+      --g-subtle: rgba(74,222,128,0.08); --g-border: rgba(74,222,128,0.20);
+      --g-border2: rgba(74,222,128,0.35);
+      --gold: #fbbf24; --silver: #94a3b8; --discord: #5865F2;
+      --t-primary: #edfff3; --t-secondary: #8da896; --t-muted: #4f6a57;
+      --radius-s: 8px; --radius-m: 14px; --radius-l: 22px;
+      --ease: cubic-bezier(0.4,0,0.2,1); --fast: 0.2s; --mid: 0.35s;
+      --font-head: 'Exo 2', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-edit: 'Playfair Display', Georgia, serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-base);
+      color: var(--t-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* Background */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 72% 18%, rgba(12,80,35,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 35% at 15% 75%, rgba(70,15,35,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 65% 40% at 50% 105%, rgba(8,55,22,0.18) 0%, transparent 55%);
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: radial-gradient(circle, rgba(74,222,128,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    /* ================================================================
+       NAVIGATION (same across all pages)
+       ================================================================ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 68px;
+      display: flex; align-items: center; padding: 0 2rem;
+      background: rgba(4,7,8,0.80); backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--g-border);
+      transition: background var(--mid) var(--ease);
+    }
+    .nav.scrolled { background: rgba(3,5,6,0.96); }
+    .nav-inner { width: 100%; max-width: 1380px; margin: 0 auto; display: flex; align-items: center; gap: 1.5rem; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-mark {
+      width: 40px; height: 40px;
+      background: var(--g-subtle); border: 1px solid var(--g-border);
+      border-radius: var(--radius-m);
+      display: flex; align-items: center; justify-content: center;
+      filter: drop-shadow(0 0 10px var(--g-glow)); flex-shrink: 0;
+    }
+    .logo-name { display: block; font-family: var(--font-head); font-weight: 900; font-size: 1rem; color: var(--g-bright); text-shadow: 0 0 18px var(--g-glow); letter-spacing: 0.06em; }
+    .logo-sub  { display: block; font-family: var(--font-head); font-weight: 600; font-size: 0.55rem; color: var(--t-muted); letter-spacing: 0.18em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 0.1rem; list-style: none; flex: 1; }
+    .nav-links a { display: block; padding: 0.45rem 0.7rem; font-family: var(--font-head); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--t-secondary); border-radius: var(--radius-s); transition: color var(--fast) var(--ease), background var(--fast) var(--ease); }
+    .nav-links a:hover, .nav-links a.active { color: var(--g-bright); background: var(--g-subtle); }
+    .nav-actions { margin-left: auto; display: flex; align-items: center; gap: 0.75rem; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.6rem 1.4rem; font-family: var(--font-head); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; border: none; border-radius: 50px; cursor: pointer; transition: transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease); white-space: nowrap; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-discord { background: var(--discord); color: #fff; box-shadow: 0 0 20px rgba(88,101,242,0.28); }
+    .btn-discord:hover { background: #4752c4; box-shadow: 0 0 30px rgba(88,101,242,0.45); }
+    .btn-sm { padding: 0.42rem 1rem; font-size: 0.72rem; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 0.5rem; margin-left: auto; }
+    .hamburger span { width: 20px; height: 2px; background: var(--t-primary); border-radius: 2px; transition: var(--fast) var(--ease); }
+    .mobile-drawer { display: none; position: fixed; top: 68px; left: 0; right: 0; z-index: 199; background: rgba(3,6,7,0.98); backdrop-filter: blur(20px); border-bottom: 1px solid var(--g-border); padding: 1rem; }
+    .mobile-drawer.open { display: block; }
+    .mobile-links { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .mobile-links a { display: block; padding: 0.8rem 1rem; font-family: var(--font-head); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--t-secondary); border-radius: var(--radius-s); transition: color var(--fast) var(--ease), background var(--fast) var(--ease); }
+    .mobile-links a:hover { color: var(--g-bright); background: var(--g-subtle); }
+
+    @media(max-width:900px) {
+      .nav-links, .nav-actions { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ================================================================
+       FOOTER
+       ================================================================ */
+    footer {
+      position: relative; z-index: 2;
+      border-top: 1px solid var(--g-border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    .foot-inner { max-width: 900px; margin: 0 auto; }
+    .foot-logo { font-family: var(--font-head); font-weight: 900; font-size: 1.1rem; color: var(--g-bright); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+    .foot-links { display: flex; justify-content: center; gap: 2rem; margin: 1rem 0; flex-wrap: wrap; }
+    .foot-links a { font-size: 0.8rem; color: var(--t-muted); letter-spacing: 0.04em; transition: color var(--fast) var(--ease); }
+    .foot-links a:hover { color: var(--g-bright); }
+    .foot-copy { font-size: 0.75rem; color: var(--t-muted); }
+    .foot-socials { display: flex; justify-content: center; gap: 0.6rem; margin: 1rem 0; }
+    .fs-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--g-subtle); border: 1px solid var(--g-border); display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: background var(--fast) var(--ease), border-color var(--fast) var(--ease), transform var(--fast) var(--ease); }
+    .fs-icon:hover { background: var(--g-border); border-color: var(--g-border2); transform: translateY(-2px); }
+
+    /* ================================================================
+       EDITORIAL LAYOUT — THE SPECIAL STUFF FOR THIS PAGE
+       ================================================================ */
+
+    /* Page intro / banner */
+    .ed-banner {
+      position: relative; z-index: 2;
+      padding: 130px 2rem 0;
+      text-align: center;
+    }
+    .ed-kicker {
+      display: inline-block;
+      font-family: var(--font-head); font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--g-bright);
+      border-top: 1px solid var(--g-border2); border-bottom: 1px solid var(--g-border2);
+      padding: 0.3rem 1.2rem; margin-bottom: 1.5rem;
+    }
+    .ed-headline {
+      font-family: var(--font-edit);
+      font-size: clamp(2.4rem, 6vw, 5.2rem);
+      font-weight: 900; line-height: 1.05;
+      color: var(--t-primary);
+      letter-spacing: -0.01em;
+      max-width: 860px; margin: 0 auto 1.2rem;
+    }
+    .ed-headline em { font-style: italic; color: var(--g-bright); }
+    .ed-deck {
+      font-family: var(--font-edit); font-style: italic;
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
+      color: var(--t-secondary);
+      max-width: 660px; margin: 0 auto 2rem;
+      line-height: 1.55;
+    }
+    .ed-byline {
+      display: flex; align-items: center; justify-content: center; gap: 1.2rem;
+      font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--t-muted); border-top: 1px solid var(--g-border);
+      padding-top: 1.2rem; max-width: 500px; margin: 0 auto 0;
+    }
+    .ed-byline-name { color: var(--g-bright); font-weight: 600; }
+    .ed-byline-sep { color: var(--t-muted); opacity: 0.4; }
+
+    /* Full-width divider image / portrait strip */
+    .ed-full-img {
+      position: relative; z-index: 2;
+      width: 100%; margin: 3rem 0 0;
+      max-height: 480px; overflow: hidden;
+    }
+    .ed-full-img img { width: 100%; height: 100%; object-fit: cover; }
+    .ed-full-img .img-placeholder {
+      width: 100%; height: 380px;
+      background: linear-gradient(135deg, rgba(10,28,16,0.9) 0%, rgba(4,9,11,0.95) 100%);
+      border-top: 1px solid var(--g-border); border-bottom: 1px solid var(--g-border);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.75rem;
+    }
+    .img-ph-label {
+      font-family: var(--font-head); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--t-muted);
+    }
+    .img-caption {
+      position: relative; z-index: 2;
+      max-width: 900px; margin: 0 auto;
+      padding: 0.65rem 2rem;
+      font-size: 0.78rem; font-style: italic; color: var(--t-muted);
+      border-bottom: 1px solid var(--g-border);
+    }
+
+    /* Inline portrait (half-width) */
+    .ed-inline-img {
+      float: right; width: 42%; margin: 0 0 1.5rem 2.2rem;
+    }
+    .ed-inline-img .img-placeholder {
+      width: 100%; aspect-ratio: 3/4;
+      background: linear-gradient(135deg, rgba(10,28,16,0.88) 0%, rgba(4,9,11,0.95) 100%);
+      border: 1px solid var(--g-border); border-radius: var(--radius-m);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.6rem;
+    }
+    .ed-inline-img .img-caption {
+      padding: 0.5rem 0; border-bottom: none; border-top: 1px solid var(--g-border);
+      margin: 0;
+    }
+
+    /* Main article body */
+    .ed-body {
+      position: relative; z-index: 2;
+      max-width: 900px; margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* Two-column newspaper layout */
+    .ed-columns {
+      column-count: 2;
+      column-gap: 2.8rem;
+      column-rule: 1px solid var(--g-border);
+    }
+    .ed-columns p {
+      font-size: 1rem; line-height: 1.78;
+      color: #c8e6d0;
+      margin-bottom: 1.2rem;
+      break-inside: avoid-column;
+    }
+    /* Drop cap on first paragraph */
+    .ed-columns > p:first-child::first-letter {
+      font-family: var(--font-edit);
+      font-size: 4.5rem; font-weight: 700;
+      float: left; line-height: 0.82;
+      margin: 0.08em 0.1em 0 0;
+      color: var(--g-bright);
+      text-shadow: 0 0 28px var(--g-glow);
+    }
+
+    /* Section break between column groups */
+    .ed-section {
+      column-count: 1;
+      margin: 2.5rem 0 0;
+      break-before: column;
+    }
+    .ed-section-head {
+      font-family: var(--font-edit);
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 700; line-height: 1.15;
+      color: var(--t-primary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--g-border2);
+    }
+    .ed-section-head + .ed-columns { margin-top: 0; }
+
+    /* Pull quote */
+    .pull-quote {
+      column-span: all;
+      margin: 2rem 0;
+      padding: 1.8rem 2.4rem;
+      border-left: 4px solid var(--g-bright);
+      background: rgba(74,222,128,0.05);
+      border-radius: 0 var(--radius-m) var(--radius-m) 0;
+      break-inside: avoid;
+    }
+    .pull-quote blockquote {
+      font-family: var(--font-edit); font-style: italic;
+      font-size: clamp(1.15rem, 2.8vw, 1.5rem);
+      font-weight: 500; line-height: 1.4;
+      color: var(--t-primary);
+      quotes: none;
+    }
+    .pull-quote cite {
+      display: block; margin-top: 0.75rem;
+      font-family: var(--font-head); font-style: normal;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--g-bright);
+    }
+
+    /* Between-column image (full-width break) */
+    .ed-break {
+      column-span: all;
+      margin: 2rem 0;
+    }
+    .ed-break .img-placeholder {
+      width: 100%; height: 240px;
+      background: linear-gradient(135deg, rgba(10,28,16,0.88) 0%, rgba(4,9,11,0.95) 100%);
+      border: 1px solid var(--g-border); border-radius: var(--radius-m);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.6rem;
+    }
+    .ed-break .img-caption {
+      margin: 0; padding: 0.5rem 0;
+      border: none; border-top: 1px solid var(--g-border);
+    }
+
+    /* Founder bio card */
+    .founder-card {
+      margin-top: 3.5rem;
+      padding: 2.2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--g-border);
+      border-radius: var(--radius-l);
+      backdrop-filter: blur(20px);
+      display: flex; gap: 2rem; align-items: flex-start;
+    }
+    .founder-avatar {
+      width: 120px; height: 120px; flex-shrink: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(74,222,128,0.2), rgba(34,197,94,0.1));
+      border: 2px solid var(--g-border2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.8rem;
+      overflow: hidden;
+    }
+    .founder-info h3 {
+      font-family: var(--font-head); font-weight: 900; font-size: 1.15rem;
+      color: var(--g-bright); letter-spacing: 0.04em; margin-bottom: 0.15rem;
+    }
+    .founder-info .founder-title {
+      font-size: 0.78rem; color: var(--t-muted); letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    .founder-info p { font-size: 0.9rem; color: var(--t-secondary); line-height: 1.6; margin-bottom: 0.75rem; }
+    .founder-links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .founder-link {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.3rem 0.8rem;
+      background: var(--g-subtle); border: 1px solid var(--g-border);
+      border-radius: 50px; font-size: 0.75rem; font-weight: 600; color: var(--g-bright);
+      transition: background var(--fast) var(--ease), border-color var(--fast) var(--ease);
+    }
+    .founder-link:hover { background: var(--g-border); border-color: var(--g-border2); }
+
+    /* Video embed placeholder */
+    .ed-video {
+      margin-top: 3rem;
+      padding: 2rem;
+      border: 1px solid var(--g-border);
+      border-radius: var(--radius-l);
+      background: var(--bg-card);
+      text-align: center;
+    }
+    .ed-video-ph {
+      width: 100%; height: 320px;
+      background: rgba(4,9,11,0.9);
+      border-radius: var(--radius-m);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.75rem; margin-bottom: 0.75rem;
+      border: 1px dashed var(--g-border);
+    }
+    .ed-video-label {
+      font-family: var(--font-head); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--t-muted);
+    }
+
+    /* CTA strip */
+    .ed-cta {
+      margin-top: 3rem;
+      padding: 2.5rem;
+      background: var(--bg-card); border: 1px solid var(--g-border);
+      border-radius: var(--radius-l); text-align: center;
+      backdrop-filter: blur(20px);
+    }
+    .ed-cta h3 {
+      font-family: var(--font-head); font-size: 1.4rem; font-weight: 900;
+      color: var(--g-bright); margin-bottom: 0.5rem;
+    }
+    .ed-cta p { font-size: 0.9rem; color: var(--t-secondary); margin-bottom: 1.25rem; }
+
+    @media(max-width:700px) {
+      .ed-columns { column-count: 1; }
+      .ed-inline-img { float: none; width: 100%; margin: 0 0 1.5rem; }
+      .founder-card { flex-direction: column; align-items: center; text-align: center; }
+      .founder-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><img src="logo-circle.png" alt="SL" style="width:34px;height:34px;border-radius:8px;object-fit:cover;"></div>
+      <div><span class="logo-name">SUIKA LEAGUE</span><span class="logo-sub">Official Community</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tournaments.html">Tournaments</a></li>
+      <li><a href="players.html">Players</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="magazine.html">Magazine</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="https://discord.gg/7frwwTJC54" class="btn btn-discord btn-sm">💬 Join Discord</a>
+    </div>
+    <div class="hamburger" onclick="toggleDrawer()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <ul class="mobile-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="tournaments.html">Tournaments</a></li>
+    <li><a href="players.html">Players</a></li>
+    <li><a href="leaderboard.html">Leaderboard</a></li>
+    <li><a href="magazine.html">Magazine</a></li>
+    <li><a href="learn.html">Learn</a></li>
+    <li><a href="media.html">Media</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div style="padding:1rem 0 0;display:flex;gap:0.75rem;">
+    <a href="https://discord.gg/7frwwTJC54" class="btn btn-discord btn-sm" style="flex:1;justify-content:center;">💬 Join Discord</a>
+    <a href="https://vrc.group/SUIKA.5062" class="btn btn-sm" style="flex:1;justify-content:center;background:var(--g-subtle);border:1px solid var(--g-border);color:var(--g-bright);">VRChat Group</a>
+  </div>
+</div>
+
+<!-- ================================================================
+     EDITORIAL BANNER
+     ================================================================ -->
+<div class="ed-banner">
+  <div class="ed-kicker">Founder's Story &nbsp;·&nbsp; Issue No. 1 &nbsp;·&nbsp; Suika League</div>
+  <h1 class="ed-headline">From Racetracks<br>to <em>Watermelons</em></h1>
+  <p class="ed-deck">
+    How a Russian-born drifter, model, and actress built the most competitive Suika Game
+    community in VRChat — not despite her unlikely background, but because of it.
+  </p>
+  <div class="ed-byline">
+    <span>By <span class="ed-byline-name">Suika League Editorial</span></span>
+    <span class="ed-byline-sep">|</span>
+    <span>Community Feature</span>
+    <span class="ed-byline-sep">|</span>
+    <span>2024</span>
+  </div>
+</div>
+
+<!-- Full-width hero image (founder photo) -->
+<div class="ed-full-img">
+  <div class="img-placeholder">
+    <div style="font-size:3rem;opacity:0.3;">&#9651;</div>
+    <div class="img-ph-label">Founder photograph — to be added</div>
+    <div style="font-size:0.7rem;color:var(--t-muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.25rem;">Replace with: Afra / Yuliana Grasman portrait</div>
+  </div>
+</div>
+<div class="img-caption">
+  Yuliana Grasman — racer, actress, and founder of Suika League — photographed [location, year].
+</div>
+
+<!-- ================================================================
+     EDITORIAL BODY
+     ================================================================ -->
+<div class="ed-body">
+
+  <!-- ── PART ONE: THE BEGINNING ─────────────────────────────── -->
+  <div class="ed-section-head">The Unexpected Origin</div>
+
+  <div class="ed-columns">
+
+    <p>There is a particular kind of person who walks into a room they were never supposed to enter and, by the time they leave, has made it theirs. Yuliana Grasman — known to the VRChat world simply as Afra — is that kind of person. The founder of Suika League didn't set out to build a gaming community. She wasn't even a gamer. She was a professional drifter.</p>
+
+    <p>Born in Russia and raised across borders, Grasman became something of a quiet record-setter long before she ever touched a watermelon-puzzle game. She is the first woman in the world to perform freestyle drift with a 4x4 vehicle. She drove on two wheels in a category where, previously, no woman had. She raced in the UAE, competed in mudcross festivals, and won gold. The instinct that drew her to competitive gaming wasn't new — it was simply redirected.</p>
+
+    <p>"I've always gravitated toward things people said couldn't be done," Grasman says. "Not because I wanted to prove something to anyone in particular. Because I genuinely wanted to see what was on the other side of the barrier."</p>
+
+    <div class="pull-quote">
+      <blockquote>
+        "A healthy competitive community shouldn't protect the people at the top. It should constantly create new people capable of reaching them."
+      </blockquote>
+      <cite>— Afra (Yuliana Grasman), Founder, Suika League</cite>
+    </div>
+
+    <p>VRChat found her the way many things find restless people: sideways. She had been exploring virtual reality as an extension of the performance work she had been doing on screen — acting, modeling, appearing alongside names like Shah Rukh Khan in Bollywood productions, and taking roles in the Emirati film circuit that cast her across genres and languages.</p>
+
+    <p>Virtual reality offered something cinema didn't: immediacy. There were no directors, no scripts, no waiting for the light to change. There was just a space and whoever showed up in it. For Grasman, that was enough to keep her coming back. The specific game — Suika, a deceptively simple fruit-merging puzzle with an iron grip on anyone who takes it seriously — caught her the same way competitive drifting had. Quietly, then completely.</p>
+
+    <div class="ed-break">
+      <div class="img-placeholder">
+        <div style="font-size:2rem;opacity:0.3;">&#9651;</div>
+        <div class="img-ph-label">Photo — to be added</div>
+        <div style="font-size:0.68rem;color:var(--t-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.2rem;">Racing / early career photograph</div>
+      </div>
+      <div class="img-caption">Grasman competing in the UAE — gold medalist, freestyle drift and mudcross. [Photo to be added]</div>
+    </div>
+
+  </div><!-- /.ed-columns -->
+
+  <!-- ── PART TWO: BUILDING IT ──────────────────────────────── -->
+  <div class="ed-section-head" style="margin-top:3rem;">Building Something Worth Losing At</div>
+
+  <div class="ed-columns">
+
+    <p>The idea for Suika League didn't arrive as a business plan or a structured proposal. It arrived as a frustration. Grasman had been playing Suika Game in Melon &amp; Chill — the VRChat world that serves as the game's social home — and noticed something that bothered her. The competitive layer was missing.</p>
+
+    <p>People played casually. They gathered, they merged fruit, they left. There were no records being kept, no rankings, no incentive to push beyond what was comfortable. For someone who had spent her career at the intersection of discipline and competition, this felt like a missed opportunity.</p>
+
+    <p>"Games are at their best when they make you want to get better," she explains. "Not better than someone else necessarily — better than the version of yourself who sat down five minutes ago. That's what competition gives you. That's what I wanted to give Suika."</p>
+
+    <div class="pull-quote">
+      <blockquote>
+        "I wanted somebody to beat me. Not because I wanted to lose. Because I wanted the level around me to rise."
+      </blockquote>
+      <cite>— Afra (Yuliana Grasman)</cite>
+    </div>
+
+    <p>She began organizing. Keeping track of scores. Sharing results. Inviting people to try. The community formed organically around the structure she created, not the other way around. Within a relatively short period, the Discord had players, the leaderboard had names, and the name Suika League had come to mean something specific: this was where the serious players went.</p>
+
+    <p>What distinguished her approach from the beginning was the role system. Rather than treating all players as equal participants in an undifferentiated mass, Suika League assigned roles that reflected how people actually engaged. The Champion, the Competitive, the Sensei, the Host, the New Player — a taxonomy that acknowledged that communities are ecosystems, not populations, and that each type of member adds something the others can't.</p>
+
+    <div class="ed-inline-img">
+      <div class="img-placeholder">
+        <div style="font-size:1.8rem;opacity:0.25;">&#9651;</div>
+        <div class="img-ph-label">Portrait — to be added</div>
+        <div style="font-size:0.66rem;color:var(--t-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.15rem;">Founder in VRChat</div>
+      </div>
+      <div class="img-caption">Afra in Melon &amp; Chill, the VRChat world where Suika League was born. [Screenshot to be added]</div>
+    </div>
+
+    <p>"A Sensei isn't just a good player. A Sensei is someone the community can learn from," Grasman notes. "That distinction matters. If you're only measuring scores, you miss all the invisible work that makes a community actually function."</p>
+
+    <p>The tournaments followed. Then the magazine. Then the formal recognition of a leaderboard that tracked not just current scores but the arc of improvement. Each addition reflected the same underlying philosophy: that the things worth doing in a community are worth documenting, and that the people who show up deserve more than anonymity.</p>
+
+  </div><!-- /.ed-columns -->
+
+  <!-- ── PART THREE: WHAT IT BECAME ─────────────────────────── -->
+  <div class="ed-section-head" style="margin-top:3rem;">What It Became</div>
+
+  <div class="ed-columns">
+
+    <p>Suika League grew. Players from different countries found their way to the Discord, to the leaderboard, to the weekly gatherings in Melon &amp; Chill. People who had never met in person and likely never would found themselves genuinely invested in each other's progress. The #1 ranking changed hands. Scores that once seemed unreachable became targets.</p>
+
+    <p>What Grasman built is, in its own way, a proof of concept. The concept being: you can take something small — a fruit puzzle game on a VRChat stage — and build a structure around it serious enough that people rise to it. You don't need a massive budget or corporate backing. You need someone willing to keep showing up and keep the records.</p>
+
+    <p>She has done both. And she has done it while maintaining the other threads of her life — the performance work, the racing history, the personality that doesn't settle into any single category. This, too, seems intentional.</p>
+
+    <div class="pull-quote">
+      <blockquote>
+        "The community didn't disappear because its founder wasn't standing in the middle of it. That's how you know it's real."
+      </blockquote>
+      <cite>— Afra (Yuliana Grasman)</cite>
+    </div>
+
+    <p>"I don't want Suika League to be about me," she says plainly. "I want it to be about the players who show up every week and put in the work. My job is to make sure the structure is there when they arrive."</p>
+
+    <p>The structure is there. The players keep arriving. And the scores — week by week, session by session — keep going up. Which is, in the end, exactly the point.</p>
+
+  </div><!-- /.ed-columns -->
+
+  <!-- ── FOUNDER VIDEO ───────────────────────────────────────── -->
+  <div class="ed-video">
+    <div class="ed-video-ph">
+      <div style="font-size:2.5rem;opacity:0.25;">▶</div>
+      <div class="ed-video-label">Founder interview / media — to be added</div>
+      <div style="font-size:0.7rem;color:var(--t-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.15rem;">Paste a YouTube or VRChat recording embed here</div>
+    </div>
+    <div style="font-size:0.78rem;font-style:italic;color:var(--t-muted);">Video feature with Afra (Yuliana Grasman) — coming soon.</div>
+  </div>
+
+  <!-- ── FOUNDER BIO CARD ────────────────────────────────────── -->
+  <div class="founder-card">
+    <div class="founder-avatar">
+      <!-- TODO: Replace with founder's actual photo -->
+      <span style="opacity:0.35;font-size:2.5rem;">&#9651;</span>
+    </div>
+    <div class="founder-info">
+      <h3>Afra · Yuliana Grasman</h3>
+      <div class="founder-title">Founder &amp; Commissioner, Suika League &nbsp;·&nbsp; Dubai, UAE</div>
+      <p>
+        Racer, model, actress, and community builder. First woman in the world to perform freestyle drift with a 4x4 vehicle. Gold medalist in UAE mudcross. Actress (IMDb). Founder of Suika League — the competitive Suika Game community in VRChat.
+      </p>
+      <div class="founder-links">
+        <a href="https://www.instagram.com/afraworld8/" class="founder-link" target="_blank" rel="noopener">
+          <span>📷</span> @afraworld8
+        </a>
+        <a href="https://www.youtube.com/@AfraWorld" class="founder-link" target="_blank" rel="noopener">
+          <span>▶</span> YouTube — Afra World
+        </a>
+        <a href="https://www.imdb.com/name/nm12341828/" class="founder-link" target="_blank" rel="noopener">
+          <span>🎬</span> IMDb
+        </a>
+        <a href="https://discord.gg/7frwwTJC54" class="founder-link" target="_blank" rel="noopener">
+          <span>💬</span> Discord — Suika League
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── JOIN CTA ────────────────────────────────────────────── -->
+  <div class="ed-cta">
+    <h3>Join the League</h3>
+    <p>Step into Melon &amp; Chill on VRChat. Find your rank. Meet the community. The leaderboard is waiting.</p>
+    <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+      <a href="https://discord.gg/7frwwTJC54" class="btn btn-discord" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.8rem;background:var(--discord);color:#fff;border-radius:50px;font-family:var(--font-head);font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;">💬 Join Discord</a>
+      <a href="https://vrc.group/SUIKA.5062" class="btn" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.8rem;background:var(--g-subtle);border:1.5px solid var(--g-border);color:var(--g-bright);border-radius:50px;font-family:var(--font-head);font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;">🌐 VRChat Group</a>
+      <a href="leaderboard.html" class="btn" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.8rem;background:transparent;border:1.5px solid var(--g-border);color:var(--t-secondary);border-radius:50px;font-family:var(--font-head);font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;">View Leaderboard</a>
+    </div>
+  </div>
+
+</div><!-- /.ed-body -->
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">SUIKA LEAGUE</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="players.html">Players</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="magazine.html">Magazine</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="foot-socials">
+      <a href="https://discord.gg/7frwwTJC54" class="fs-icon" title="Discord" target="_blank" rel="noopener">💬</a>
+    </div>
+    <div class="foot-copy">&copy; 2024 Suika League · All rights reserved · Founded by Afra (Yuliana Grasman)</div>
+  </div>
+</footer>
+
+<script>
+  /* Nav scroll */
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+  /* Hamburger */
+  function toggleDrawer() {
+    document.getElementById('mobileDrawer').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Suika League Leaderboard — See the top-ranked Suika Game players in VRChat.">
+  <title>Leaderboard – Suika League</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base:#06090a;--bg-card:rgba(10,18,20,0.82);
+      --g-bright:#4ade80;--g-mid:#22c55e;--g-glow:rgba(74,222,128,0.45);
+      --g-subtle:rgba(74,222,128,0.08);--g-border:rgba(74,222,128,0.20);--g-border2:rgba(74,222,128,0.38);
+      --gold:#fbbf24;--silver:#94a3b8;--bronze:#c2783b;
+      --t-primary:#edfff3;--t-secondary:#8da896;--t-muted:#4f6a57;
+      --discord:#5865F2;
+      --radius-s:8px;--radius-m:14px;--radius-l:22px;
+      --ease:cubic-bezier(0.4,0,0.2,1);--fast:0.2s;
+      --font-head:'Exo 2',system-ui,sans-serif;--font-body:'Inter',system-ui,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--bg-base);color:var(--t-primary);overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 55% 45% at 70% 20%,rgba(12,80,35,0.16) 0%,transparent 60%),
+                 radial-gradient(ellipse 40% 35% at 15% 80%,rgba(70,15,35,0.12) 0%,transparent 60%);}
+    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:radial-gradient(circle,rgba(74,222,128,0.035) 1px,transparent 1px);
+      background-size:32px 32px;}
+    h1,h2,h3,h4{font-family:var(--font-head);font-weight:800;line-height:1.15;}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 2rem;}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.6rem 1.4rem;
+      font-family:var(--font-head);font-weight:700;font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;
+      border:none;border-radius:50px;cursor:pointer;transition:transform var(--fast) var(--ease),box-shadow var(--fast) var(--ease);}
+    .btn:hover{transform:translateY(-2px);}
+    .btn-discord{background:var(--discord);color:#fff;box-shadow:0 0 20px rgba(88,101,242,0.28);}
+    .btn-discord:hover{background:#4752c4;}
+    .btn-outline{background:transparent;color:var(--g-bright);border:1.5px solid var(--g-border);}
+    .btn-outline:hover{background:var(--g-subtle);border-color:var(--g-border2);}
+    .btn-sm{padding:0.42rem 1rem;font-size:0.72rem;}
+
+    /* Nav (same as homepage) */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;padding:0 2rem;
+      background:rgba(4,7,8,0.82);backdrop-filter:blur(24px);border-bottom:1px solid var(--g-border);
+      transition:background 0.35s var(--ease);}
+    .nav.scrolled{background:rgba(3,5,6,0.97);}
+    .nav-inner{width:100%;max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+    .logo-mark{width:40px;height:40px;background:var(--g-subtle);border:1px solid var(--g-border);border-radius:var(--radius-m);
+      display:flex;align-items:center;justify-content:center;font-size:1.5rem;filter:drop-shadow(0 0 10px var(--g-glow));}
+    .logo-name{font-family:var(--font-head);font-weight:900;font-size:1rem;color:var(--g-bright);letter-spacing:0.06em;text-shadow:0 0 18px var(--g-glow);}
+    .logo-sub{font-family:var(--font-head);font-weight:600;font-size:0.55rem;color:var(--t-muted);letter-spacing:0.18em;text-transform:uppercase;}
+    .nav-links{display:flex;align-items:center;gap:0.1rem;list-style:none;flex:1;}
+    .nav-links a{display:block;padding:0.45rem 0.7rem;font-family:var(--font-head);font-weight:600;font-size:0.78rem;
+      letter-spacing:0.05em;text-transform:uppercase;color:var(--t-secondary);border-radius:var(--radius-s);
+      transition:color var(--fast) var(--ease),background var(--fast) var(--ease);}
+    .nav-links a:hover,.nav-links a.active{color:var(--g-bright);background:var(--g-subtle);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem;margin-left:auto;}
+    .hamburger span{width:20px;height:2px;background:var(--t-primary);border-radius:2px;}
+    .mobile-drawer{display:none;position:fixed;top:68px;left:0;right:0;z-index:199;
+      background:rgba(3,6,7,0.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--g-border);padding:1rem;}
+    .mobile-drawer.open{display:block;}
+    .mobile-links{list-style:none;display:flex;flex-direction:column;gap:2px;}
+    .mobile-links a{display:block;padding:0.8rem 1rem;font-family:var(--font-head);font-weight:600;font-size:0.9rem;
+      letter-spacing:0.06em;text-transform:uppercase;color:var(--t-secondary);border-radius:var(--radius-s);
+      transition:color var(--fast) var(--ease),background var(--fast) var(--ease);}
+    .mobile-links a:hover{color:var(--g-bright);background:var(--g-subtle);}
+    @media(max-width:900px){.nav-links{display:none;}.hamburger{display:flex;}}
+
+    /* Page Hero */
+    .page-hero{position:relative;z-index:2;padding:140px 0 60px;text-align:center;}
+    .page-hero-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;background:var(--g-subtle);
+      border:1px solid var(--g-border);border-radius:50px;padding:0.35rem 0.9rem;
+      font-family:var(--font-head);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+      color:var(--g-bright);margin-bottom:1rem;}
+    .page-hero-title{font-size:clamp(2.4rem,6vw,4rem);font-weight:900;letter-spacing:-0.02em;
+      color:var(--g-bright);text-shadow:0 0 40px rgba(74,222,128,0.5);margin-bottom:0.6rem;}
+    .page-hero-sub{font-size:1rem;color:var(--t-secondary);max-width:480px;margin:0 auto;}
+
+    /* Season Tabs */
+    .season-tabs{display:flex;align-items:center;gap:0.5rem;margin-bottom:2rem;flex-wrap:wrap;}
+    .s-tab{padding:0.45rem 1.1rem;font-family:var(--font-head);font-weight:700;font-size:0.76rem;
+      letter-spacing:0.06em;text-transform:uppercase;border-radius:50px;cursor:pointer;
+      background:rgba(74,222,128,0.06);border:1px solid var(--g-border);color:var(--t-muted);
+      transition:all var(--fast) var(--ease);}
+    .s-tab:hover,.s-tab.active{background:var(--g-subtle);border-color:var(--g-border2);color:var(--g-bright);}
+
+    /* Podium */
+    .podium{display:flex;align-items:flex-end;justify-content:center;gap:1.5rem;margin-bottom:3rem;}
+    .podium-slot{display:flex;flex-direction:column;align-items:center;gap:0.75rem;}
+    .podium-slot.p1{order:2;}
+    .podium-slot.p2{order:1;}
+    .podium-slot.p3{order:3;}
+
+    .podium-av{border-radius:50%;display:flex;align-items:center;justify-content:center;
+      font-size:2.5rem;border:3px solid;overflow:hidden;position:relative;}
+    .podium-av img{width:100%;height:100%;object-fit:cover;}
+    .p1 .podium-av{width:100px;height:100px;border-color:var(--gold);box-shadow:0 0 30px rgba(251,191,36,0.45);}
+    .p2 .podium-av{width:82px;height:82px;border-color:var(--silver);box-shadow:0 0 20px rgba(148,163,184,0.35);}
+    .p3 .podium-av{width:76px;height:76px;border-color:var(--bronze);box-shadow:0 0 20px rgba(194,120,59,0.35);}
+
+    .podium-crown{font-size:1.6rem;filter:drop-shadow(0 0 12px rgba(251,191,36,0.85));}
+    .podium-name{font-family:var(--font-head);font-weight:900;font-size:1rem;text-align:center;}
+    .podium-score{font-family:var(--font-head);font-weight:900;font-size:1.3rem;text-align:center;}
+    .p1 .podium-score{color:var(--gold);text-shadow:0 0 16px rgba(251,191,36,0.5);font-size:1.6rem;}
+    .p2 .podium-score{color:var(--silver);}
+    .p3 .podium-score{color:var(--bronze);}
+
+    .podium-stand{width:100%;border-radius:var(--radius-m) var(--radius-m) 0 0;text-align:center;
+      padding:0.75rem 0; font-family:var(--font-head);font-weight:900;font-size:1.2rem;}
+    .p1 .podium-stand{height:100px;background:linear-gradient(to top,rgba(251,191,36,0.18),rgba(251,191,36,0.05));
+      border:1px solid rgba(251,191,36,0.25);color:var(--gold);font-size:1.8rem;display:flex;align-items:center;justify-content:center;}
+    .p2 .podium-stand{height:72px;background:linear-gradient(to top,rgba(148,163,184,0.12),rgba(148,163,184,0.02));
+      border:1px solid rgba(148,163,184,0.2);color:var(--silver);display:flex;align-items:center;justify-content:center;}
+    .p3 .podium-stand{height:55px;background:linear-gradient(to top,rgba(194,120,59,0.12),rgba(194,120,59,0.02));
+      border:1px solid rgba(194,120,59,0.2);color:var(--bronze);display:flex;align-items:center;justify-content:center;}
+
+    /* Full leaderboard table */
+    .lb-table{width:100%;border-collapse:collapse;}
+    .lb-thead th{padding:0.7rem 0.875rem;font-family:var(--font-head);font-weight:700;font-size:0.68rem;
+      letter-spacing:0.12em;text-transform:uppercase;color:var(--t-muted);border-bottom:1px solid var(--g-border);text-align:left;}
+    .lb-row{border-bottom:1px solid rgba(74,222,128,0.05);transition:background var(--fast) var(--ease);}
+    .lb-row:hover{background:var(--g-subtle);}
+    .lb-row td{padding:0.9rem 0.875rem;vertical-align:middle;}
+    .lb-row.r1 td:first-child{border-left:3px solid var(--gold);}
+    .lb-row.r2 td:first-child{border-left:3px solid var(--silver);}
+    .lb-row.r3 td:first-child{border-left:3px solid var(--bronze);}
+
+    .lb-rank-cell{font-family:var(--font-head);font-weight:900;font-size:1rem;width:50px;}
+    .rank-gold{color:var(--gold);}
+    .rank-silver{color:var(--silver);}
+    .rank-bronze{color:var(--bronze);}
+    .rank-plain{color:var(--t-muted);}
+
+    .lb-player{display:flex;align-items:center;gap:0.75rem;}
+    .lb-av-sm{width:40px;height:40px;border-radius:50%;background:var(--g-subtle);border:1px solid var(--g-border);
+      display:flex;align-items:center;justify-content:center;font-size:1.3rem;overflow:hidden;flex-shrink:0;}
+    .lb-av-sm img{width:100%;height:100%;object-fit:cover;}
+    .lb-pname-lg{font-weight:700;font-size:0.92rem;}
+    .lb-pcountry{font-size:0.72rem;color:var(--t-muted);}
+    .lb-score-cell{font-family:var(--font-head);font-weight:900;font-size:1rem;color:var(--g-bright);}
+    .lb-score-cell.golden{color:var(--gold);}
+    .role-tag{display:inline-flex;align-items:center;gap:0.3rem;padding:0.2rem 0.58rem;border-radius:50px;
+      font-size:0.66rem;font-weight:600;letter-spacing:0.03em;}
+    .role-champion{background:rgba(251,191,36,0.12);color:var(--gold);border:1px solid rgba(251,191,36,0.2);}
+    .role-competitive{background:rgba(99,102,241,0.12);color:#818cf8;border:1px solid rgba(99,102,241,0.2);}
+    .role-regular{background:rgba(74,222,128,0.12);color:var(--g-bright);border:1px solid rgba(74,222,128,0.2);}
+    .placeholder{margin-top:0.875rem;background:rgba(251,191,36,0.06);border:1px dashed rgba(251,191,36,0.28);
+      border-radius:var(--radius-s);padding:0.4rem 0.75rem;font-size:0.68rem;color:rgba(251,191,36,0.65);text-align:center;}
+    .card{background:var(--bg-card);border:1px solid var(--g-border);border-radius:var(--radius-l);
+      backdrop-filter:blur(20px);padding:1.75rem;}
+
+    /* Footer */
+    .glow-divider{position:relative;z-index:2;height:1px;background:linear-gradient(to right,transparent,var(--g-border),transparent);}
+    .footer{position:relative;z-index:2;background:rgba(2,4,5,0.92);border-top:1px solid var(--g-border);}
+    .footer-bottom{max-width:1380px;margin:0 auto;padding:1.6rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+    .footer-copy,.footer-made{font-size:0.73rem;color:var(--t-muted);}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><img src="logo-circle.png" alt="SL" style="width:34px;height:34px;border-radius:8px;object-fit:cover;"></div>
+      <div><span class="logo-name" style="display:block;">SUIKA LEAGUE</span><span class="logo-sub">Official Community</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tournaments.html">Tournaments</a></li>
+      <li><a href="players.html">Players</a></li>
+      <li><a href="leaderboard.html" class="active">Leaderboard</a></li>
+      <li><a href="magazine.html">Magazine</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div style="margin-left:auto;display:flex;gap:0.75rem;align-items:center;">
+      <a href="https://discord.gg/7frwwTJC54" class="btn btn-discord btn-sm" id="nav-discord" target="_blank" rel="noopener">💬 Join Discord</a>
+    </div>
+    <div class="hamburger" onclick="document.getElementById('drawer').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-drawer" id="drawer">
+  <ul class="mobile-links">
+    <li><a href="index.html">Home</a></li><li><a href="tournaments.html">Tournaments</a></li>
+    <li><a href="players.html">Players</a></li><li><a href="leaderboard.html">Leaderboard</a></li>
+    <li><a href="magazine.html">Magazine</a></li><li><a href="learn.html">Learn</a></li>
+    <li><a href="media.html">Media</a></li><li><a href="community.html">Community</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-eyebrow">👑 Rankings</div>
+  <h1 class="page-hero-title">Leaderboard</h1>
+  <p class="page-hero-sub">The top Suika Game players in the VRChat community — ranked by best score.</p>
+</div>
+
+<!-- MAIN CONTENT -->
+<main style="position:relative;z-index:2;padding-bottom:5rem;">
+  <div class="wrap">
+
+    <!-- Season Tabs -->
+    <div class="season-tabs" id="seasonTabs">
+      <div class="s-tab active" onclick="setTab(this,'current')">Current Season</div>
+      <div class="s-tab" onclick="setTab(this,'alltime')">All-Time</div>
+    </div>
+
+    <!-- Podium -->
+    <div class="podium" id="podium"></div>
+
+    <!-- Full Table -->
+    <div class="card" style="padding:0;overflow:hidden;">
+      <table class="lb-table">
+        <thead class="lb-thead">
+          <tr>
+            <th style="width:50px;">#</th>
+            <th>Player</th>
+            <th>Score</th>
+            <th>Role</th>
+            <th>Country</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="lbTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- More players will be added as the community grows -->
+  </div>
+</main>
+
+<div class="glow-divider"></div>
+<footer class="footer">
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2024 Suika League. All rights reserved.</span>
+    <span class="footer-made">Made with 🍉 for the Suika Community</span>
+  </div>
+</footer>
+
+<script>
+/* ================================================================
+   LEADERBOARD DATA  ←  UPDATE THIS ARRAY TO CHANGE RANKINGS
+   ================================================================ */
+const LEADERBOARD = {
+  /* Add / edit players here. Fields:
+     rank, name, avatar (URL or null), emoji, score, role, country, profileLink
+  */
+  current: [
+    { rank:1, name:'SPUTN1X',        avatar:null, emoji:'🍉', score:'38,432', role:'champion',    country:'',  profileLink:'players.html' },
+    { rank:2, name:'Rialsnogard',     avatar:null, emoji:'🍓', score:'26,819', role:'competitive', country:'',  profileLink:'players.html' },
+    { rank:3, name:'buzer ~',         avatar:null, emoji:'🍊', score:'26,249', role:'competitive', country:'',  profileLink:'players.html' },
+    { rank:4, name:'~Hydro~',         avatar:null, emoji:'🍍', score:'22,196', role:'regular',     country:'',  profileLink:'players.html' },
+    { rank:5, name:'TheGreatLeader0', avatar:null, emoji:'🫐', score:'3,736',  role:'regular',     country:'',  profileLink:'players.html' },
+    { rank:6, name:'Bubbles_2021',    avatar:null, emoji:'🍇', score:'3,419',  role:'regular',     country:'',  profileLink:'players.html' },
+    // TODO: Add more players (30+ expected) — add as: { rank:N, name:'...', avatar:null, emoji:'🍒', score:'...', role:'regular', country:'', profileLink:'players.html' }
+  ],
+  alltime: [], // will mirror current as placeholder
+};
+LEADERBOARD.alltime = LEADERBOARD.current; // placeholder
+
+const ROLE_MAP = {
+  champion:   { label:'🏆 #1 Player',       cls:'role-champion'   },
+  competitive:{ label:'🎮 Competitive',      cls:'role-competitive'},
+  regular:    { label:'🍉 Regular',          cls:'role-regular'    },
+  sensei:     { label:'🧑‍🏫 Sensei',       cls:'role-competitive'},
+  vip:        { label:'💎 VIP',              cls:'role-champion'   },
+};
+
+let activeSet = 'current';
+
+function setTab(el, key) {
+  document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  activeSet = key;
+  renderPodium();
+  renderTable();
+}
+
+function renderPodium() {
+  const data = LEADERBOARD[activeSet];
+  const top3 = [data[1], data[0], data[2]]; // silver, gold, bronze order (visual podium)
+  const medals = ['🥈', '🥇', '🥉'];
+  const classes = ['p2', 'p1', 'p3'];
+  const el = document.getElementById('podium');
+  el.innerHTML = top3.map((p, i) => {
+    if (!p) return '';
+    const role = ROLE_MAP[p.role] || ROLE_MAP.regular;
+    return `
+      <div class="podium-slot ${classes[i]}">
+        ${i === 1 ? `<div class="podium-crown">👑</div>` : ''}
+        <div class="podium-av">
+          ${p.avatar ? `<img src="${p.avatar}" alt="${p.name}">` : p.emoji}
+        </div>
+        <div class="podium-name">${p.name}</div>
+        <div class="podium-score">${p.score}</div>
+        <span class="role-tag ${role.cls}" style="font-size:0.62rem;">${role.label}</span>
+        <div class="podium-stand">${medals[i]}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderTable() {
+  const data = LEADERBOARD[activeSet];
+  const rankCls = ['rank-gold','rank-silver','rank-bronze'];
+  const rowCls  = ['r1','r2','r3'];
+  const el = document.getElementById('lbTableBody');
+  el.innerHTML = data.map((p, i) => {
+    const role = ROLE_MAP[p.role] || ROLE_MAP.regular;
+    const rc = i < 3 ? rankCls[i] : 'rank-plain';
+    return `
+      <tr class="lb-row ${i<3?rowCls[i]:''}">
+        <td><span class="lb-rank-cell ${rc}">${p.rank}</span></td>
+        <td>
+          <div class="lb-player">
+            <div class="lb-av-sm">${p.avatar?`<img src="${p.avatar}" alt="">`:`${p.emoji}`}</div>
+            <div>
+              <div class="lb-pname-lg">${p.name}</div>
+              <div class="lb-pcountry">${p.country}</div>
+            </div>
+          </div>
+        </td>
+        <td><span class="lb-score-cell ${i===0?'golden':''}">${p.score}</span></td>
+        <td><span class="role-tag ${role.cls}">${role.label}</span></td>
+        <td style="font-size:0.82rem;color:var(--t-muted);">${p.country}</td>
+        <td><a href="${p.profileLink}" style="font-size:0.75rem;color:var(--g-bright);font-weight:600;">Profile →</a></td>
+      </tr>
+    `;
+  }).join('');
+}
+
+document.addEventListener('DOMContentLoaded',() => {
+  renderPodium();
+  renderTable();
+  window.addEventListener('scroll',()=>{
+    document.getElementById('mainNav').classList.toggle('scrolled',scrollY>60);
+  },{passive:true});
+});
+</script>
+</body>
+</html>

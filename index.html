@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Suika League – The official competitive VRChat community for Melon &amp; Chill players. Play, Connect, Compete, Grow.">
+  <meta name="keywords" content="Suika League, VRChat, Suika Game, Melon and Chill, competitive, community, tournament">
+  <meta property="og:title" content="Suika League – Play • Connect • Compete • Grow">
+  <meta property="og:description" content="The official competitive VRChat community for Suika Game players.">
+  <title>Suika League – Play • Connect • Compete • Grow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ================================================================
+       SUIKA LEAGUE — DESIGN SYSTEM
+       ================================================================ */
+    :root {
+      /* Backgrounds */
+      --bg-base:        #06090a;
+      --bg-dark:        #080d0e;
+      --bg-mid:         #0c1416;
+      --bg-card:        rgba(10, 18, 20, 0.82);
+      --bg-card-hover:  rgba(14, 24, 26, 0.95);
+
+      /* Green palette */
+      --g-bright:  #4ade80;
+      --g-mid:     #22c55e;
+      --g-dim:     #16a34a;
+      --g-glow:    rgba(74, 222, 128, 0.45);
+      --g-subtle:  rgba(74, 222, 128, 0.08);
+      --g-border:  rgba(74, 222, 128, 0.20);
+      --g-border2: rgba(74, 222, 128, 0.35);
+
+      /* Gold / rank */
+      --gold:    #fbbf24;
+      --silver:  #94a3b8;
+      --bronze:  #c2783b;
+
+      /* Text */
+      --t-primary:   #edfff3;
+      --t-secondary: #8da896;
+      --t-muted:     #4f6a57;
+
+      /* Misc */
+      --discord:  #5865F2;
+      --radius-s: 8px;
+      --radius-m: 14px;
+      --radius-l: 22px;
+      --radius-x: 32px;
+      --ease:     cubic-bezier(0.4, 0, 0.2, 1);
+      --fast:     0.2s;
+      --mid:      0.35s;
+
+      --font-head: 'Exo 2', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+    }
+
+    /* === RESET === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-base);
+      color: var(--t-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* === BACKGROUND WORLD === */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 72% 18%, rgba(12,80,35,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 35% at 15% 75%, rgba(70,15,35,0.14) 0%, transparent 60%),
+        radial-gradient(ellipse 65% 40% at 50% 105%, rgba(8,55,22,0.22) 0%, transparent 55%);
+    }
+
+    /* subtle dot-grid overlay */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: radial-gradient(circle, rgba(74,222,128,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    /* ================================================================
+       TYPOGRAPHY HELPERS
+       ================================================================ */
+    h1,h2,h3,h4,h5 {
+      font-family: var(--font-head);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    /* ================================================================
+       LAYOUT
+       ================================================================ */
+    .wrap {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ================================================================
+       NAVIGATION
+       ================================================================ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 68px;
+      display: flex; align-items: center;
+      padding: 0 2rem;
+      background: rgba(4, 7, 8, 0.80);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--g-border);
+      transition: background var(--mid) var(--ease);
+    }
+    .nav.scrolled { background: rgba(3, 5, 6, 0.96); }
+
+    .nav-inner {
+      width: 100%; max-width: 1380px; margin: 0 auto;
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      flex-shrink: 0;
+    }
+    .logo-mark {
+      width: 40px; height: 40px;
+      background: var(--g-subtle);
+      border: 1px solid var(--g-border);
+      border-radius: var(--radius-m);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      filter: drop-shadow(0 0 10px var(--g-glow));
+      flex-shrink: 0;
+    }
+    .logo-text { line-height: 1; }
+    .logo-name {
+      display: block;
+      font-family: var(--font-head); font-weight: 900; font-size: 1rem;
+      color: var(--g-bright);
+      text-shadow: 0 0 18px var(--g-glow);
+      letter-spacing: 0.06em;
+    }
+    .logo-sub {
+      display: block;
+      font-family: var(--font-head); font-weight: 600; font-size: 0.55rem;
+      color: var(--t-muted); letter-spacing: 0.18em; text-transform: uppercase;
+    }
+
+    /* Nav links */
+    .nav-links {
+      display: flex; align-items: center; gap: 0.1rem;
+      list-style: none; flex: 1;
+    }
+    .nav-links a {
+      display: block; padding: 0.45rem 0.7rem;
+      font-family: var(--font-head); font-weight: 600; font-size: 0.78rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--t-secondary);
+      border-radius: var(--radius-s);
+      transition: color var(--fast) var(--ease), background var(--fast) var(--ease);
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--g-bright); background: var(--g-subtle);
+    }
+
+    /* Nav actions */
+    .nav-actions { margin-left: auto; display: flex; align-items: center; gap: 0.75rem; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 0.5rem; margin-left: auto;
+    }
+    .hamburger span {
+      width: 20px; height: 2px;
+      background: var(--t-primary); border-radius: 2px;
+      transition: var(--fast) var(--ease);
+    }
+
+    /* Mobile drawer */
+    .mobile-drawer {
+      display: none;
+      position: fixed; top: 68px; left: 0; right: 0; z-index: 199;
+      background: rgba(3,6,7,0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--g-border);
+      padding: 1rem;
+    }
+    .mobile-drawer.open { display: block; }
+    .mobile-links { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .mobile-links a {
+      display: block; padding: 0.8rem 1rem;
+      font-family: var(--font-head); font-weight: 600; font-size: 0.9rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--t-secondary); border-radius: var(--radius-s);
+      transition: color var(--fast) var(--ease), background var(--fast) var(--ease);
+    }
+    .mobile-links a:hover { color: var(--g-bright); background: var(--g-subtle); }
+
+    /* ================================================================
+       BUTTONS
+       ================================================================ */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.6rem 1.4rem;
+      font-family: var(--font-head); font-weight: 700; font-size: 0.82rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      border: none; border-radius: 50px; cursor: pointer;
+      transition: transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease), background var(--fast) var(--ease);
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--g-mid); color: #02100a;
+      box-shadow: 0 0 22px rgba(34,197,94,0.32);
+    }
+    .btn-primary:hover { background: var(--g-bright); box-shadow: 0 0 35px rgba(74,222,128,0.5); }
+
+    .btn-outline {
+      background: transparent; color: var(--g-bright);
+      border: 1.5px solid var(--g-border);
+    }
+    .btn-outline:hover { background: var(--g-subtle); border-color: var(--g-border2); }
+
+    .btn-discord {
+      background: var(--discord); color: #fff;
+      box-shadow: 0 0 20px rgba(88,101,242,0.28);
+    }
+    .btn-discord:hover { background: #4752c4; box-shadow: 0 0 30px rgba(88,101,242,0.45); }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.07); color: var(--t-primary);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.22); }
+
+    .btn-sm { padding: 0.42rem 1rem; font-size: 0.72rem; }
+    .btn-lg { padding: 0.8rem 2rem; font-size: 0.9rem; }
+    .btn-block { width: 100%; }
+
+    /* ================================================================
+       CARDS
+       ================================================================ */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--g-border);
+      border-radius: var(--radius-l);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: border-color var(--mid) var(--ease),
+                  box-shadow var(--mid) var(--ease),
+                  transform var(--mid) var(--ease);
+    }
+    .card:hover {
+      border-color: var(--g-border2);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 0 24px rgba(74,222,128,0.07);
+      transform: translateY(-3px);
+    }
+    .card-pad { padding: 1.75rem; }
+
+    /* ================================================================
+       SECTION HEADER (card-level)
+       ================================================================ */
+    .sec-hd {
+      display: flex; align-items: center; gap: 0.65rem;
+      margin-bottom: 1.5rem;
+    }
+    .sec-hd-icon { font-size: 1.1rem; filter: drop-shadow(0 0 8px var(--g-glow)); }
+    .sec-hd-label {
+      font-family: var(--font-head); font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--g-bright);
+    }
+    .sec-hd-link {
+      margin-left: auto; font-size: 0.72rem; font-weight: 600;
+      color: var(--t-muted); letter-spacing: 0.04em;
+      transition: color var(--fast) var(--ease);
+    }
+    .sec-hd-link:hover { color: var(--g-bright); }
+
+    /* ================================================================
+       BADGES / TAGS
+       ================================================================ */
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 50px; font-size: 0.68rem; font-weight: 600;
+    }
+    .badge-green { background: rgba(74,222,128,0.12); color: var(--g-bright); border: 1px solid rgba(74,222,128,0.22); }
+    .badge-gold  { background: rgba(251,191,36,0.12); color: var(--gold);    border: 1px solid rgba(251,191,36,0.22); }
+    .badge-purple{ background: rgba(168,85,247,0.12); color: #c084fc;        border: 1px solid rgba(168,85,247,0.22); }
+
+    .role-tag {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      padding: 0.2rem 0.58rem; border-radius: 50px;
+      font-size: 0.66rem; font-weight: 600; letter-spacing: 0.03em;
+    }
+    .role-champion   { background:rgba(251,191,36,0.12); color:var(--gold);   border:1px solid rgba(251,191,36,0.2); }
+    .role-competitive{ background:rgba(99,102,241,0.12); color:#818cf8;        border:1px solid rgba(99,102,241,0.2); }
+    .role-regular    { background:rgba(74,222,128,0.12); color:var(--g-bright);border:1px solid rgba(74,222,128,0.2); }
+    .role-sensei     { background:rgba(251,146,60,0.12); color:#fb923c;        border:1px solid rgba(251,146,60,0.2); }
+    .role-vip        { background:rgba(168,85,247,0.12); color:#c084fc;        border:1px solid rgba(168,85,247,0.2); }
+    .role-host       { background:rgba(236,72,153,0.12); color:#f472b6;        border:1px solid rgba(236,72,153,0.2); }
+    .role-media      { background:rgba(14,165,233,0.12); color:#38bdf8;        border:1px solid rgba(14,165,233,0.2); }
+
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: var(--g-subtle); border: 1px solid var(--g-border);
+      border-radius: 50px; padding: 0.32rem 0.85rem;
+      font-family: var(--font-head); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--g-bright);
+      margin-bottom: 0.875rem;
+    }
+
+    /* Pulsing registration dot */
+    .pulse-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--g-bright); box-shadow: 0 0 6px var(--g-bright);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.45;transform:scale(0.7)} }
+
+    .reg-open {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.22);
+      border-radius: 50px; padding: 0.22rem 0.65rem;
+      font-size: 0.64rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--g-bright);
+    }
+
+    /* ================================================================
+       DIVIDERS
+       ================================================================ */
+    .glow-divider {
+      position: relative; z-index: 2; height: 1px;
+      background: linear-gradient(to right, transparent, var(--g-border), transparent);
+    }
+
+    /* ================================================================
+       PLACEHOLDER NOTICE
+       ================================================================ */
+    .placeholder {
+      margin-top: 0.875rem;
+      background: rgba(251,191,36,0.06); border: 1px dashed rgba(251,191,36,0.28);
+      border-radius: var(--radius-s); padding: 0.38rem 0.75rem;
+      font-size: 0.68rem; color: rgba(251,191,36,0.65); text-align: center;
+    }
+
+    /* ================================================================
+       HERO
+       ================================================================ */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 68px; overflow: hidden;
+    }
+
+    /* Atmospheric background */
+    .hero-atmo {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 90% 70% at 65% 35%, rgba(8,65,28,0.38) 0%, transparent 58%),
+        radial-gradient(ellipse 45% 55% at 85% 65%, rgba(65,8,30,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 45% at 10% 85%, rgba(6,45,18,0.28) 0%, transparent 55%);
+    }
+
+    /* Banner atmospheric overlay (right side, behind emblem) */
+    .hero-banner-bg {
+      position: absolute; right: -5%; top: 50%; transform: translateY(-50%);
+      width: 60%; pointer-events: none; z-index: 1;
+      opacity: 0.22;
+      mix-blend-mode: screen;
+    }
+
+    /* Floating bokeh */
+    .bokeh-layer { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+    .bokeh-dot {
+      position: absolute; border-radius: 50%;
+      animation: bokeh-drift 7s ease-in-out infinite;
+    }
+    @keyframes bokeh-drift {
+      0%,100%{ transform:translateY(0) scale(1); opacity:0.3; }
+      50%{ transform:translateY(-22px) scale(1.12); opacity:0.6; }
+    }
+
+    .hero-grid {
+      position: relative; z-index: 3;
+      width: 100%; max-width: 1380px; margin: 0 auto; padding: 0 2rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+      min-height: calc(100vh - 68px); padding-top: 3rem; padding-bottom: 3rem;
+    }
+
+    .hero-content { }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--g-subtle); border: 1px solid var(--g-border);
+      border-radius: 50px; padding: 0.38rem 0.95rem;
+      font-family: var(--font-head); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--g-bright);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(3.8rem, 8.5vw, 7.5rem);
+      font-weight: 900; letter-spacing: -0.03em; line-height: 0.88;
+      margin-bottom: 0.6rem;
+    }
+    .hero-title-main {
+      display: block; color: var(--g-bright);
+      text-shadow: 0 0 50px rgba(74,222,128,0.55), 0 0 100px rgba(74,222,128,0.25);
+    }
+    .hero-title-sub {
+      display: block;
+      font-size: 0.44em; letter-spacing: 0.28em;
+      color: var(--t-primary); font-weight: 700;
+      text-shadow: none;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-head); font-weight: 600; font-size: 0.88rem;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--g-mid);
+      margin-bottom: 1.5rem;
+    }
+    .hero-tagline .sep { opacity: 0.4; margin: 0 0.3em; }
+
+    .hero-desc {
+      font-size: 1rem; color: var(--t-secondary); line-height: 1.75;
+      max-width: 440px; margin-bottom: 2.5rem;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* Hero Logo Visual */
+    .hero-visual {
+      position: relative; display: flex;
+      align-items: center; justify-content: center;
+    }
+
+    .hero-emblem-wrap {
+      position: relative; display: flex;
+      align-items: center; justify-content: center;
+      width: 100%;
+    }
+
+    .hero-emblem {
+      width: 100%; max-width: 520px;
+      height: auto;
+      animation: emblem-float 6s ease-in-out infinite;
+      filter:
+        drop-shadow(0 0 40px rgba(74,222,128,0.45))
+        drop-shadow(0 0 80px rgba(251,191,36,0.25))
+        drop-shadow(0 24px 48px rgba(0,0,0,0.5));
+    }
+
+    @keyframes emblem-float {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-16px) scale(1.015); }
+    }
+
+    /* Orbit fruits — small decorative */
+    .orbit-fruit {
+      position: absolute; user-select: none; line-height: 1;
+      animation: fruit-bob 4.5s ease-in-out infinite;
+    }
+    .of-1 { top:4%;  right:8%;  font-size:2.8rem; animation-delay:0s;    opacity:0.75; }
+    .of-2 { bottom:6%; left:5%; font-size:2.4rem; animation-delay:-1.8s; opacity:0.65; }
+    .of-3 { top:38%; right:2%; font-size:2rem;   animation-delay:-0.9s; opacity:0.55; }
+    .of-4 { bottom:25%; right:10%; font-size:1.8rem; animation-delay:-2.5s; opacity:0.45; }
+
+    @keyframes fruit-bob {
+      0%,100%{ transform:translateY(0) rotate(-4deg); }
+      50%{ transform:translateY(-14px) rotate(4deg); }
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--t-muted); animation: scroll-hint 2.2s ease-in-out infinite;
+    }
+    .scroll-hint-bar {
+      width: 1px; height: 36px;
+      background: linear-gradient(to bottom, var(--g-mid), transparent);
+    }
+    @keyframes scroll-hint { 0%,100%{transform:translateX(-50%) translateY(0);opacity:0.8} 50%{transform:translateX(-50%) translateY(9px);opacity:0.35} }
+
+    /* ================================================================
+       STATS BAR
+       ================================================================ */
+    .stats-bar {
+      position: relative; z-index: 2;
+      background: rgba(4,8,9,0.55);
+      border-top: 1px solid var(--g-border); border-bottom: 1px solid var(--g-border);
+      backdrop-filter: blur(20px);
+    }
+    .stats-inner {
+      max-width: 1380px; margin: 0 auto; padding: 1.75rem 2rem;
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: var(--font-head); font-weight: 900; font-size: 2.2rem; line-height: 1;
+      color: var(--g-bright); text-shadow: 0 0 22px rgba(74,222,128,0.4);
+      margin-bottom: 0.3rem;
+    }
+    .stat-lbl {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--t-muted);
+    }
+
+    /* ================================================================
+       SECTIONS
+       ================================================================ */
+    .section { position: relative; z-index: 2; padding: 5rem 0; }
+    .section-sm { padding: 3rem 0; }
+
+    .page-section-title {
+      font-size: 1.75rem; font-weight: 900; margin-bottom: 0.4rem;
+    }
+    .page-section-sub {
+      font-size: 0.9rem; color: var(--t-secondary); margin-bottom: 2.5rem;
+    }
+
+    /* ================================================================
+       FEATURE CARDS GRID
+       ================================================================ */
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
+    }
+
+    /* --- Tournament Card --- */
+    .t-name { font-size: 1.3rem; font-weight: 900; margin: 0.6rem 0 0.25rem; line-height: 1.2; }
+    .t-sub  { font-size: 0.78rem; color: var(--t-muted); margin-bottom: 1.1rem; }
+    .t-meta { display: flex; flex-direction: column; gap: 0.42rem; margin-bottom: 1.2rem; }
+    .t-meta-row {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8rem; color: var(--t-secondary);
+    }
+    .t-meta-row .ico { width: 1rem; text-align: center; flex-shrink: 0; font-size: 0.85rem; }
+
+    /* --- #1 Player Card --- */
+    .num1-body {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 0.75rem; margin-bottom: 1.25rem;
+    }
+    .avatar-wrap { position: relative; }
+    .avatar {
+      width: 84px; height: 84px; border-radius: 50%;
+      background: var(--g-subtle); border: 2px solid var(--g-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.7rem; overflow: hidden;
+      box-shadow: 0 0 24px rgba(74,222,128,0.18);
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .avatar-crown {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      font-size: 1.5rem; filter: drop-shadow(0 0 10px rgba(251,191,36,0.8));
+    }
+    .p-name     { font-size: 1.35rem; font-weight: 900; }
+    .p-score-lg {
+      font-family: var(--font-head); font-size: 2.2rem; font-weight: 900; line-height: 1;
+      color: var(--g-bright); text-shadow: 0 0 22px rgba(74,222,128,0.4);
+    }
+    .p-rank-held { font-size: 0.73rem; color: var(--t-muted); }
+
+    /* --- Community Card --- */
+    .comm-icon {
+      font-size: 3.2rem; margin-bottom: 0.875rem; display: block;
+      filter: drop-shadow(0 0 18px rgba(74,222,128,0.42));
+      animation: fruit-bob 5s ease-in-out infinite;
+    }
+    .comm-title { font-size: 1.25rem; font-weight: 900; margin-bottom: 0.65rem; }
+    .comm-text  { font-size: 0.85rem; color: var(--t-secondary); line-height: 1.65; margin-bottom: 1.25rem; }
+    .comm-buttons { display: flex; flex-direction: column; gap: 0.65rem; }
+
+    /* ================================================================
+       MID GRID
+       ================================================================ */
+    .mid-grid {
+      display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 1.5rem;
+    }
+
+    /* --- Spotlight card --- */
+    .spotlight-av {
+      width: 100px; height: 100px;
+      border-radius: var(--radius-l);
+      background: var(--g-subtle); border: 2px solid var(--g-border);
+      margin: 0 auto 0.875rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; overflow: hidden;
+      box-shadow: 0 0 30px rgba(74,222,128,0.12);
+    }
+    .spotlight-name  { font-size: 1.5rem; font-weight: 900; margin-bottom: 0.2rem; text-align:center; }
+    .spotlight-title { font-size: 0.78rem; color: var(--t-muted); text-align: center; margin-bottom: 0.875rem; }
+
+    .spotlight-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-bottom: 1.1rem;
+    }
+    .spotlight-stat {
+      background: var(--g-subtle); border: 1px solid rgba(74,222,128,0.12);
+      border-radius: var(--radius-s); padding: 0.6rem; text-align: center;
+    }
+    .spotlight-stat-v { font-size: 0.95rem; font-weight: 700; color: var(--g-bright); }
+    .spotlight-stat-l { font-size: 0.62rem; color: var(--t-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    .carousel-dots {
+      display: flex; justify-content: center; gap: 0.35rem; margin-top: 0.875rem;
+    }
+    .c-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(74,222,128,0.18); transition: background var(--fast) var(--ease);
+    }
+    .c-dot.on { background: var(--g-bright); }
+
+    /* --- News card --- */
+    .news-list { display: flex; flex-direction: column; }
+    .news-item {
+      display: flex; gap: 0.875rem; padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(74,222,128,0.07);
+      text-decoration: none; transition: opacity var(--fast) var(--ease);
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-item:hover { opacity: 0.8; }
+    .news-thumb {
+      width: 58px; height: 58px; border-radius: var(--radius-s);
+      background: var(--g-subtle); border: 1px solid var(--g-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem; flex-shrink: 0; overflow: hidden;
+    }
+    .news-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .news-cat {
+      font-size: 0.63rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--g-mid); margin-bottom: 0.18rem;
+    }
+    .news-title {
+      font-size: 0.83rem; font-weight: 600; color: var(--t-primary); line-height: 1.35;
+      margin-bottom: 0.2rem; transition: color var(--fast) var(--ease);
+    }
+    .news-item:hover .news-title { color: var(--g-bright); }
+    .news-date { font-size: 0.7rem; color: var(--t-muted); }
+
+    /* --- Leaderboard card --- */
+    .lb-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .lb-row {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.65rem 0.875rem; border-radius: var(--radius-m);
+      background: rgba(74,222,128,0.03); border: 1px solid transparent;
+      text-decoration: none; transition: background var(--fast) var(--ease), border-color var(--fast) var(--ease);
+    }
+    .lb-row:hover { background: var(--g-subtle); border-color: var(--g-border); }
+    .lb-row.r1 { background: rgba(251,191,36,0.07); border-color: rgba(251,191,36,0.18); }
+    .lb-row.r2 { background: rgba(148,163,184,0.05); border-color: rgba(148,163,184,0.12); }
+    .lb-row.r3 { background: rgba(180,90,45,0.05); border-color: rgba(180,90,45,0.12); }
+
+    .lb-rank {
+      font-family: var(--font-head); font-weight: 900; font-size: 0.88rem;
+      width: 22px; text-align: center; flex-shrink: 0;
+    }
+    .lb-rank.gold   { color: var(--gold); }
+    .lb-rank.silver { color: var(--silver); }
+    .lb-rank.bronze { color: var(--bronze); }
+    .lb-rank.plain  { color: var(--t-muted); }
+
+    .lb-av {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--g-subtle); border: 1px solid var(--g-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0; overflow: hidden;
+    }
+    .lb-av img { width: 100%; height: 100%; object-fit: cover; }
+    .lb-info { flex: 1; min-width: 0; }
+    .lb-pname { font-size: 0.83rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lb-prole { font-size: 0.65rem; color: var(--t-muted); }
+    .lb-score {
+      font-family: var(--font-head); font-weight: 900; font-size: 0.88rem;
+      color: var(--g-bright); flex-shrink: 0;
+    }
+    .lb-score.golden { color: var(--gold); }
+
+    /* ================================================================
+       ABOUT SECTION
+       ================================================================ */
+    .about-bg {
+      background: rgba(4,8,9,0.45);
+      border-top: 1px solid var(--g-border); border-bottom: 1px solid var(--g-border);
+    }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: center;
+    }
+    .about-left { text-align: center; }
+    .about-wm {
+      font-size: 9rem; display: block; line-height: 1;
+      filter: drop-shadow(0 0 35px rgba(74,222,128,0.5)) drop-shadow(0 24px 48px rgba(0,0,0,0.55));
+      animation: fruit-bob 5.5s ease-in-out infinite;
+      margin-bottom: 0.75rem;
+    }
+    .about-brand {
+      font-family: var(--font-head); font-weight: 900; font-size: 1.4rem;
+      color: var(--g-bright); text-shadow: 0 0 16px rgba(74,222,128,0.4);
+    }
+    .about-tagline { font-size: 0.72rem; color: var(--t-muted); letter-spacing: 0.15em; margin-top: 0.3rem; }
+
+    .about-title {
+      font-size: 1.8rem; font-weight: 900; margin-bottom: 0.875rem; line-height: 1.2;
+    }
+    .about-title span { color: var(--g-bright); }
+    .about-body {
+      font-size: 0.95rem; color: var(--t-secondary); line-height: 1.8; margin-bottom: 2rem;
+    }
+
+    .feature-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+    .feature-pill {
+      display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.95rem;
+      background: var(--g-subtle); border: 1px solid var(--g-border); border-radius: var(--radius-m);
+      transition: border-color var(--fast) var(--ease), background var(--fast) var(--ease);
+    }
+    .feature-pill:hover { border-color: var(--g-border2); background: rgba(74,222,128,0.1); }
+    .fp-icon {
+      font-size: 1.4rem; flex-shrink: 0;
+      filter: drop-shadow(0 0 8px rgba(74,222,128,0.4));
+    }
+    .fp-h { font-size: 0.83rem; font-weight: 700; margin-bottom: 0.18rem; }
+    .fp-p { font-size: 0.73rem; color: var(--t-muted); line-height: 1.5; }
+
+    /* ================================================================
+       CTA SECTION
+       ================================================================ */
+    .cta-section {
+      text-align: center; padding: 6rem 2rem;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 65% 55% at 50% 50%, rgba(12,70,28,0.22) 0%, transparent 65%);
+    }
+    .cta-fruits {
+      display: flex; justify-content: center; gap: 0.875rem;
+      font-size: 2.4rem; margin-bottom: 1.75rem;
+    }
+    .cta-f { animation: fruit-bob 4s ease-in-out infinite; filter: drop-shadow(0 0 14px rgba(74,222,128,0.38)); }
+    .cta-f:nth-child(2){ animation-delay:-1.2s; }
+    .cta-f:nth-child(3){ animation-delay:-2.4s; }
+
+    .cta-title { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 900; margin-bottom: 0.65rem; }
+    .cta-title span { color: var(--g-bright); text-shadow: 0 0 28px rgba(74,222,128,0.45); }
+    .cta-sub { font-size: 1rem; color: var(--t-secondary); margin-bottom: 2.25rem; }
+    .cta-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    /* ================================================================
+       SIDE SOCIALS
+       ================================================================ */
+    .side-social-bar {
+      position: fixed; right: 1.4rem; top: 50%; transform: translateY(-50%);
+      z-index: 50; display: flex; flex-direction: column; gap: 0.45rem;
+    }
+    .ss-btn {
+      width: 36px; height: 36px; border-radius: var(--radius-s);
+      background: rgba(4,8,9,0.78); border: 1px solid var(--g-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; backdrop-filter: blur(12px);
+      transition: background var(--fast) var(--ease), border-color var(--fast) var(--ease), transform var(--fast) var(--ease);
+    }
+    .ss-btn:hover {
+      background: var(--g-subtle); border-color: var(--g-border2);
+      transform: translateX(-4px);
+    }
+
+    /* ================================================================
+       FOOTER
+       ================================================================ */
+    .footer {
+      position: relative; z-index: 2;
+      background: rgba(2,4,5,0.92);
+      border-top: 1px solid var(--g-border);
+    }
+    .footer-main {
+      max-width: 1380px; margin: 0 auto; padding: 4rem 2rem 2.5rem;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 3rem;
+    }
+    .footer-logo-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.875rem; }
+    .footer-logo-wm { font-size: 2rem; filter: drop-shadow(0 0 10px rgba(74,222,128,0.45)); }
+    .footer-logo-name { font-family: var(--font-head); font-weight: 900; font-size: 1rem; color: var(--g-bright); }
+    .footer-desc { font-size: 0.83rem; color: var(--t-muted); line-height: 1.65; max-width: 280px; margin-bottom: 1.4rem; }
+    .footer-socials { display: flex; gap: 0.6rem; }
+    .fs-icon {
+      width: 36px; height: 36px; border-radius: var(--radius-s);
+      background: var(--g-subtle); border: 1px solid var(--g-border);
+      display: flex; align-items: center; justify-content: center; font-size: 0.95rem;
+      transition: background var(--fast) var(--ease), border-color var(--fast) var(--ease), transform var(--fast) var(--ease);
+    }
+    .fs-icon:hover { background: rgba(74,222,128,0.18); border-color: var(--g-border2); transform: translateY(-2px); }
+
+    .footer-col-title {
+      font-size: 0.67rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--t-muted); margin-bottom: 1.1rem;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-links a { font-size: 0.83rem; color: var(--t-secondary); transition: color var(--fast) var(--ease); }
+    .footer-links a:hover { color: var(--g-bright); }
+
+    .footer-bottom {
+      max-width: 1380px; margin: 0 auto; padding: 1.4rem 2rem;
+      border-top: 1px solid var(--g-border);
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    }
+    .footer-copy { font-size: 0.73rem; color: var(--t-muted); }
+    .footer-made { font-size: 0.73rem; color: var(--t-muted); }
+
+    /* ================================================================
+       ANIMATIONS / UTILITIES
+       ================================================================ */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fade-up 0.65s var(--ease) both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.14s; }
+    .d3 { animation-delay: 0.23s; }
+    .d4 { animation-delay: 0.32s; }
+    .d5 { animation-delay: 0.41s; }
+
+    /* ================================================================
+       RESPONSIVE
+       ================================================================ */
+    @media(max-width:1100px){
+      .mid-grid { grid-template-columns: 1fr 1fr; }
+      .lb-card  { grid-column: 1 / -1; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media(max-width:900px){
+      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 2rem; padding-top: 2rem; }
+      .hero-desc { margin-left: auto; margin-right: auto; }
+      .hero-btns { justify-content: center; }
+      .hero-visual { max-height: 320px; }
+      .fruit-scene { padding-top: 70%; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .mid-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-left { display: none; }
+      .stats-inner { grid-template-columns: repeat(2,1fr); }
+      .nav-links { display: none; }
+      .nav-actions .btn:not(.btn-discord) { display: none; }
+      .hamburger { display: flex; }
+      .side-social-bar { display: none; }
+    }
+    @media(max-width:600px){
+      .section { padding: 3rem 0; }
+      .wrap { padding: 0 1rem; }
+      .feature-pills { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr; }
+      .cta-title { font-size: 1.75rem; }
+      .fruit-scene { padding-top: 80%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================================================================
+     NAVIGATION
+     ================================================================ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><img src="logo-circle.png" alt="SL" style="width:34px;height:34px;border-radius:8px;object-fit:cover;"></div>
+      <div class="logo-text">
+        <span class="logo-name">SUIKA LEAGUE</span>
+        <span class="logo-sub">Official Community</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="tournaments.html">Tournaments</a></li>
+      <li><a href="players.html">Players</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="magazine.html">Magazine</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="#" class="btn btn-discord btn-sm" id="nav-discord-btn">💬 Join Discord</a>
+    </div>
+
+    <div class="hamburger" onclick="toggleDrawer()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <ul class="mobile-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="tournaments.html">Tournaments</a></li>
+    <li><a href="players.html">Players</a></li>
+    <li><a href="leaderboard.html">Leaderboard</a></li>
+    <li><a href="magazine.html">Magazine</a></li>
+    <li><a href="learn.html">Learn</a></li>
+    <li><a href="media.html">Media</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div style="padding:1rem 0 0;display:flex;gap:0.75rem;">
+    <a href="#" class="btn btn-discord btn-sm btn-block" id="drawer-discord-btn">💬 Join Discord</a>
+    <a href="#" class="btn btn-ghost btn-sm btn-block" id="drawer-vrchat-btn">🌐 VRChat</a>
+  </div>
+</div>
+
+<!-- Side Social Bar -->
+<div class="side-social-bar">
+  <a href="#" class="ss-btn" id="side-discord" title="Discord">💬</a>
+  <!-- Future: Twitter, YouTube, TikTok, Instagram icons go here when accounts are created -->
+</div>
+
+<!-- ================================================================
+     HERO
+     ================================================================ -->
+<section class="hero">
+  <div class="hero-atmo"></div>
+  <img src="logo-banner.png" class="hero-banner-bg" alt="" aria-hidden="true">
+  <div class="bokeh-layer" id="bokehLayer"></div>
+
+  <div class="hero-grid">
+    <!-- Content -->
+    <div class="hero-content">
+      <div class="hero-eyebrow fade-up d1">VRChat Competitive Community</div>
+
+      <h1 class="hero-title fade-up d2">
+        <span class="hero-title-main">SUIKA</span>
+        <span class="hero-title-sub">LEAGUE</span>
+      </h1>
+
+      <p class="hero-tagline fade-up d3">
+        PLAY <span class="sep">•</span>
+        CONNECT <span class="sep">•</span>
+        COMPETE <span class="sep">•</span>
+        GROW
+      </p>
+
+      <p class="hero-desc fade-up d4">
+        The official competitive community for Suika Game players in VRChat.
+        Join 600+ members across 20+ countries — play, learn, compete and
+        chill together in Melon &amp; Chill!
+      </p>
+
+      <div class="hero-btns fade-up d5">
+        <a href="#" class="btn btn-discord btn-lg" id="hero-discord-btn">💬 Join Discord</a>
+        <a href="#" class="btn btn-outline btn-lg" id="hero-vrchat-btn">🌐 Find Us in VRChat</a>
+      </div>
+    </div>
+
+    <!-- Emblem Visual -->
+    <div class="hero-visual fade-up d3">
+      <div class="hero-emblem-wrap">
+        <img src="logo-main.png" alt="Suika League" class="hero-emblem">
+        <div class="orbit-fruit of-1">🍉</div>
+        <div class="orbit-fruit of-2">🍓</div>
+        <div class="orbit-fruit of-3">🍊</div>
+        <div class="orbit-fruit of-4">🫐</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-hint-bar"></div>
+  </div>
+</section>
+
+<!-- ================================================================
+     STATS BAR
+     ================================================================ -->
+<div class="stats-bar">
+  <div class="stats-inner" id="statsBar">
+    <!-- populated by JS -->
+  </div>
+</div>
+
+<div class="glow-divider"></div>
+
+<!-- ================================================================
+     FEATURE CARDS
+     ================================================================ -->
+<section class="section">
+  <div class="wrap">
+    <div class="feature-grid">
+      <div class="card card-pad" id="tournamentCard"></div>
+      <div class="card card-pad" id="numberOneCard"></div>
+      <div class="card card-pad" id="communityCard"></div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ================================================================
+     SPOTLIGHT + NEWS + LEADERBOARD
+     ================================================================ -->
+<section class="section">
+  <div class="wrap">
+    <div class="mid-grid">
+      <div class="card card-pad" id="spotlightCard"></div>
+      <div class="card card-pad" id="newsCard"></div>
+      <div class="card card-pad lb-card" id="leaderboardCard"></div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ================================================================
+     ABOUT / WHAT IS SUIKA LEAGUE
+     ================================================================ -->
+<section class="section about-bg">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-left">
+        <span class="about-wm">🍉</span>
+        <div class="about-brand">SUIKA LEAGUE</div>
+        <div class="about-tagline">PLAY • CONNECT • COMPETE • GROW</div>
+      </div>
+
+      <div class="about-right">
+        <div class="section-tag">🎮 What is Suika League?</div>
+        <h2 class="about-title">
+          A VRChat community built<br>around <span>Suika Game</span>
+        </h2>
+        <p class="about-body">
+          Suika League is the official competitive community for Melon &amp; Chill / Suika
+          Game players in VRChat. From casual weekend sessions to top-tier competition,
+          everyone is welcome here. We host regular tournaments, celebrate our top players,
+          publish player spotlights, and keep the fun alive — because Suika Game is
+          simply better together.
+        </p>
+
+        <div class="feature-pills">
+          <div class="feature-pill">
+            <span class="fp-icon">🏆</span>
+            <div>
+              <div class="fp-h">Tournaments</div>
+              <div class="fp-p">Regular events with amazing prizes and fierce competition</div>
+            </div>
+          </div>
+          <div class="feature-pill">
+            <span class="fp-icon">👑</span>
+            <div>
+              <div class="fp-h">Ranking System</div>
+              <div class="fp-p">Compete and climb the leaderboard to reach #1</div>
+            </div>
+          </div>
+          <div class="feature-pill">
+            <span class="fp-icon">📖</span>
+            <div>
+              <div class="fp-h">Learn &amp; Improve</div>
+              <div class="fp-p">Tips, guides and Suika Sensei lessons for all levels</div>
+            </div>
+          </div>
+          <div class="feature-pill">
+            <span class="fp-icon">🍉</span>
+            <div>
+              <div class="fp-h">Chill &amp; Connect</div>
+              <div class="fp-p">Make friends and enjoy the community together</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ================================================================
+     CTA
+     ================================================================ -->
+<section class="cta-section">
+  <div class="cta-fruits">
+    <span class="cta-f">🍉</span>
+    <span class="cta-f">🍓</span>
+    <span class="cta-f">🍊</span>
+  </div>
+  <h2 class="cta-title">Ready to <span>Play</span>?</h2>
+  <p class="cta-sub">Jump into Melon &amp; Chill in VRChat and become part of the league!</p>
+  <div class="cta-btns">
+    <a href="#" class="btn btn-primary btn-lg" id="cta-discord-btn">💬 Join Discord</a>
+    <a href="#" class="btn btn-ghost btn-lg" id="cta-vrchat-btn">🌐 Find Us in VRChat</a>
+  </div>
+</section>
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="footer-logo-row">
+        <span class="footer-logo-wm">🍉</span>
+        <span class="footer-logo-name">SUIKA LEAGUE</span>
+      </div>
+      <p class="footer-desc">
+        The official competitive VRChat community for Suika Game players.
+        Play, Connect, Compete, Grow.
+      </p>
+      <div class="footer-socials" id="footerSocials">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Explore</div>
+      <ul class="footer-links">
+        <li><a href="tournaments.html">Tournaments</a></li>
+        <li><a href="players.html">Players</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="magazine.html">Magazine</a></li>
+        <li><a href="learn.html">Learn</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Community</div>
+      <ul class="footer-links">
+        <li><a href="#" id="footer-discord">Discord</a></li>
+        <li><a href="#" id="footer-vrchat">VRChat Group</a></li>
+        <li><a href="community.html">Rules</a></li>
+        <li><a href="community.html">Roles</a></li>
+        <li><a href="about.html">Partners</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Support</div>
+      <ul class="footer-links">
+        <li><a href="community.html#faq">FAQ</a></li>
+        <li><a href="about.html#contact">Contact</a></li>
+        <li><a href="community.html#report">Report</a></li>
+        <li><a href="community.html#suggestions">Suggestions</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Legal</div>
+      <ul class="footer-links">
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2024 Suika League. All rights reserved.</span>
+    <span class="footer-made">Made with 🍉 for the Suika Community</span>
+  </div>
+</footer>
+
+
+<!-- ================================================================
+     SITE DATA  ←  UPDATE THIS OBJECT TO CHANGE CONTENT
+     ================================================================ -->
+<script>
+const SUIKA = {
+
+  /* ── Links ─────────────────────────────────────────────────── */
+  links: {
+    discord:       'https://discord.gg/7frwwTJC54',
+    vrchatGroup:   'https://vrc.group/SUIKA.5062',
+    melonChill:    '#',   // TODO: Add Melon & Chill VRChat world link when available
+    // Future social links — add here when accounts are created:
+    // twitter:    '#',
+    // youtube:    '#',
+    // tiktok:     '#',
+    // instagram:  '#',
+  },
+
+  /* ── Community Stats ────────────────────────────────────────── */
+  stats: [
+    { value: '600+',  label: 'Members' },
+    { value: '50+',   label: 'Events Hosted' },
+    { value: '20+',   label: 'Countries' },
+    { value: '1',     label: 'Community' },
+  ],
+
+  /* ── Next / Upcoming Tournament ────────────────────────────── */
+  nextTournament: {
+    name:             '[TOURNAMENT NAME]',       // e.g. "Summer Slam 2024"
+    subtitle:         'Suika League Tournament',
+    date:             '[DATE — e.g. July 12, 2024]',
+    time:             '[TIME] UTC',
+    location:         'Melon & Chill (VRChat)',
+    host:             '[HOST PLAYER NAME]',
+    sponsor:          '[SPONSOR NAME]',
+    prize:            '[PRIZE DETAILS]',
+    registrationOpen: true,
+    registrationLink: '#',
+    viewLink:         'tournaments.html',
+    status:           'upcoming',  // "upcoming" | "registration" | "live" | "past"
+  },
+
+  /* ── Current #1 Player ──────────────────────────────────────── */
+  currentNumberOne: {
+    name:          'SPUTN1X',
+    avatar:        null,                    // TODO: Add player avatar URL when provided
+    avatarEmoji:   '🍉',
+    score:         '38,432',
+    rankHeldDays:  null,                    // TODO: Add when known
+    profileLink:   'players.html',
+  },
+
+  /* ── Featured Spotlight Player ──────────────────────────────── */
+  spotlight: {
+    name:         '[FEATURED PLAYER]',      // e.g. "YuzuSuika"
+    avatar:       null,
+    avatarEmoji:  '⭐',
+    role:         'competitive',            // champion | competitive | regular | sensei | vip | host | media
+    roleLabel:    'Competitive Player',
+    bestScore:    '[BEST SCORE]',
+    favFruitEmoji:'🍉',
+    profileLink:  'players.html',
+    interviewLink:'magazine.html',
+  },
+
+  /* ── Recent News / Magazine Items ───────────────────────────── */
+  news: [
+    {
+      title:     '[TOURNAMENT NAME] – Registration Open!',
+      category:  'Tournament',
+      date:      '[DATE]',
+      emoji:     '🏆',
+      thumbnail: null,
+      link:      'tournaments.html',
+      isPlaceholder: true,
+    },
+    {
+      title:     'Interview with [PLAYER NAME]',
+      category:  'Magazine',
+      date:      '[DATE]',
+      emoji:     '⭐',
+      thumbnail: null,
+      link:      'magazine.html',
+      isPlaceholder: true,
+    },
+    {
+      title:     'Tournament Highlights — [EVENT NAME]',
+      category:  'Media',
+      date:      '[DATE]',
+      emoji:     '🎬',
+      thumbnail: null,
+      link:      'media.html',
+      isPlaceholder: true,
+    },
+    {
+      title:     'Community Update: New Roles & Rewards',
+      category:  'Community',
+      date:      '[DATE]',
+      emoji:     '📢',
+      thumbnail: null,
+      link:      'community.html',
+      isPlaceholder: true,
+    },
+  ],
+
+  /* ── Leaderboard Top 5 ──────────────────────────────────────── */
+  leaderboard: [
+    { rank:1, name:'SPUTN1X',        score:'38,432', emoji:'🍉', role:'#1 Player',  link:'players.html', isPlaceholder:false },
+    { rank:2, name:'Rialsnogard',     score:'26,819', emoji:'🍓', role:'Competitive',link:'players.html', isPlaceholder:false },
+    { rank:3, name:'buzer ~',         score:'26,249', emoji:'🍊', role:'Competitive',link:'players.html', isPlaceholder:false },
+    { rank:4, name:'~Hydro~',         score:'22,196', emoji:'🍍', role:'Regular',    link:'players.html', isPlaceholder:false },
+    { rank:5, name:'TheGreatLeader0', score:'3,736',  emoji:'🫐', role:'Regular',    link:'players.html', isPlaceholder:false },
+  ],
+
+};
+
+/* ================================================================
+   RENDER HELPERS
+   ================================================================ */
+
+/* Wire up all links */
+function applyLinks() {
+  const L = SUIKA.links;
+  const map = {
+    '#hero-discord-btn':   L.discord,
+    '#hero-vrchat-btn':    L.vrchatGroup,
+    '#nav-discord-btn':    L.discord,
+    '#drawer-discord-btn': L.discord,
+    '#drawer-vrchat-btn':  L.vrchatGroup,
+    '#cta-discord-btn':    L.discord,
+    '#cta-vrchat-btn':     L.vrchatGroup,
+    '#footer-discord':     L.discord,
+    '#footer-vrchat':      L.vrchatGroup,
+    '#side-discord':       L.discord,
+    // Future socials: '#side-twitter', '#side-youtube', '#side-tiktok', '#side-instagram'
+  };
+  Object.entries(map).forEach(([sel, href]) => {
+    const el = document.querySelector(sel);
+    if (el && href) el.href = href;
+  });
+}
+
+/* Stats Bar */
+function renderStats() {
+  const el = document.getElementById('statsBar');
+  if (!el) return;
+  el.innerHTML = SUIKA.stats.map(s => `
+    <div class="stat-item">
+      <div class="stat-num">${s.value}</div>
+      <div class="stat-lbl">${s.label}</div>
+    </div>
+  `).join('');
+}
+
+/* Tournament Card */
+function renderTournament() {
+  const t = SUIKA.nextTournament;
+  const el = document.getElementById('tournamentCard');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="sec-hd">
+      <span class="sec-hd-icon">🏆</span>
+      <span class="sec-hd-label">Next Tournament</span>
+    </div>
+    ${t.registrationOpen ? `
+    <div style="margin-bottom:0.75rem;">
+      <span class="reg-open"><span class="pulse-dot"></span>Registration Open</span>
+    </div>` : ''}
+    <div class="t-name">${t.name}</div>
+    <div class="t-sub">${t.subtitle}</div>
+    <div class="t-meta">
+      <div class="t-meta-row"><span class="ico">📅</span>${t.date}</div>
+      <div class="t-meta-row"><span class="ico">🕐</span>${t.time}</div>
+      <div class="t-meta-row"><span class="ico">📍</span>${t.location}</div>
+      <div class="t-meta-row"><span class="ico">🎤</span>Host: ${t.host}</div>
+      ${t.sponsor ? `<div class="t-meta-row"><span class="ico">✨</span>Sponsor: ${t.sponsor}</div>` : ''}
+      ${t.prize   ? `<div class="t-meta-row"><span class="ico">🎁</span>Prize: ${t.prize}</div>` : ''}
+    </div>
+    <a href="${t.viewLink}" class="btn btn-primary btn-block">View Event →</a>
+    <div class="placeholder">⚠️ Placeholder — real tournament info coming soon</div>
+  `;
+}
+
+/* #1 Card */
+function renderNumberOne() {
+  const p = SUIKA.currentNumberOne;
+  const el = document.getElementById('numberOneCard');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="sec-hd">
+      <span class="sec-hd-icon">👑</span>
+      <span class="sec-hd-label">Current #1</span>
+    </div>
+    <div class="num1-body">
+      <div class="avatar-wrap">
+        <div class="avatar-crown">👑</div>
+        <div class="avatar">
+          ${p.avatar ? `<img src="${p.avatar}" alt="${p.name}">` : p.avatarEmoji}
+        </div>
+      </div>
+      <div class="p-name">${p.name}</div>
+      <div class="p-score-lg">${p.score}</div>
+      <span class="badge badge-gold">Top Score</span>
+      ${p.rankHeldDays ? `<div class="p-rank-held">Rank held for ${p.rankHeldDays} days</div>` : ''}
+    </div>
+    <a href="${p.profileLink}" class="btn btn-outline btn-block">View Profile →</a>
+    <div class="placeholder">⚠️ Placeholder — real #1 data coming soon</div>
+  `;
+}
+
+/* Community Card */
+function renderCommunity() {
+  const L = SUIKA.links;
+  const el = document.getElementById('communityCard');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="sec-hd">
+      <span class="sec-hd-icon">👥</span>
+      <span class="sec-hd-label">Join Our Community</span>
+    </div>
+    <div style="text-align:center;">
+      <span class="comm-icon">🍉</span>
+      <div class="comm-title">Play Together, Grow Together</div>
+      <p class="comm-text">Meet fellow players, share scores, compete in tournaments, and be part of something amazing in VRChat!</p>
+      <div class="comm-buttons">
+        <a href="${L.discord}" class="btn btn-discord btn-block">💬 Join Discord</a>
+        <a href="${L.vrchatGroup}" class="btn btn-outline btn-block">🌐 Find Us in VRChat</a>
+      </div>
+    </div>
+  `;
+}
+
+/* Spotlight Card */
+function renderSpotlight() {
+  const s = SUIKA.spotlight;
+  const el = document.getElementById('spotlightCard');
+  if (!el) return;
+  const roleClasses = {
+    champion:'role-champion', competitive:'role-competitive', regular:'role-regular',
+    sensei:'role-sensei', vip:'role-vip', host:'role-host', media:'role-media',
+  };
+  const rc = roleClasses[s.role] || 'role-regular';
+  el.innerHTML = `
+    <div class="sec-hd">
+      <span class="sec-hd-icon">⭐</span>
+      <span class="sec-hd-label">Player Spotlight</span>
+    </div>
+    <div style="text-align:center;margin-bottom:1rem;">
+      <span class="badge badge-green" style="margin-bottom:0.75rem;">Featured Player</span>
+      <div class="spotlight-av">
+        ${s.avatar ? `<img src="${s.avatar}" alt="${s.name}">` : s.avatarEmoji}
+      </div>
+      <span class="role-tag ${rc}">${s.roleLabel}</span>
+      <div class="spotlight-name">${s.name}</div>
+      <div class="spotlight-title">${s.roleLabel}</div>
+      <div class="spotlight-stats">
+        <div class="spotlight-stat">
+          <div class="spotlight-stat-v">${s.bestScore}</div>
+          <div class="spotlight-stat-l">Best Score</div>
+        </div>
+        <div class="spotlight-stat">
+          <div class="spotlight-stat-v">${s.favFruitEmoji}</div>
+          <div class="spotlight-stat-l">Fav. Fruit</div>
+        </div>
+      </div>
+    </div>
+    <a href="${s.interviewLink}" class="btn btn-outline btn-block" style="margin-bottom:0.6rem;">📖 Read Interview</a>
+    <a href="${s.profileLink}"   class="btn btn-ghost   btn-block btn-sm">View Profile</a>
+    <div class="carousel-dots">
+      <div class="c-dot on"></div>
+      <div class="c-dot"></div>
+      <div class="c-dot"></div>
+      <div class="c-dot"></div>
+      <div class="c-dot"></div>
+    </div>
+    <div class="placeholder">⚠️ Placeholder — real spotlight coming soon</div>
+  `;
+}
+
+/* News Card */
+function renderNews() {
+  const el = document.getElementById('newsCard');
+  if (!el) return;
+  const items = SUIKA.news.map(n => `
+    <a href="${n.link}" class="news-item">
+      <div class="news-thumb">
+        ${n.thumbnail ? `<img src="${n.thumbnail}" alt="">` : n.emoji}
+      </div>
+      <div>
+        <div class="news-cat">${n.category}</div>
+        <div class="news-title">${n.title}</div>
+        <div class="news-date">${n.date}</div>
+      </div>
+    </a>
+  `).join('');
+  el.innerHTML = `
+    <div class="sec-hd">
+      <span class="sec-hd-icon">📰</span>
+      <span class="sec-hd-label">Recent News</span>
+      <a href="magazine.html" class="sec-hd-link">View All →</a>
+    </div>
+    <div class="news-list">${items}</div>
+    <div class="placeholder">⚠️ Placeholder — real news coming soon</div>
+  `;
+}
+
+/* Leaderboard Card */
+function renderLeaderboard() {
+  const el = document.getElementById('leaderboardCard');
+  if (!el) return;
+  const rankCls  = ['gold','silver','bronze','plain','plain'];
+  const rankMedal= ['🥇','🥈','🥉','4','5'];
+  const rowCls   = ['r1','r2','r3','',''];
+  const rows = SUIKA.leaderboard.map((p, i) => `
+    <a href="${p.link}" class="lb-row ${rowCls[i]}">
+      <span class="lb-rank ${rankCls[i]}">${rankMedal[i]}</span>
+      <div class="lb-av">
+        ${p.avatar ? `<img src="${p.avatar}" alt="${p.name}">` : p.emoji}
+      </div>
+      <div class="lb-info">
+        <div class="lb-pname">${p.name}</div>
+        <div class="lb-prole">${p.role}</div>
+      </div>
+      <span class="lb-score ${i===0?'golden':''}">${p.score}</span>
+    </a>
+  `).join('');
+  el.innerHTML = `
+    <div class="sec-hd">
+      <span class="sec-hd-icon">👑</span>
+      <span class="sec-hd-label">Leaderboard Top 5</span>
+      <a href="leaderboard.html" class="sec-hd-link">Full Board →</a>
+    </div>
+    <div class="lb-list">${rows}</div>
+    <a href="leaderboard.html" class="btn btn-outline btn-block" style="margin-top:1.1rem;">View Full Leaderboard →</a>
+    <div class="placeholder">⚠️ Placeholder — real scores coming soon</div>
+  `;
+}
+
+/* Footer Socials */
+function renderFooterSocials() {
+  const L = SUIKA.links;
+  const el = document.getElementById('footerSocials');
+  if (!el) return;
+  const icons = [
+    { href: L.discord,   label:'Discord',   emoji:'💬' },
+    // Future: add Twitter, YouTube, TikTok, Instagram when accounts are created
+  ];
+  el.innerHTML = icons.map(i =>
+    `<a href="${i.href}" class="fs-icon" title="${i.label}">${i.emoji}</a>`
+  ).join('');
+}
+
+/* Bokeh effect */
+function createBokeh() {
+  const layer = document.getElementById('bokehLayer');
+  if (!layer) return;
+  const palette = [
+    'rgba(74,222,128,0.28)', 'rgba(34,197,94,0.18)',
+    'rgba(80,18,38,0.18)',   'rgba(50,14,28,0.16)',
+  ];
+  for (let i = 0; i < 22; i++) {
+    const d   = document.createElement('div');
+    const sz  = Math.random() * 70 + 12;
+    d.className = 'bokeh-dot';
+    d.style.cssText = `
+      width:${sz}px; height:${sz}px;
+      background:${palette[i % palette.length]};
+      left:${Math.random()*100}%; top:${Math.random()*100}%;
+      filter:blur(${sz/2.2}px);
+      animation-delay:${(Math.random()*-7).toFixed(2)}s;
+      animation-duration:${(5+Math.random()*5).toFixed(2)}s;
+    `;
+    layer.appendChild(d);
+  }
+}
+
+/* Navbar scroll tint */
+function initNavScroll() {
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+}
+
+/* Mobile drawer */
+function toggleDrawer() {
+  document.getElementById('mobileDrawer').classList.toggle('open');
+}
+
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded', () => {
+  applyLinks();
+  renderStats();
+  renderTournament();
+  renderNumberOne();
+  renderCommunity();
+  renderSpotlight();
+  renderNews();
+  renderLeaderboard();
+  renderFooterSocials();
+  createBokeh();
+  initNavScroll();
+});
+</script>
+</body>
+</html>
