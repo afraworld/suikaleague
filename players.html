@@ -105,7 +105,7 @@
     .p-av{width:80px;height:80px;border-radius:50%;background:var(--g-subtle);border:2px solid var(--g-border);
       margin:0 auto 0.875rem;display:flex;align-items:center;justify-content:center;font-size:2.4rem;
       overflow:hidden;box-shadow:0 0 22px rgba(74,222,128,0.12);position:relative;}
-    .p-av img{width:100%;height:100%;object-fit:cover;}
+    .p-av img{width:100%;height:100%;object-fit:cover;object-position:top center;}
     .p-av-badge{position:absolute;bottom:-3px;right:-3px;font-size:1rem;
       background:var(--bg-base);border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;
       filter:drop-shadow(0 0 6px rgba(251,191,36,0.7));}
@@ -334,14 +334,14 @@ const PLAYERS = [
     profileLink:'#', isPlaceholder:false,
   },
   {
-    id:'buzer', name:'buzer ~', avatar:'buzer2.png', emoji:'🍊',
+    id:'buzer', name:'buzer ~', avatar:'buzer2.png', avatarStyle:'object-fit:contain;', emoji:'🍊',
     roles:['competitive','vip'], isNumberOne:false,
     bestScore:'26,249', rank:3, country:'',
     profileLink:'player-buzer.html', isPlaceholder:false,
   },
   {
     id:'hydro', name:'~Hydro~', avatar:null, emoji:'🍍',
-    roles:['regular'], isNumberOne:false,
+    roles:['competitive'], isNumberOne:false,
     bestScore:'22,196', rank:4, country:'',
     profileLink:'#', isPlaceholder:false,
   },
@@ -408,7 +408,7 @@ function buildFoundingCard(p) {
       <div class="f-badge">⭐ Founding</div>
       <div class="f-av-wrap">
         <div class="f-av">
-          ${p.avatar ? `<img src="${p.avatar}" alt="${p.name}">` : p.emoji}
+          ${p.avatar ? `<img src="${p.avatar}" alt="${p.name}"${p.avatarStyle ? \` style="${p.avatarStyle}"\` : ''}>` : p.emoji}
         </div>
         <div class="f-av-ring"></div>
       </div>
@@ -445,7 +445,7 @@ function buildCard(p) {
       <div class="p-card-top">
         ${p.roles.includes('vip') ? `<div class="p-av-vip-frame">` : ''}
         <div class="p-av">
-          ${p.avatar ? `<img src="${p.avatar}" alt="${p.name}">` : p.emoji}
+          ${p.avatar ? `<img src="${p.avatar}" alt="${p.name}"${p.avatarStyle ? \` style="${p.avatarStyle}"\` : ''}>` : p.emoji}
           ${p.isNumberOne ? `<div class="p-av-badge">👑</div>` : ''}
           ${p.roles.includes('vip') ? `<div class="p-av-vip-crown" title="VIP Member">👑</div>` : ''}
         </div>
