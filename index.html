@@ -364,22 +364,21 @@
       padding-top: 68px; overflow: hidden;
     }
 
-    /* Atmospheric background */
+    /* Full-bleed hero background photo */
+    .hero-bg-photo {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      width: 100%; height: 100%; object-fit: cover; object-position: center right;
+      opacity: 0.38;
+    }
+    /* Dark atmospheric overlay so text stays readable */
     .hero-atmo {
-      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      position: absolute; inset: 0; pointer-events: none; z-index: 1;
       background:
-        radial-gradient(ellipse 90% 70% at 65% 35%, rgba(8,65,28,0.38) 0%, transparent 58%),
-        radial-gradient(ellipse 45% 55% at 85% 65%, rgba(65,8,30,0.22) 0%, transparent 55%),
+        linear-gradient(to right, rgba(4,8,9,0.94) 38%, rgba(4,8,9,0.55) 65%, rgba(4,8,9,0.12) 100%),
         radial-gradient(ellipse 55% 45% at 10% 85%, rgba(6,45,18,0.28) 0%, transparent 55%);
     }
-
-    /* Banner atmospheric overlay (right side, behind emblem) */
-    .hero-banner-bg {
-      position: absolute; right: -5%; top: 50%; transform: translateY(-50%);
-      width: 60%; pointer-events: none; z-index: 1;
-      opacity: 0.22;
-      mix-blend-mode: screen;
-    }
+    /* Banner overlay removed — using hero-bg.png instead */
+    .hero-banner-bg { display: none; }
 
     /* Floating bokeh */
     .bokeh-layer { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
@@ -440,46 +439,40 @@
 
     .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-    /* Hero Logo Visual */
+    /* Hero Visual — fruit scene image */
     .hero-visual {
       position: relative; display: flex;
-      align-items: center; justify-content: center;
+      align-items: center; justify-content: flex-end;
+      z-index: 3;
     }
-
-    .hero-emblem-wrap {
-      position: relative; display: flex;
-      align-items: center; justify-content: center;
-      width: 100%;
+    .hero-scene-img {
+      width: 100%; max-width: 680px; height: auto;
+      border-radius: var(--radius-l);
+      filter: drop-shadow(0 0 48px rgba(74,222,128,0.22)) drop-shadow(0 32px 64px rgba(0,0,0,0.55));
+      animation: emblem-float 7s ease-in-out infinite;
     }
-
-    .hero-emblem {
-      width: 100%; max-width: 520px;
-      height: auto;
-      animation: emblem-float 6s ease-in-out infinite;
-      filter:
-        drop-shadow(0 0 40px rgba(74,222,128,0.45))
-        drop-shadow(0 0 80px rgba(251,191,36,0.25))
-        drop-shadow(0 24px 48px rgba(0,0,0,0.5));
-    }
-
     @keyframes emblem-float {
-      0%,100% { transform: translateY(0) scale(1); }
-      50%      { transform: translateY(-16px) scale(1.015); }
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-14px); }
     }
 
-    /* Orbit fruits — small decorative */
-    .orbit-fruit {
-      position: absolute; user-select: none; line-height: 1;
-      animation: fruit-bob 4.5s ease-in-out infinite;
+    /* RGB neon animated border for player avatars */
+    @keyframes rgb-spin {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    .of-1 { top:4%;  right:8%;  font-size:2.8rem; animation-delay:0s;    opacity:0.75; }
-    .of-2 { bottom:6%; left:5%; font-size:2.4rem; animation-delay:-1.8s; opacity:0.65; }
-    .of-3 { top:38%; right:2%; font-size:2rem;   animation-delay:-0.9s; opacity:0.55; }
-    .of-4 { bottom:25%; right:10%; font-size:1.8rem; animation-delay:-2.5s; opacity:0.45; }
-
-    @keyframes fruit-bob {
-      0%,100%{ transform:translateY(0) rotate(-4deg); }
-      50%{ transform:translateY(-14px) rotate(4deg); }
+    .rgb-frame {
+      display: inline-block; border-radius: 50%; padding: 3px;
+      background: linear-gradient(270deg,
+        #ff0000,#ff7700,#ffff00,#00ff00,#00ffff,#0000ff,#8b00ff,#ff0000);
+      background-size: 400% 400%;
+      animation: rgb-spin 2.5s linear infinite;
+      box-shadow: 0 0 18px rgba(255,255,255,0.25), 0 0 32px rgba(100,200,255,0.3);
+    }
+    .rgb-frame img, .rgb-frame .av-inner {
+      display: block; border-radius: 50%;
+      border: 3px solid #06090a;
     }
 
     /* Scroll indicator */
@@ -933,8 +926,8 @@
      HERO
      ================================================================ -->
 <section class="hero">
+  <img src="hero-bg.png" class="hero-bg-photo" alt="" aria-hidden="true">
   <div class="hero-atmo"></div>
-  <img src="logo-banner.png" class="hero-banner-bg" alt="" aria-hidden="true">
   <div class="bokeh-layer" id="bokehLayer"></div>
 
   <div class="hero-grid">
@@ -956,8 +949,7 @@
 
       <p class="hero-desc fade-up d4">
         The official competitive community for Suika Game players in VRChat.
-        Join 600+ members across 20+ countries — play, learn, compete and
-        chill together in Melon &amp; Chill!
+        Join 600+ members — play, learn, compete and chill together in Melon &amp; Chill!
       </p>
 
       <div class="hero-btns fade-up d5">
@@ -966,15 +958,9 @@
       </div>
     </div>
 
-    <!-- Emblem Visual -->
+    <!-- Fruit Scene Visual -->
     <div class="hero-visual fade-up d3">
-      <div class="hero-emblem-wrap">
-        <img src="logo-main.png" alt="Suika League" class="hero-emblem">
-        <div class="orbit-fruit of-1">🍉</div>
-        <div class="orbit-fruit of-2">🍓</div>
-        <div class="orbit-fruit of-3">🍊</div>
-        <div class="orbit-fruit of-4">🫐</div>
-      </div>
+      <img src="hero-bg.png" alt="Suika League — Melon & Chill" class="hero-scene-img">
     </div>
   </div>
 
@@ -1192,7 +1178,7 @@ const SUIKA = {
   /* ── Community Stats ────────────────────────────────────────── */
   stats: [
     { value: '600+',  label: 'Members' },
-    { value: '50+',   label: 'Events Hosted' },
+    { value: '10+',   label: 'Events Hosted' },
     { value: '20+',   label: 'Countries' },
     { value: '1',     label: 'Community' },
   ],
@@ -1225,13 +1211,13 @@ const SUIKA = {
 
   /* ── Featured Spotlight Player ──────────────────────────────── */
   spotlight: {
-    name:         '[FEATURED PLAYER]',      // e.g. "YuzuSuika"
-    avatar:       null,
+    name:         'Buzer',
+    avatar:       'buzer-avi.png',
     avatarEmoji:  '⭐',
-    role:         'competitive',            // champion | competitive | regular | sensei | vip | host | media
+    role:         'competitive',
     roleLabel:    'Competitive Player',
-    bestScore:    '[BEST SCORE]',
-    favFruitEmoji:'🍉',
+    bestScore:    '26,249',
+    favFruitEmoji:'🍊',
     profileLink:  'players.html',
     interviewLink:'magazine.html',
   },
@@ -1278,11 +1264,11 @@ const SUIKA = {
 
   /* ── Leaderboard Top 5 ──────────────────────────────────────── */
   leaderboard: [
-    { rank:1, name:'SPUTN1X',        score:'38,432', emoji:'🍉', role:'#1 Player',  link:'players.html', isPlaceholder:false },
-    { rank:2, name:'Rialsnogard',     score:'26,819', emoji:'🍓', role:'Competitive',link:'players.html', isPlaceholder:false },
-    { rank:3, name:'buzer ~',         score:'26,249', emoji:'🍊', role:'Competitive',link:'players.html', isPlaceholder:false },
-    { rank:4, name:'~Hydro~',         score:'22,196', emoji:'🍍', role:'Regular',    link:'players.html', isPlaceholder:false },
-    { rank:5, name:'TheGreatLeader0', score:'3,736',  emoji:'🫐', role:'Regular',    link:'players.html', isPlaceholder:false },
+    { rank:1, name:'SPUTN1X',       score:'38,432', emoji:'🍉', role:'Champion',   link:'players.html', isPlaceholder:false },
+    { rank:2, name:'BUZA',          score:'38,407', emoji:'🍉', role:'Competitive',link:'players.html', isPlaceholder:false },
+    { rank:3, name:'Rialsnogard',   score:'27,132', emoji:'🍓', role:'Competitive', avatar:'rialsnogard-avi.png', link:'players.html', isPlaceholder:false },
+    { rank:4, name:'チョコレート麦茶', score:'26,770', emoji:'🍵', role:'Regular', link:'players.html', isPlaceholder:false },
+    { rank:5, name:'buzer ~',       score:'26,249', emoji:'🍊', role:'Competitive',link:'players.html', isPlaceholder:false },
   ],
 
 };
@@ -1419,9 +1405,12 @@ function renderSpotlight() {
       <span class="sec-hd-label">Player Spotlight</span>
     </div>
     <div style="text-align:center;margin-bottom:1rem;">
-      <span class="badge badge-green" style="margin-bottom:0.75rem;">Featured Player</span>
-      <div class="spotlight-av">
-        ${s.avatar ? `<img src="${s.avatar}" alt="${s.name}">` : s.avatarEmoji}
+      <span class="badge badge-green" style="margin-bottom:0.75rem;">⭐ Player of the Month</span>
+      <div style="display:flex;justify-content:center;margin:0.5rem 0 0.75rem;">
+        ${s.avatar
+          ? `<div class="rgb-frame"><img src="${s.avatar}" alt="${s.name}" style="width:90px;height:90px;object-fit:cover;border-radius:50%;border:3px solid #06090a;"></div>`
+          : `<div class="spotlight-av">${s.avatarEmoji}</div>`
+        }
       </div>
       <span class="role-tag ${rc}">${s.roleLabel}</span>
       <div class="spotlight-name">${s.name}</div>
@@ -1446,7 +1435,6 @@ function renderSpotlight() {
       <div class="c-dot"></div>
       <div class="c-dot"></div>
     </div>
-    <div class="placeholder">⚠️ Placeholder — real spotlight coming soon</div>
   `;
 }
 
