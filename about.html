@@ -103,6 +103,31 @@
        SECTION 2 — ROLES
        Two tiers, premium role cards
     ════════════════════════════════════════ */
+    /* ── Mahu / Our Home World ── */
+    .s-mahu{position:relative;z-index:2;padding:70px 0;border-bottom:1px solid var(--g-border);}
+    .mahu-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:3rem;align-items:center;}
+    .mahu-photo{border-radius:var(--radius-l);overflow:hidden;border:1px solid var(--g-border);position:relative;}
+    .mahu-photo img{width:100%;display:block;object-fit:cover;}
+    .mahu-photo-caption{position:absolute;bottom:0;left:0;right:0;padding:1rem 1.2rem;
+      background:linear-gradient(to top,rgba(6,9,10,0.92),transparent);
+      font-family:var(--font-head);font-size:0.68rem;font-weight:700;letter-spacing:0.08em;
+      text-transform:uppercase;color:var(--g-bright);}
+    .mahu-kicker{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--g-bright);opacity:0.75;margin-bottom:0.5rem;}
+    .mahu-title{font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:900;color:var(--t-primary);margin-bottom:1rem;}
+    .mahu-body p{font-size:0.95rem;color:var(--t-secondary);line-height:1.85;margin-bottom:0.9rem;}
+    .mahu-body p:last-child{margin-bottom:0;}
+    .mahu-body strong{color:var(--t-primary);}
+    .mahu-submit-box{margin-top:1.5rem;background:rgba(88,101,242,0.08);border:1px solid rgba(88,101,242,0.3);
+      border-radius:var(--radius-m);padding:1.1rem 1.3rem;}
+    .mahu-submit-label{font-family:var(--font-head);font-size:0.68rem;font-weight:700;letter-spacing:0.12em;
+      text-transform:uppercase;color:#818cf8;margin-bottom:0.5rem;}
+    .mahu-submit-text{font-size:0.85rem;color:var(--t-secondary);line-height:1.65;margin-bottom:0.75rem;}
+    .mahu-submit-text code{font-family:monospace;background:rgba(88,101,242,0.15);padding:0.1em 0.4em;
+      border-radius:4px;color:#a5b4fc;font-size:0.9em;}
+    .mahu-btns{display:flex;gap:0.6rem;flex-wrap:wrap;}
+    @media(max-width:760px){.mahu-grid{grid-template-columns:1fr;}}
+
     .s-roles{position:relative;z-index:2;padding:70px 0;border-bottom:1px solid var(--g-border);}
     .s-header{margin-bottom:2.5rem;}
     .s-label{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.16em;
@@ -336,6 +361,45 @@
             <div>
               <div class="p-card-name">suikaleague.com</div>
               <p class="p-card-desc">Our public archive. Player profiles, rankings, tournaments, interviews, community stories and the history we're building together.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       § 1b — OUR HOME WORLD / MAHU
+  ══════════════════════════════ -->
+  <section class="s-mahu">
+    <div class="wrap">
+      <div class="mahu-grid">
+
+        <!-- Photo -->
+        <div class="mahu-photo">
+          <img src="mahu-visit.png" alt="Mahu visits Suika League — November 2024">
+          <div class="mahu-photo-caption">Mahu visits Suika League · November 2024</div>
+        </div>
+
+        <!-- Text -->
+        <div>
+          <div class="mahu-kicker">Our Home World</div>
+          <h2 class="mahu-title">Melon &amp; Chill — Created by Mahu</h2>
+          <div class="mahu-body">
+            <p>Every community needs a place to call home. Ours is <strong>Melon &amp; Chill</strong> — the VRChat world created by <strong>Mahu</strong>, where Suika League members meet, practice, compete and spend time together.</p>
+            <p>Mahu visited the Suika League group in November 2024 — an event that meant a great deal to the community. We exchanged ideas, got a glimpse at what's coming to the world, and were reminded of the care and creativity behind everything we play in.</p>
+            <p>The global leaderboard for Melon &amp; Chill is tracked through Mahu's community. If you want your score to count in the world rankings, you'll need to submit it there.</p>
+          </div>
+          <div class="mahu-submit-box">
+            <div class="mahu-submit-label">📊 Submit Your Global Score</div>
+            <div class="mahu-submit-text">
+              Join Mahu's Discord and post your score in the <code>#melon-n-chill</code> channel to appear in the global VRChat leaderboard.
+            </div>
+            <div class="mahu-btns">
+              <a href="https://discord.gg/uGbpaEa3N6" target="_blank" rel="noopener" class="involve-btn discord" style="padding:0.6rem 1rem;border-radius:var(--radius-s);font-size:0.8rem;">
+                <span>💬</span> Mahu's Discord
+              </a>
             </div>
           </div>
         </div>

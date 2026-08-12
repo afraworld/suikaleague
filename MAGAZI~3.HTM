@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mahu visited Suika League — November 2024. Suika League Magazine.">
+  <title>Mahu Visited Suika League – Suika League Magazine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base:#06090a; --bg-card:rgba(10,18,20,0.82);
+      --g-bright:#4ade80; --g-glow:rgba(74,222,128,0.45);
+      --g-subtle:rgba(74,222,128,0.08); --g-border:rgba(74,222,128,0.18); --g-border2:rgba(74,222,128,0.38);
+      --gold:#fbbf24; --discord:#5865F2;
+      --t-primary:#edfff3; --t-secondary:#8da896; --t-muted:#4f6a57;
+      --radius-s:8px; --radius-m:14px; --radius-l:22px;
+      --ease:cubic-bezier(0.4,0,0.2,1); --fast:0.2s;
+      --font-head:'Exo 2',system-ui,sans-serif;
+      --font-serif:'Playfair Display',Georgia,serif;
+      --font-body:'Inter',system-ui,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--bg-base);color:var(--t-primary);overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;padding:0 2rem;
+      background:rgba(4,7,8,0.82);backdrop-filter:blur(24px);border-bottom:1px solid var(--g-border);}
+    .nav.scrolled{background:rgba(3,5,6,0.97);}
+    .nav-inner{width:100%;max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+    .logo-mark{width:40px;height:40px;background:var(--g-subtle);border:1px solid var(--g-border);border-radius:var(--radius-m);
+      display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .logo-name{font-family:var(--font-head);font-weight:900;font-size:1rem;color:var(--g-bright);letter-spacing:0.06em;display:block;}
+    .logo-sub{font-family:var(--font-head);font-weight:600;font-size:0.55rem;color:var(--t-muted);letter-spacing:0.18em;text-transform:uppercase;display:block;}
+    .nav-links{display:flex;align-items:center;gap:0.1rem;list-style:none;flex:1;}
+    .nav-links a{display:block;padding:0.45rem 0.7rem;font-family:var(--font-head);font-weight:600;font-size:0.78rem;
+      letter-spacing:0.05em;text-transform:uppercase;color:var(--t-secondary);border-radius:var(--radius-s);
+      transition:color var(--fast) var(--ease),background var(--fast) var(--ease);}
+    .nav-links a:hover,.nav-links a.active{color:var(--g-bright);background:var(--g-subtle);}
+    .nav-actions{margin-left:auto;}
+    .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1.2rem;
+      font-family:var(--font-head);font-weight:700;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;
+      border:none;border-radius:50px;cursor:pointer;transition:all var(--fast) var(--ease);}
+    .btn-outline{background:transparent;color:var(--g-bright);border:1.5px solid var(--g-border);}
+    .btn-outline:hover{background:var(--g-subtle);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem;margin-left:auto;}
+    .hamburger span{width:20px;height:2px;background:var(--t-primary);border-radius:2px;}
+    @media(max-width:900px){.nav-links{display:none;}.hamburger{display:flex;}}
+
+    /* Breadcrumb */
+    .back-bar{background:rgba(3,5,6,0.85);border-bottom:1px solid var(--g-border);
+      position:sticky;top:68px;z-index:100;padding:0.6rem 2rem;}
+    .back-inner{max-width:820px;margin:0 auto;display:flex;align-items:center;gap:0.75rem;}
+    .back-link{display:flex;align-items:center;gap:0.4rem;font-family:var(--font-head);font-size:0.7rem;
+      font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--t-muted);transition:color var(--fast) var(--ease);}
+    .back-link:hover{color:var(--g-bright);}
+    .back-sep{color:var(--g-border2);}
+    .back-current{font-family:var(--font-head);font-size:0.7rem;color:var(--t-muted);}
+
+    /* Hero photo */
+    .cover-photo{position:relative;width:100%;height:55vh;min-height:320px;overflow:hidden;margin-top:68px;}
+    .cover-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;
+      filter:brightness(0.75);}
+    .cover-photo::after{content:'';position:absolute;inset:0;
+      background:linear-gradient(to bottom,transparent 30%,rgba(6,9,10,0.98) 100%);}
+
+    /* Article */
+    .article{max-width:740px;margin:0 auto;padding:3.5rem 2rem 6rem;}
+
+    .article-kicker{display:inline-flex;align-items:center;gap:0.5rem;
+      font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+      color:var(--g-bright);margin-bottom:0.9rem;}
+    .article-kicker::before{content:'';width:20px;height:1.5px;background:var(--g-bright);border-radius:2px;}
+    .article-title{font-family:var(--font-serif);font-size:clamp(1.9rem,4.5vw,3rem);font-weight:800;
+      line-height:1.15;color:var(--t-primary);margin-bottom:1rem;letter-spacing:-0.01em;}
+    .article-deck{font-size:1.08rem;color:var(--t-secondary);line-height:1.75;margin-bottom:1.5rem;font-style:italic;}
+    .article-meta{display:flex;align-items:center;gap:1rem;padding-bottom:2rem;border-bottom:1px solid var(--g-border);margin-bottom:2rem;}
+    .meta-by{font-size:0.82rem;font-weight:600;color:var(--t-primary);}
+    .meta-date{font-size:0.78rem;color:var(--t-muted);}
+    .meta-dot{color:var(--g-border2);}
+
+    .article-body p{font-size:1.02rem;color:var(--t-secondary);line-height:1.95;margin-bottom:1.35rem;}
+    .article-body p:last-child{margin-bottom:0;}
+    .article-body strong{color:var(--t-primary);}
+
+    /* Drop cap */
+    .article-body > p:first-child::first-letter{
+      font-family:var(--font-serif);font-size:4.2rem;font-weight:800;
+      float:left;line-height:0.78;margin-right:0.1em;margin-top:0.06em;color:var(--g-bright);}
+
+    /* Pull quote */
+    .pull-quote{margin:2.8rem 0;padding:1.8rem 1.8rem 1.8rem 2.2rem;border-left:3px solid var(--g-bright);position:relative;}
+    .pull-quote::before{content:'\201C';position:absolute;top:-0.3rem;left:1.6rem;
+      font-family:var(--font-serif);font-size:4.5rem;color:var(--g-bright);opacity:0.2;line-height:1;}
+    .pull-quote p{font-family:var(--font-serif);font-size:1.25rem;font-style:italic;color:var(--t-primary);line-height:1.6;margin:0;}
+
+    /* Mahu info box */
+    .mahu-box{background:rgba(88,101,242,0.07);border:1px solid rgba(88,101,242,0.25);border-radius:var(--radius-l);
+      padding:1.6rem 1.8rem;margin:2.5rem 0;}
+    .mahu-box-title{font-family:var(--font-head);font-size:0.68rem;font-weight:700;letter-spacing:0.14em;
+      text-transform:uppercase;color:#818cf8;margin-bottom:0.75rem;}
+    .mahu-box p{font-size:0.88rem;color:var(--t-secondary);line-height:1.7;margin-bottom:0.75rem;}
+    .mahu-box p:last-of-type{margin-bottom:1rem;}
+    .mahu-btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1.1rem;border-radius:50px;
+      background:#5865F2;color:#fff;font-family:var(--font-head);font-weight:700;font-size:0.76rem;
+      letter-spacing:0.06em;text-transform:uppercase;}
+    .mahu-btn:hover{opacity:0.9;}
+
+    .ornament{text-align:center;margin:2.5rem 0;color:var(--g-border2);font-size:1.2rem;letter-spacing:0.5em;}
+
+    /* End nav */
+    .article-end{margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--g-border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .end-back{font-family:var(--font-head);font-size:0.74rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+      color:var(--t-muted);display:flex;align-items:center;gap:0.4rem;}
+    .end-back:hover{color:var(--g-bright);}
+    .end-next{background:var(--bg-card);border:1px solid var(--g-border);border-radius:var(--radius-m);
+      padding:1rem 1.4rem;display:flex;gap:1rem;align-items:center;transition:border-color var(--fast) var(--ease);max-width:360px;}
+    .end-next:hover{border-color:var(--g-border2);}
+    .end-next-label{font-family:var(--font-head);font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--t-muted);margin-bottom:0.3rem;}
+    .end-next-title{font-family:var(--font-serif);font-size:1rem;font-weight:700;color:var(--t-primary);}
+    .end-next-arrow{color:var(--g-bright);font-size:1.2rem;margin-left:auto;flex-shrink:0;}
+
+    footer{background:rgba(2,4,5,0.95);border-top:1px solid var(--g-border);padding:2rem;}
+    .foot-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .foot-logo{font-family:var(--font-head);font-weight:900;font-size:0.9rem;color:var(--g-bright);letter-spacing:0.1em;}
+    .foot-links{display:flex;gap:1.2rem;}
+    .foot-links a{font-size:0.75rem;color:var(--t-muted);letter-spacing:0.06em;text-transform:uppercase;}
+    .foot-links a:hover{color:var(--g-bright);}
+    .foot-copy{font-size:0.72rem;color:var(--t-muted);}
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><img src="logo-circle.png" alt="SL" style="width:34px;height:34px;border-radius:8px;object-fit:cover;"></div>
+      <div><span class="logo-name">SUIKA LEAGUE</span><span class="logo-sub">Official Community</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tournaments.html">Tournaments</a></li>
+      <li><a href="players.html">Players</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="magazine.html" class="active">Magazine</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="magazine.html" class="btn btn-outline">← All Articles</a>
+    </div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- Breadcrumb -->
+<div class="back-bar" style="top:68px;">
+  <div class="back-inner">
+    <a href="magazine.html" class="back-link">← Magazine</a>
+    <span class="back-sep">/</span>
+    <span class="back-current">Community Moment</span>
+  </div>
+</div>
+
+<!-- Hero Photo -->
+<div class="cover-photo">
+  <img src="mahu-visit.png" alt="Mahu visits Suika League — November 2024">
+</div>
+
+<!-- Article -->
+<article class="article">
+
+  <div class="article-kicker">Suika League Magazine &nbsp;·&nbsp; Community Moment</div>
+  <h1 class="article-title">Mahu Visited Suika League — and It Meant Everything</h1>
+  <p class="article-deck">In November 2024, the creator of the very world we play in walked into our group session. What happened next felt like a quiet confirmation of everything we'd been building.</p>
+  <div class="article-meta">
+    <span class="meta-by">Written by Afra</span>
+    <span class="meta-dot">·</span>
+    <span class="meta-date">November 27, 2024</span>
+    <span class="meta-dot">·</span>
+    <span class="meta-date">Community News</span>
+  </div>
+
+  <div class="article-body">
+
+    <p>There is a particular feeling that comes when someone you've been quietly hoping would notice your work finally shows up — not because they had to, not because you arranged it, but because they heard about it and wanted to see it for themselves. That's what happened when Mahu visited Suika League on November 27, 2024.</p>
+
+    <p>Mahu is the creator of <strong>Melon &amp; Chill</strong> — the VRChat world that Suika League was built around. He built the environment, the scoreboards, the fruit physics, the world that hundreds of players in our community have spent real hours inside. Without his world, there is no Suika League. It's as simple as that.</p>
+
+    <div class="pull-quote">
+      <p>Without his world, there is no Suika League. It's as simple as that.</p>
+    </div>
+
+    <p>When he joined our group session, the reaction was immediate. The players who were there recognized what the moment meant — not just that a well-known VRChat creator had dropped in, but that the person whose work made all of this possible was standing inside the community we'd built around it. The circle felt complete in a way that's hard to describe but easy to feel.</p>
+
+    <p>We spent time together exchanging ideas. He shared thoughts on the game's future — and gave us a glimpse at potential updates coming to Suika World. Some of those ideas were things we'd talked about wanting as a community. Hearing them confirmed by the creator himself landed differently than any announcement post ever could.</p>
+
+    <p>It was also simply a good time. VRChat has a way of collapsing the distance between creators and communities, and this session reminded us why. There was no agenda, no formal structure. Just players, a creator, and a shared love of a game about stacking fruit.</p>
+
+    <p>Mahu's passion for what he's building is genuine and visible. You can feel it in how he talks about the game, how he listens to feedback, how he shows up. We're grateful he spent that time with us — and grateful that his world continues to be the place Suika League calls home.</p>
+
+    <p>We'll keep making it worthy of the space.</p>
+
+  </div>
+
+  <div class="ornament">🍉 · · · 🍉</div>
+
+  <!-- Mahu info box -->
+  <div class="mahu-box">
+    <div class="mahu-box-title">🌍 About Mahu &amp; Global Score Submission</div>
+    <p><strong>Mahu</strong> is the VRChat world creator behind Melon &amp; Chill — the game Suika League is built around. He maintains the global leaderboard for the world.</p>
+    <p>If you want your score to count in the <strong>global VRChat rankings</strong>, you need to submit it directly in Mahu's Discord server, in the <code style="background:rgba(88,101,242,0.15);padding:0.1em 0.4em;border-radius:4px;color:#a5b4fc;">#melon-n-chill</code> channel.</p>
+    <a href="https://discord.gg/uGbpaEa3N6" target="_blank" rel="noopener" class="mahu-btn">💬 Join Mahu's Discord</a>
+  </div>
+
+  <!-- Article end nav -->
+  <div class="article-end">
+    <a href="magazine.html" class="end-back">← Back to Magazine</a>
+    <a href="magazine-story-founder.html" class="end-next">
+      <div>
+        <div class="end-next-label">Also in Magazine</div>
+        <div class="end-next-title">Built at Full Speed — The Founder Story</div>
+      </div>
+      <div class="end-next-arrow">→</div>
+    </a>
+  </div>
+
+</article>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">SUIKA LEAGUE</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="magazine.html">Magazine</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="foot-copy">&copy; 2024 Suika League Magazine</div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+</script>
+</body>
+</html>

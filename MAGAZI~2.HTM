@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Built at Full Speed — The Afra founder story. Suika League Magazine.">
+  <title>Built at Full Speed – Suika League Magazine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700;1,800&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base:#06090a; --bg-card:rgba(10,18,20,0.82);
+      --g-bright:#4ade80; --g-mid:#22c55e; --g-glow:rgba(74,222,128,0.45);
+      --g-subtle:rgba(74,222,128,0.08); --g-border:rgba(74,222,128,0.18); --g-border2:rgba(74,222,128,0.38);
+      --gold:#fbbf24; --discord:#5865F2;
+      --t-primary:#edfff3; --t-secondary:#8da896; --t-muted:#4f6a57;
+      --radius-s:8px; --radius-m:14px; --radius-l:22px;
+      --ease:cubic-bezier(0.4,0,0.2,1); --fast:0.2s;
+      --font-head:'Exo 2',system-ui,sans-serif;
+      --font-serif:'Playfair Display',Georgia,serif;
+      --font-body:'Inter',system-ui,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--bg-base);color:var(--t-primary);overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+
+    /* ── Nav ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;padding:0 2rem;
+      background:rgba(4,7,8,0.82);backdrop-filter:blur(24px);border-bottom:1px solid var(--g-border);}
+    .nav.scrolled{background:rgba(3,5,6,0.97);}
+    .nav-inner{width:100%;max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+    .logo-mark{width:40px;height:40px;background:var(--g-subtle);border:1px solid var(--g-border);border-radius:var(--radius-m);
+      display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .logo-name{font-family:var(--font-head);font-weight:900;font-size:1rem;color:var(--g-bright);letter-spacing:0.06em;display:block;}
+    .logo-sub{font-family:var(--font-head);font-weight:600;font-size:0.55rem;color:var(--t-muted);letter-spacing:0.18em;text-transform:uppercase;display:block;}
+    .nav-links{display:flex;align-items:center;gap:0.1rem;list-style:none;flex:1;}
+    .nav-links a{display:block;padding:0.45rem 0.7rem;font-family:var(--font-head);font-weight:600;font-size:0.78rem;
+      letter-spacing:0.05em;text-transform:uppercase;color:var(--t-secondary);border-radius:var(--radius-s);
+      transition:color var(--fast) var(--ease),background var(--fast) var(--ease);}
+    .nav-links a:hover,.nav-links a.active{color:var(--g-bright);background:var(--g-subtle);}
+    .nav-actions{margin-left:auto;}
+    .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1.2rem;
+      font-family:var(--font-head);font-weight:700;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;
+      border:none;border-radius:50px;cursor:pointer;transition:all var(--fast) var(--ease);}
+    .btn-outline{background:transparent;color:var(--g-bright);border:1.5px solid var(--g-border);}
+    .btn-outline:hover{background:var(--g-subtle);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem;margin-left:auto;}
+    .hamburger span{width:20px;height:2px;background:var(--t-primary);border-radius:2px;}
+    .mobile-drawer{display:none;position:fixed;top:68px;left:0;right:0;z-index:199;
+      background:rgba(3,6,7,0.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--g-border);padding:1rem;}
+    .mobile-drawer.open{display:block;}
+    .mobile-links{list-style:none;display:flex;flex-direction:column;gap:2px;}
+    .mobile-links a{display:block;padding:0.8rem 1rem;font-family:var(--font-head);font-weight:600;font-size:0.9rem;
+      letter-spacing:0.06em;text-transform:uppercase;color:var(--t-secondary);border-radius:var(--radius-s);}
+    .mobile-links a:hover{color:var(--g-bright);background:var(--g-subtle);}
+    @media(max-width:900px){.nav-links{display:none;}.hamburger{display:flex;}}
+
+    /* ── Cover / Hero ── */
+    .cover{position:relative;height:90vh;min-height:560px;display:flex;align-items:flex-end;overflow:hidden;}
+    .cover-bg{position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,14,8,0.7) 0%,rgba(30,8,18,0.5) 40%,rgba(6,9,10,0.95) 100%);}
+    /* Green scanline texture */
+    .cover-bg::after{content:'';position:absolute;inset:0;
+      background-image:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(74,222,128,0.015) 3px,rgba(74,222,128,0.015) 4px);}
+    .cover-glow{position:absolute;top:20%;right:15%;width:380px;height:380px;
+      background:radial-gradient(circle,rgba(74,222,128,0.12) 0%,transparent 70%);pointer-events:none;}
+    .cover-content{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;padding:0 2rem 5rem;}
+    .cover-mag-label{display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;
+      font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+      color:var(--g-bright);opacity:0.9;}
+    .cover-mag-label::before{content:'';width:28px;height:1.5px;background:var(--g-bright);border-radius:2px;}
+    .cover-title{font-family:var(--font-serif);font-size:clamp(2.8rem,8vw,6rem);font-weight:800;
+      line-height:1.0;color:var(--t-primary);margin-bottom:1.2rem;letter-spacing:-0.02em;}
+    .cover-title em{color:var(--g-bright);font-style:italic;}
+    .cover-deck{font-family:var(--font-body);font-size:clamp(1rem,2vw,1.2rem);color:var(--t-secondary);
+      max-width:640px;line-height:1.7;margin-bottom:2rem;}
+    .cover-meta{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+    .cover-byline{display:flex;align-items:center;gap:0.6rem;}
+    .cover-av{width:38px;height:38px;border-radius:50%;background:var(--g-subtle);border:1.5px solid var(--g-border2);
+      display:flex;align-items:center;justify-content:center;font-size:1.1rem;overflow:hidden;}
+    .cover-av img{width:100%;height:100%;object-fit:cover;}
+    .cover-author{font-size:0.82rem;font-weight:600;color:var(--t-primary);}
+    .cover-date{font-size:0.75rem;color:var(--t-muted);}
+    .cover-divider{width:1px;height:28px;background:var(--g-border);}
+    .cover-category{font-family:var(--font-head);font-size:0.68rem;font-weight:700;letter-spacing:0.12em;
+      text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:50px;
+      background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.3);color:var(--gold);}
+    /* Scroll hint */
+    .scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+      display:flex;flex-direction:column;align-items:center;gap:0.4rem;opacity:0.4;}
+    .scroll-cue span{font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--t-muted);}
+    .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--g-bright),transparent);
+      animation:scrollpulse 2s ease-in-out infinite;}
+    @keyframes scrollpulse{0%,100%{opacity:0.4;transform:scaleY(1);}50%{opacity:1;transform:scaleY(1.15);}}
+
+    /* ── Article body ── */
+    .article{max-width:740px;margin:0 auto;padding:5rem 2rem 6rem;}
+
+    /* Drop cap on first paragraph */
+    .article-intro > p:first-child::first-letter{
+      font-family:var(--font-serif);font-size:4.5rem;font-weight:800;
+      float:left;line-height:0.75;margin-right:0.12em;margin-top:0.08em;
+      color:var(--g-bright);}
+
+    .article-intro p,.article-body p{
+      font-size:1.05rem;color:var(--t-secondary);line-height:1.95;margin-bottom:1.4rem;}
+    .article-intro p:last-child,.article-body p:last-child{margin-bottom:0;}
+
+    /* Section break heading */
+    .article-h2{font-family:var(--font-serif);font-size:1.6rem;font-weight:700;font-style:italic;
+      color:var(--t-primary);margin:3rem 0 1.2rem;padding-top:2.5rem;
+      border-top:1px solid var(--g-border);}
+
+    /* Pull quote */
+    .pull-quote{position:relative;margin:3.5rem 0;padding:2rem 2rem 2rem 2.5rem;
+      border-left:3px solid var(--g-bright);}
+    .pull-quote::before{content:'\201C';position:absolute;top:-0.4rem;left:1.8rem;
+      font-family:var(--font-serif);font-size:5rem;color:var(--g-bright);opacity:0.25;line-height:1;}
+    .pull-quote p{font-family:var(--font-serif);font-size:1.35rem;font-style:italic;
+      color:var(--t-primary);line-height:1.55;margin:0;}
+    .pull-quote cite{display:block;font-family:var(--font-head);font-size:0.7rem;font-weight:700;
+      letter-spacing:0.12em;text-transform:uppercase;color:var(--t-muted);margin-top:0.8rem;font-style:normal;}
+
+    /* Inline highlight */
+    .hl{color:var(--g-bright);font-weight:600;}
+    .hl-gold{color:var(--gold);font-weight:600;}
+
+    /* Stat callout */
+    .stat-row{display:flex;gap:2rem;margin:2.5rem 0;flex-wrap:wrap;}
+    .stat{flex:1;min-width:130px;background:var(--g-subtle);border:1px solid var(--g-border);
+      border-radius:var(--radius-m);padding:1.2rem 1.4rem;}
+    .stat-val{font-family:var(--font-head);font-size:2rem;font-weight:900;color:var(--g-bright);line-height:1;}
+    .stat-label{font-size:0.75rem;color:var(--t-muted);letter-spacing:0.06em;text-transform:uppercase;margin-top:0.3rem;}
+
+    /* Divider ornament */
+    .ornament{text-align:center;margin:3rem 0;color:var(--g-border2);font-size:1.2rem;letter-spacing:0.5em;}
+
+    /* End links */
+    .article-end{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--g-border);}
+    .article-end-label{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.14em;
+      text-transform:uppercase;color:var(--t-muted);margin-bottom:1rem;}
+    .end-links{display:flex;gap:0.75rem;flex-wrap:wrap;}
+    .end-link{display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1rem;
+      border-radius:50px;border:1px solid var(--g-border);background:var(--g-subtle);
+      font-family:var(--font-head);font-weight:700;font-size:0.73rem;letter-spacing:0.05em;
+      color:var(--g-bright);transition:all var(--fast) var(--ease);}
+    .end-link:hover{border-color:var(--g-border2);background:rgba(74,222,128,0.13);}
+
+    /* Next article teaser */
+    .next-article{background:var(--bg-card);border:1px solid var(--g-border);border-radius:var(--radius-l);
+      padding:2rem 2.5rem;margin-top:3rem;display:flex;gap:1.5rem;align-items:center;
+      transition:border-color var(--fast) var(--ease);}
+    .next-article:hover{border-color:var(--g-border2);}
+    .next-label{font-family:var(--font-head);font-size:0.62rem;font-weight:700;letter-spacing:0.14em;
+      text-transform:uppercase;color:var(--t-muted);margin-bottom:0.4rem;}
+    .next-title{font-family:var(--font-serif);font-size:1.15rem;font-weight:700;color:var(--t-primary);}
+    .next-arrow{font-size:1.5rem;color:var(--g-bright);margin-left:auto;flex-shrink:0;}
+
+    /* Back to magazine */
+    .back-bar{background:rgba(3,5,6,0.85);border-bottom:1px solid var(--g-border);
+      position:sticky;top:68px;z-index:100;padding:0.6rem 2rem;}
+    .back-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:0.75rem;}
+    .back-link{display:flex;align-items:center;gap:0.4rem;font-family:var(--font-head);font-size:0.7rem;
+      font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--t-muted);
+      transition:color var(--fast) var(--ease);}
+    .back-link:hover{color:var(--g-bright);}
+    .back-sep{color:var(--g-border2);}
+    .back-current{font-family:var(--font-head);font-size:0.7rem;color:var(--t-muted);letter-spacing:0.06em;}
+
+    /* ── Footer ── */
+    footer{background:rgba(2,4,5,0.95);border-top:1px solid var(--g-border);padding:2rem;}
+    .foot-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .foot-logo{font-family:var(--font-head);font-weight:900;font-size:0.9rem;color:var(--g-bright);letter-spacing:0.1em;}
+    .foot-links{display:flex;gap:1.2rem;}
+    .foot-links a{font-size:0.75rem;color:var(--t-muted);letter-spacing:0.06em;text-transform:uppercase;}
+    .foot-links a:hover{color:var(--g-bright);}
+    .foot-copy{font-size:0.72rem;color:var(--t-muted);}
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><img src="logo-circle.png" alt="SL" style="width:34px;height:34px;border-radius:8px;object-fit:cover;"></div>
+      <div><span class="logo-name">SUIKA LEAGUE</span><span class="logo-sub">Official Community</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tournaments.html">Tournaments</a></li>
+      <li><a href="players.html">Players</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="magazine.html" class="active">Magazine</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="magazine.html" class="btn btn-outline">← All Articles</a>
+    </div>
+    <div class="hamburger" onclick="toggleDrawer()" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <ul class="mobile-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="magazine.html">Magazine</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</div>
+
+<!-- Breadcrumb bar -->
+<div class="back-bar">
+  <div class="back-inner">
+    <a href="magazine.html" class="back-link">← Magazine</a>
+    <span class="back-sep">/</span>
+    <span class="back-current">Cover Story</span>
+  </div>
+</div>
+
+<!-- ══ COVER ══ -->
+<div class="cover">
+  <div class="cover-bg"></div>
+  <div class="cover-glow"></div>
+
+  <div class="cover-content">
+    <div class="cover-mag-label">Suika League Magazine &nbsp;·&nbsp; Cover Story</div>
+    <h1 class="cover-title">Built at<br><em>Full Speed</em></h1>
+    <p class="cover-deck">A drifter. A model. An actress. How one woman built the most competitive Suika Game community in VRChat — and made it feel like home for 600+ players worldwide.</p>
+    <div class="cover-meta">
+      <div class="cover-byline">
+        <div class="cover-av">▲</div>
+        <div>
+          <div class="cover-author">Suika League Magazine</div>
+          <div class="cover-date">2024 · Issue 01</div>
+        </div>
+      </div>
+      <div class="cover-divider"></div>
+      <span class="cover-category">⭐ Founder Story</span>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Read</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<!-- ══ ARTICLE ══ -->
+<article class="article">
+
+  <div class="article-intro">
+    <p>Some people arrive at the thing they were meant to build by a straight road. Afra did not. She arrived through racetracks, camera lenses, film sets, game lobbies and a VRChat world full of people dropping watermelons onto each other — and the path, looking back, makes perfect sense.</p>
+    <p>Suika League is a competitive VRChat community built around Melon &amp; Chill, the VRChat adaptation of the Suika Game fruit-merging phenomenon. It has <span class="hl">over 600 members</span>, a structured leaderboard, regular tournaments and a growing roster of player profiles, spotlights and editorial features. It is also, depending on who you ask, one of the most serious Suika communities in existence. All of this was built by one person — in her spare time, in a virtual world, around a game where the final goal is making a watermelon.</p>
+    <p>That's the surface. What's underneath it is a lot more interesting.</p>
+  </div>
+
+  <div class="ornament">· · ·</div>
+
+  <div class="article-body">
+
+    <h2 class="article-h2">A Life Built Around Speed</h2>
+
+    <p>Before VRChat, before gaming communities, before any of this — there were racetracks. Afra grew up in and around motorsport: the smell of rubber and fuel, the sound of engines that don't negotiate, the particular kind of attention required when things are moving faster than most people are comfortable with. She did not drive competitively. She was something rarer — someone who understood what was happening, and why it mattered to the people doing it.</p>
+
+    <p>That understanding of competition — not as spectacle but as pursuit — followed her into everything she did next. Modeling. Acting. Migration. New cities, new languages, new social architectures. She learned to read rooms and build them. She learned that the people most committed to something, however niche, are usually the most interesting people in it.</p>
+
+    <div class="pull-quote">
+      <p>Competition becomes more meaningful when it helps other people grow too. That was the idea from the beginning — not to build the best leaderboard, but to build something worth competing inside of.</p>
+      <cite>— Afra, Founder of Suika League</cite>
+    </div>
+
+    <p>She came to VRChat the way most people do — looking for something that didn't quite exist yet offline. And she found, in Melon &amp; Chill, a game that was deceptively simple on the surface and genuinely strategic the deeper you went. She also found, around it, a scattered and informal scene of players who were competing with no structure, no record, no way to know where they stood.</p>
+
+    <h2 class="article-h2">The Gap Nobody Had Filled</h2>
+
+    <p>There is a specific frustration that serious players feel when they enter a space with real competitive energy and no competitive infrastructure. Scores disappear. Rankings don't exist. The player who worked for weeks to push their personal best has nowhere to put that achievement except a screenshot in a personal folder.</p>
+
+    <p>Afra felt that frustration. And then she did what founders do — she stopped waiting for someone else to solve it.</p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">600+</div>
+        <div class="stat-label">Community Members</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">Top 30</div>
+        <div class="stat-label">World Ranking Goal</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">10+</div>
+        <div class="stat-label">Events Run</div>
+      </div>
+    </div>
+
+    <p>Suika League began as a Discord server and a VRChat group with a clear purpose: <span class="hl">bring structure to a scene that had the talent but not the infrastructure</span>. Rankings. Player profiles. A leaderboard that tracked not just numbers but the people behind them. A community where new players could learn, competitive players could challenge each other and everyone's contribution — whether through gameplay, teaching, media or organization — could be recognized.</p>
+
+    <p>It grew quickly. Not because it was marketed aggressively, but because the need was real and the execution was genuine. Players who discovered Suika League didn't just stay for the leaderboard. They stayed because someone had built a home around the game they loved.</p>
+
+    <div class="pull-quote">
+      <p>The goal isn't to protect the top. It's to keep raising the level of everyone around it.</p>
+      <cite>— Suika League Philosophy</cite>
+    </div>
+
+    <h2 class="article-h2">What She Built, and Why It Works</h2>
+
+    <p>A lot of gaming communities are built around a game. Suika League was built around an idea about what competition should feel like. That distinction matters more than it might seem.</p>
+
+    <p>The community has roles — some self-assigned, some earned. Competitive players sit alongside new players. Suika Sensei (experienced members who invest time teaching others) have the same standing as the people at the top of the leaderboard. A media contributor who photographs community events is recognized the same way a tournament finalist is. That balance is not accidental. It reflects a deliberate philosophy: <span class="hl-gold">a community where only the top 5 matter is a community that is always shrinking.</span></p>
+
+    <p>The website — suikaleague.com — extends that philosophy into a permanent record. Player profiles. Tournament archives. Magazine features. A leaderboard that tracks both the global VRChat scene and Suika League's own members-only rankings. The mission, stated plainly on the leaderboard page, is to keep Suika League members in the Top 30 of VRChat world rankings. Not a vague aspiration. A concrete, trackable goal.</p>
+
+    <p>It's the kind of detail that reveals something about the person who built it. Afra came from a world where performance is measurable and results are public. She brought that precision into a virtual watermelon game — and it turns out, that's exactly what the scene needed.</p>
+
+    <h2 class="article-h2">Still Building</h2>
+
+    <p>Suika League is not finished. The community is still growing, the tournament format is still evolving and there are pages on this very website that are still under construction. Afra is working on all of it — player profiles for every ranked member, a dedicated media archive, expanded editorial coverage and, eventually, a Suika League world in VRChat that would serve as a permanent home within the game itself.</p>
+
+    <p>She is doing this the way she has done everything — without waiting for the right moment, without asking permission, with the particular kind of drive that comes from actually caring about what you're building.</p>
+
+    <p>From racetracks to watermelons. The road was long and took unexpected turns. But the destination, it turns out, was somewhere worth going.</p>
+
+  </div>
+
+  <div class="ornament">🍉</div>
+
+  <!-- End links -->
+  <div class="article-end">
+    <div class="article-end-label">Connect with Afra &amp; Suika League</div>
+    <div class="end-links">
+      <a href="https://discord.gg/7frwwTJC54" target="_blank" rel="noopener" class="end-link">💬 Discord</a>
+      <a href="https://vrc.group/SUIKA.5062" target="_blank" rel="noopener" class="end-link">🌐 VRChat Group</a>
+      <a href="https://www.instagram.com/afraworld8/" target="_blank" rel="noopener" class="end-link">📸 Instagram</a>
+      <a href="https://www.youtube.com/@AfraWorld" target="_blank" rel="noopener" class="end-link">▶ YouTube</a>
+      <a href="https://www.imdb.com/name/nm12341828/" target="_blank" rel="noopener" class="end-link">🎬 IMDb</a>
+    </div>
+  </div>
+
+  <!-- Next article teaser -->
+  <a href="magazine-story-name.html" class="next-article">
+    <div>
+      <div class="next-label">Next in Magazine</div>
+      <div class="next-title">How Suika League Got Its Name</div>
+    </div>
+    <div class="next-arrow">→</div>
+  </a>
+
+</article>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">SUIKA LEAGUE</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="magazine.html">Magazine</a>
+      <a href="players.html">Players</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="foot-copy">&copy; 2024 Suika League Magazine · Founded by Afra</div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+  function toggleDrawer() { document.getElementById('mobileDrawer').classList.toggle('open'); }
+</script>
+</body>
+</html>
