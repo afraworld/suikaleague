@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="data:image/png;base64,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">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Support Suika League — help us keep building the community.">
+  <title>Support – Suika League</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base:#06090a; --bg-card:rgba(10,18,20,0.82);
+      --g-bright:#4ade80; --g-mid:#22c55e; --g-glow:rgba(74,222,128,0.45);
+      --g-subtle:rgba(74,222,128,0.08); --g-border:rgba(74,222,128,0.18); --g-border2:rgba(74,222,128,0.38);
+      --gold:#fbbf24; --discord:#5865F2;
+      --t-primary:#edfff3; --t-secondary:#8da896; --t-muted:#4f6a57;
+      --radius-s:8px; --radius-m:14px; --radius-l:22px;
+      --ease:cubic-bezier(0.4,0,0.2,1); --fast:0.2s;
+      --font-head:'Exo 2',system-ui,sans-serif; --font-body:'Inter',system-ui,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--bg-base);color:var(--t-primary);overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 55% 45% at 70% 20%,rgba(12,80,35,0.14) 0%,transparent 60%),
+                 radial-gradient(ellipse 40% 35% at 15% 80%,rgba(70,15,35,0.09) 0%,transparent 60%);}
+    h1,h2,h3{font-family:var(--font-head);font-weight:800;line-height:1.15;}
+
+    /* ── Nav ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;padding:0 2rem;
+      background:rgba(4,7,8,0.82);backdrop-filter:blur(24px);border-bottom:1px solid var(--g-border);}
+    .nav.scrolled{background:rgba(3,5,6,0.97);}
+    .nav-inner{width:100%;max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+    .logo-mark{width:40px;height:40px;background:var(--g-subtle);border:1px solid var(--g-border);border-radius:var(--radius-m);
+      display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .logo-name{font-family:var(--font-head);font-weight:900;font-size:1rem;color:var(--g-bright);letter-spacing:0.06em;display:block;}
+    .logo-sub{font-family:var(--font-head);font-weight:600;font-size:0.55rem;color:var(--t-muted);letter-spacing:0.18em;text-transform:uppercase;display:block;}
+    .nav-links{display:flex;align-items:center;gap:0.1rem;list-style:none;flex:1;}
+    .nav-links a{display:block;padding:0.45rem 0.7rem;font-family:var(--font-head);font-weight:600;font-size:0.78rem;
+      letter-spacing:0.05em;text-transform:uppercase;color:var(--t-secondary);border-radius:var(--radius-s);
+      transition:color var(--fast) var(--ease),background var(--fast) var(--ease);}
+    .nav-links a:hover,.nav-links a.active{color:var(--g-bright);background:var(--g-subtle);}
+    .nav-actions{margin-left:auto;display:flex;gap:0.5rem;}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.55rem 1.3rem;
+      font-family:var(--font-head);font-weight:700;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;
+      border:none;border-radius:50px;cursor:pointer;transition:all var(--fast) var(--ease);}
+    .btn:hover{transform:translateY(-2px);}
+    .btn-discord{background:var(--discord);color:#fff;}
+    .btn-outline{background:transparent;color:var(--g-bright);border:1.5px solid var(--g-border);}
+    .btn-outline:hover{background:var(--g-subtle);border-color:var(--g-border2);}
+    .btn-gold{background:rgba(251,191,36,0.12);color:var(--gold);border:1.5px solid rgba(251,191,36,0.3);}
+    .btn-gold:hover{background:rgba(251,191,36,0.22);border-color:rgba(251,191,36,0.55);}
+    .btn-lg{padding:0.85rem 2rem;font-size:0.88rem;}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem;margin-left:auto;}
+    .hamburger span{width:20px;height:2px;background:var(--t-primary);border-radius:2px;}
+    .mobile-drawer{display:none;position:fixed;top:68px;left:0;right:0;z-index:199;
+      background:rgba(3,6,7,0.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--g-border);padding:1rem;}
+    .mobile-drawer.open{display:block;}
+    .mobile-links{list-style:none;display:flex;flex-direction:column;gap:2px;}
+    .mobile-links a{display:block;padding:0.8rem 1rem;font-family:var(--font-head);font-weight:600;font-size:0.9rem;
+      letter-spacing:0.06em;text-transform:uppercase;color:var(--t-secondary);border-radius:var(--radius-s);}
+    .mobile-links a:hover{color:var(--g-bright);background:var(--g-subtle);}
+    @media(max-width:900px){.nav-links{display:none;}.hamburger{display:flex;}}
+
+    /* ── Page Shell ── */
+    .page{padding-top:68px;}
+    .wrap{max-width:1060px;margin:0 auto;padding:0 2rem;}
+
+    /* ── Hero ── */
+    .hero{position:relative;z-index:2;padding:90px 0 75px;border-bottom:1px solid var(--g-border);overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;pointer-events:none;
+      background:radial-gradient(ellipse 70% 60% at 50% -10%,rgba(74,222,128,0.06) 0%,transparent 65%);}
+    .hero-inner{max-width:720px;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;background:var(--g-subtle);
+      border:1px solid var(--g-border);border-radius:50px;padding:0.3rem 0.85rem;
+      font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+      color:var(--g-bright);margin-bottom:1.2rem;}
+    .hero-title{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:900;color:var(--t-primary);
+      letter-spacing:-0.02em;margin-bottom:1.1rem;line-height:1.1;}
+    .hero-title em{color:var(--g-bright);font-style:normal;}
+    .hero-sub{font-size:1.05rem;color:var(--t-secondary);line-height:1.85;max-width:600px;margin-bottom:1.8rem;}
+    .hero-cta-row{display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap;}
+    .btn-support{background:linear-gradient(135deg,rgba(74,222,128,0.2),rgba(34,197,94,0.12));
+      color:var(--g-bright);border:1.5px solid var(--g-border2);padding:0.85rem 2rem;
+      font-family:var(--font-head);font-weight:800;font-size:0.88rem;letter-spacing:0.07em;text-transform:uppercase;
+      border-radius:50px;cursor:pointer;transition:all var(--fast) var(--ease);display:inline-flex;align-items:center;gap:0.5rem;}
+    .btn-support:hover{background:linear-gradient(135deg,rgba(74,222,128,0.3),rgba(34,197,94,0.2));
+      border-color:var(--g-bright);box-shadow:0 0 24px rgba(74,222,128,0.18);transform:translateY(-2px);}
+    .hero-note{font-size:0.78rem;color:var(--t-muted);font-style:italic;}
+
+    /* ── Where support goes ── */
+    .s-uses{padding:70px 0;border-bottom:1px solid var(--g-border);position:relative;z-index:2;}
+    .s-label{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--g-bright);opacity:0.75;margin-bottom:0.5rem;}
+    .s-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:900;color:var(--t-primary);}
+    .s-sub{font-size:0.94rem;color:var(--t-secondary);margin-top:0.5rem;line-height:1.7;max-width:580px;}
+    .s-header{margin-bottom:2.5rem;}
+    .use-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+    .use-card{background:var(--bg-card);border:1px solid var(--g-border);border-radius:var(--radius-m);
+      padding:1.4rem 1.5rem;backdrop-filter:blur(16px);display:flex;gap:1rem;align-items:flex-start;
+      transition:border-color var(--fast) var(--ease),transform var(--fast) var(--ease);}
+    .use-card:hover{border-color:var(--g-border2);transform:translateY(-2px);}
+    .use-icon{font-size:1.6rem;flex-shrink:0;margin-top:1px;line-height:1;}
+    .use-name{font-family:var(--font-head);font-weight:800;font-size:0.9rem;letter-spacing:0.03em;
+      color:var(--t-primary);margin-bottom:0.35rem;}
+    .use-desc{font-size:0.82rem;color:var(--t-secondary);line-height:1.65;}
+
+    /* ── Optional notice ── */
+    .s-optional{padding:65px 0;border-bottom:1px solid var(--g-border);position:relative;z-index:2;}
+    .optional-box{background:linear-gradient(135deg,rgba(74,222,128,0.05),rgba(10,18,20,0.6));
+      border:1px solid var(--g-border);border-radius:var(--radius-l);padding:2.8rem 3rem;
+      display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+    @media(max-width:720px){.optional-box{grid-template-columns:1fr;gap:2rem;padding:2rem;}}
+    .opt-kicker{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--g-bright);opacity:0.75;margin-bottom:0.6rem;}
+    .opt-heading{font-size:clamp(1.3rem,2.5vw,1.7rem);font-weight:900;color:var(--t-primary);margin-bottom:0.9rem;line-height:1.2;}
+    .opt-body p{font-size:0.93rem;color:var(--t-secondary);line-height:1.85;margin-bottom:0.8rem;}
+    .opt-body p:last-child{margin-bottom:0;}
+    .opt-body strong{color:var(--t-primary);}
+    .contrib-list{display:flex;flex-direction:column;gap:0.65rem;margin-top:0.3rem;}
+    .contrib-item{display:flex;align-items:flex-start;gap:0.7rem;font-size:0.88rem;
+      color:var(--t-secondary);line-height:1.6;}
+    .contrib-dot{color:var(--g-bright);font-size:0.7rem;flex-shrink:0;margin-top:0.22rem;}
+    .contrib-item strong{color:var(--t-primary);}
+
+    /* ── Support action ── */
+    .s-action{padding:70px 0;border-bottom:1px solid var(--g-border);position:relative;z-index:2;}
+    .action-inner{max-width:600px;margin:0 auto;text-align:center;}
+    .paypal-box{background:var(--bg-card);border:1px solid var(--g-border);border-radius:var(--radius-l);
+      padding:2.5rem 2.5rem;backdrop-filter:blur(20px);margin-top:2rem;}
+    .paypal-logo{font-family:var(--font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;
+      text-transform:uppercase;color:var(--t-muted);margin-bottom:0.5rem;}
+    .paypal-label{font-size:0.93rem;color:var(--t-secondary);line-height:1.7;margin-bottom:1.4rem;}
+    .btn-paypal{display:inline-flex;align-items:center;justify-content:center;gap:0.6rem;
+      background:linear-gradient(135deg,#0070ba,#003087);color:#fff;
+      font-family:var(--font-head);font-weight:800;font-size:0.9rem;letter-spacing:0.07em;text-transform:uppercase;
+      padding:0.9rem 2.4rem;border-radius:50px;border:none;cursor:pointer;
+      transition:all var(--fast) var(--ease);box-shadow:0 4px 20px rgba(0,112,186,0.25);}
+    .btn-paypal:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,112,186,0.35);}
+    .paypal-fine{font-size:0.72rem;color:var(--t-muted);margin-top:1rem;line-height:1.6;}
+
+    /* ── Transparency ── */
+    .s-transparency{padding:70px 0;border-bottom:1px solid var(--g-border);position:relative;z-index:2;}
+    .transparency-intro{font-size:0.94rem;color:var(--t-secondary);line-height:1.8;max-width:620px;margin-bottom:2.5rem;}
+    .timeline{display:flex;flex-direction:column;gap:0;}
+    .tl-item{display:grid;grid-template-columns:110px 1fr;gap:0 1.5rem;position:relative;}
+    .tl-item:not(:last-child)::before{content:'';position:absolute;left:105px;top:28px;bottom:-10px;
+      width:1px;background:var(--g-border);}
+    .tl-year{font-family:var(--font-head);font-weight:800;font-size:0.78rem;letter-spacing:0.08em;
+      color:var(--t-muted);padding-top:0.55rem;text-align:right;padding-right:0;flex-shrink:0;}
+    .tl-content{padding:0.4rem 0 1.6rem 0;}
+    .tl-dot{width:10px;height:10px;border-radius:50%;background:var(--g-mid);
+      box-shadow:0 0 8px var(--g-glow);position:absolute;left:100px;top:8px;}
+    .tl-dot.future{background:var(--t-muted);box-shadow:none;}
+    .tl-name{font-family:var(--font-head);font-weight:800;font-size:0.9rem;color:var(--t-primary);margin-bottom:0.2rem;}
+    .tl-note{font-size:0.8rem;color:var(--t-secondary);line-height:1.6;}
+    .tl-badge{display:inline-flex;align-items:center;gap:0.3rem;font-size:0.62rem;font-family:var(--font-head);
+      font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.15rem 0.5rem;
+      border-radius:50px;margin-left:0.5rem;}
+    .badge-done{background:rgba(74,222,128,0.1);color:var(--g-bright);border:1px solid rgba(74,222,128,0.25);}
+    .badge-soon{background:rgba(251,191,36,0.1);color:var(--gold);border:1px solid rgba(251,191,36,0.25);}
+    .badge-future{background:rgba(148,163,184,0.08);color:var(--t-muted);border:1px solid rgba(148,163,184,0.15);}
+
+    /* ── Disclaimer ── */
+    .s-disclaimer{padding:55px 0 70px;position:relative;z-index:2;}
+    .disclaimer-box{background:rgba(10,18,20,0.7);border:1px solid rgba(74,222,128,0.1);
+      border-radius:var(--radius-l);padding:2rem 2.4rem;max-width:820px;margin:0 auto;}
+    .disclaimer-title{font-family:var(--font-head);font-weight:800;font-size:0.82rem;letter-spacing:0.1em;
+      text-transform:uppercase;color:var(--t-muted);margin-bottom:0.9rem;}
+    .disclaimer-text{font-size:0.88rem;color:var(--t-muted);line-height:1.85;}
+    .disclaimer-text strong{color:var(--t-secondary);}
+
+    /* ── Footer ── */
+    footer{border-top:1px solid var(--g-border);padding:2.5rem 2rem;position:relative;z-index:2;}
+    .foot-inner{max-width:1060px;margin:0 auto;display:flex;align-items:center;
+      justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+    .foot-logo{font-family:var(--font-head);font-weight:900;font-size:0.85rem;letter-spacing:0.12em;
+      color:var(--g-bright);opacity:0.6;}
+    .foot-links{display:flex;gap:1.2rem;flex-wrap:wrap;}
+    .foot-links a{font-size:0.78rem;color:var(--t-muted);transition:color var(--fast) var(--ease);}
+    .foot-links a:hover{color:var(--g-bright);}
+    .foot-copy{font-size:0.72rem;color:var(--t-muted);}
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">🍉</div>
+      <div>
+        <span class="logo-name">SUIKA LEAGUE</span>
+        <span class="logo-sub">VRChat Community</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tournaments.html">Tournaments</a></li>
+      <li><a href="players.html">Players</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="magazine.html">Magazine</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="support.html" class="active">Support</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="https://discord.gg/suikaleague" target="_blank" rel="noopener" class="btn btn-discord">Discord</a>
+    </div>
+    <div class="hamburger" onclick="toggleDrawer()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <ul class="mobile-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="tournaments.html">Tournaments</a></li>
+    <li><a href="players.html">Players</a></li>
+    <li><a href="leaderboard.html">Leaderboard</a></li>
+    <li><a href="magazine.html">Magazine</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="support.html">Support</a></li>
+  </ul>
+</div>
+
+<div class="page">
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">🍉 Community Project</div>
+        <h1 class="hero-title">Support<br><em>Suika League</em></h1>
+        <p class="hero-sub">Suika League is built through the time, creativity, and contributions of its members. If the community has given you something and you want to help us build more, here is how you can contribute.</p>
+        <div class="hero-cta-row">
+          <a href="#contribute" class="btn-support">🍉 Contribute via PayPal</a>
+          <span class="hero-note">Completely optional · Never required to participate</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Where support goes ── -->
+  <section class="s-uses">
+    <div class="wrap">
+      <div class="s-header">
+        <div class="s-label">Transparency</div>
+        <h2 class="s-title">Where support goes</h2>
+        <p class="s-sub">Community support goes back into Suika League. Here is what it helps us build and maintain.</p>
+      </div>
+      <div class="use-grid">
+        <div class="use-card">
+          <div class="use-icon">🌐</div>
+          <div>
+            <div class="use-name">Website &amp; Domain</div>
+            <div class="use-desc">suikaleague.com, hosting, and future website tools that keep the league visible and accessible.</div>
+          </div>
+        </div>
+
+
+        <div class="use-card">
+          <div class="use-icon">🏆</div>
+          <div>
+            <div class="use-name">Events &amp; Tournaments</div>
+            <div class="use-desc">Prizes, event materials, and resources to keep competitive community activities running.</div>
+          </div>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">🤖</div>
+          <div>
+            <div class="use-name">Community Infrastructure</div>
+            <div class="use-desc">Discord development, tools, and the technical resources that power our community systems.</div>
+          </div>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">📸</div>
+          <div>
+            <div class="use-name">Media &amp; Content</div>
+            <div class="use-desc">The website magazine, player features, graphics, and promotional materials that tell our story.</div>
+          </div>
+        </div>
+        <div class="use-card">
+          <div class="use-icon">🍉</div>
+          <div>
+            <div class="use-name">Future Community Projects</div>
+            <div class="use-desc">New ideas that directly support Suika League and its members — decided as the community grows.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Optional + Other Contributions ── -->
+  <section class="s-optional">
+    <div class="wrap">
+      <div class="optional-box">
+        <div>
+          <div class="opt-kicker">It is always optional</div>
+          <h2 class="opt-heading">Supporting is never required</h2>
+          <div class="opt-body">
+            <p>Being part of Suika League has never required payment. Every player, member, and community participant is valued regardless of whether they contribute financially.</p>
+            <p>We built this league around shared love of a game and each other. <strong>That does not change.</strong></p>
+          </div>
+        </div>
+        <div>
+          <div class="opt-kicker">Contribution comes in many forms</div>
+          <h2 class="opt-heading" style="margin-bottom:0.8rem;">Money is just one path</h2>
+          <div class="contrib-list">
+            <div class="contrib-item">
+              <div class="contrib-dot">✦</div>
+              <div><strong>Teaching players</strong> — sharing technique, knowledge and time</div>
+            </div>
+
+            <div class="contrib-item">
+              <div class="contrib-dot">✦</div>
+              <div><strong>Creating assets</strong> — artwork, graphics, tools that help the community</div>
+            </div>
+            <div class="contrib-item">
+              <div class="contrib-dot">✦</div>
+              <div><strong>Hosting events</strong> — organising tournaments and community activities</div>
+            </div>
+            <div class="contrib-item">
+              <div class="contrib-dot">✦</div>
+              <div><strong>Helping newcomers</strong> — welcoming and integrating new members</div>
+            </div>
+            <div class="contrib-item">
+              <div class="contrib-dot">✦</div>
+              <div><strong>Making media</strong> — content that represents and grows the league</div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Support Action / PayPal ── -->
+  <section class="s-action" id="contribute">
+    <div class="wrap">
+      <div class="action-inner">
+        <div class="s-label" style="text-align:center;">Contribute</div>
+        <h2 class="s-title" style="text-align:center;font-size:clamp(1.5rem,3vw,2rem);">Support Suika League</h2>
+        <p style="text-align:center;font-size:0.93rem;color:var(--t-secondary);line-height:1.75;margin-top:0.5rem;">
+          If Suika League has given you something and you want to help us build more, you can contribute via PayPal. Any amount is appreciated.
+        </p>
+        <div class="paypal-box">
+          <div class="paypal-logo">Via PayPal</div>
+          <p class="paypal-label">Your contribution goes directly toward keeping Suika League running and growing. You can choose any amount that feels right to you.</p>
+          <a href="https://paypal.me/GrasmanYuliana" target="_blank" rel="noopener" class="btn-paypal">
+            🍉 &nbsp;Contribute via PayPal
+          </a>
+          <div class="paypal-fine">PayPal supports most currencies. Contributions are voluntary gifts to the community project, not purchases of any product or service.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Transparency Timeline ── -->
+  <section class="s-transparency">
+    <div class="wrap">
+      <div class="s-header">
+        <div class="s-label">Accountability</div>
+        <h2 class="s-title">Where support has gone</h2>
+        <p class="transparency-intro">We want community support to go back into Suika League. As projects develop, we share major community-funded expenses and what they helped us create. This list will grow.</p>
+      </div>
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-year">2024</div>
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-name">suikaleague.com domain <span class="tl-badge badge-done">✓ Done</span></div>
+            <div class="tl-note">Domain registered to give the league a permanent home online.</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2025</div>
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-name">SL Bot assets <span class="tl-badge badge-done">✓ Done</span></div>
+            <div class="tl-note">Community bot development and infrastructure to support league operations.</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2026</div>
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-name">Website rebuild <span class="tl-badge badge-done">✓ Done</span></div>
+            <div class="tl-note">Full website launched — player profiles, magazine, leaderboard, tournament history.</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2026</div>
+          <div class="tl-dot future"></div>
+          <div class="tl-content">
+            <div class="tl-name">Tournament prizes <span class="tl-badge badge-soon">Upcoming</span></div>
+            <div class="tl-note">Community-funded prizes for official Suika League tournaments.</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">Future</div>
+          <div class="tl-dot future"></div>
+          <div class="tl-content">
+            <div class="tl-name">Suika League VRChat World <span class="tl-badge badge-future">Future goal</span></div>
+            <div class="tl-note">Building our own VRChat space — a dedicated home for the league and its community.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── GOD of Suika ── -->
+  <section style="padding:65px 0;border-bottom:1px solid var(--g-border);position:relative;z-index:2;">
+    <div class="wrap">
+      <div style="max-width:900px;margin:0 auto;">
+        <div class="s-header" style="margin-bottom:2rem;">
+          <div class="s-label">Patron Recognition</div>
+          <h2 class="s-title" style="font-size:clamp(1.5rem,3vw,2rem);">GOD of Suika</h2>
+          <p class="s-sub" style="max-width:620px;">A unique profile and role reserved for those who make a significant financial contribution toward building Suika League.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;">
+          <!-- GOD profile card preview -->
+          <div style="background:linear-gradient(160deg,rgba(255,215,0,0.07) 0%,rgba(255,165,0,0.04) 50%,rgba(251,191,36,0.06) 100%);
+            border:1.5px solid rgba(251,191,36,0.45);border-radius:var(--radius-l);padding:2rem;
+            box-shadow:0 0 40px rgba(251,191,36,0.08),0 0 80px rgba(255,165,0,0.04);">
+            <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1.2rem;">
+              <span style="font-size:1.8rem;">👑</span>
+              <div>
+                <div style="font-family:var(--font-head);font-weight:900;font-size:1.05rem;
+                  background:linear-gradient(90deg,#fbbf24,#f59e0b,#fde68a,#fbbf24);
+                  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+                  GOD of Suika
+                </div>
+                <div style="font-size:0.68rem;color:var(--t-muted);letter-spacing:0.1em;text-transform:uppercase;font-family:var(--font-head);">
+                  Patron Profile
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.55rem;">
+              <div style="display:flex;align-items:center;gap:0.6rem;font-size:0.85rem;color:var(--t-secondary);">
+                <span style="color:var(--gold);">✦</span> Unique golden profile page with special visual treatment
+              </div>
+              <div style="display:flex;align-items:center;gap:0.6rem;font-size:0.85rem;color:var(--t-secondary);">
+                <span style="color:var(--gold);">✦</span> GOD of Suika role and badge in the community
+              </div>
+              <div style="display:flex;align-items:center;gap:0.6rem;font-size:0.85rem;color:var(--t-secondary);">
+                <span style="color:var(--gold);">✦</span> Named in the Suika League supporters record
+              </div>
+              <div style="display:flex;align-items:center;gap:0.6rem;font-size:0.85rem;color:var(--t-secondary);">
+                <span style="color:var(--gold);">✦</span> Bio, custom quote, and contribution noted on profile
+              </div>
+              <div style="display:flex;align-items:center;gap:0.6rem;font-size:0.85rem;color:var(--t-secondary);">
+                <span style="color:var(--gold);">✦</span> Completely separate from VIP and Premium
+              </div>
+            </div>
+          </div>
+          <!-- Explanation -->
+          <div style="padding:0.5rem 0;">
+            <p style="font-size:0.93rem;color:var(--t-secondary);line-height:1.85;margin-bottom:0.9rem;">
+              GOD of Suika is not earned through gameplay or editorial selection — it is a mark of patronage, awarded to those whose financial contribution makes a meaningful difference to what Suika League can build.
+            </p>
+            <p style="font-size:0.93rem;color:var(--t-secondary);line-height:1.85;margin-bottom:0.9rem;">
+              It does not grant moderation power, leaderboard advantages, or influence over community decisions. It is recognition — a way of saying <em style="color:var(--t-primary);">this person helped build this.</em>
+            </p>
+            <p style="font-size:0.93rem;color:var(--t-secondary);line-height:1.85;margin-bottom:1.2rem;">
+              If you contribute significantly and want to be recognised as a GOD of Suika, reach out to Afra on Discord after supporting.
+            </p>
+            <a href="https://discord.gg/suikaleague" target="_blank" rel="noopener"
+              style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(251,191,36,0.1);
+              color:var(--gold);border:1.5px solid rgba(251,191,36,0.3);border-radius:50px;
+              padding:0.6rem 1.4rem;font-family:var(--font-head);font-weight:700;font-size:0.78rem;
+              letter-spacing:0.07em;text-transform:uppercase;transition:all 0.2s ease;">
+              👑 Contact Afra on Discord
+            </a>
+            <p style="font-size:0.72rem;color:var(--t-muted);margin-top:0.75rem;font-style:italic;">
+              Minimum contribution threshold applies — contact for details.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Disclaimer ── -->
+  <section class="s-disclaimer">
+    <div class="wrap">
+      <div class="disclaimer-box">
+        <div class="disclaimer-title">What support does and does not buy</div>
+        <p class="disclaimer-text" style="margin-bottom:1rem;">
+          <strong>VIP cannot be purchased. Premium cannot be purchased.</strong> These are earned — VIP through long-term contribution to the community, Premium through editorial recognition of a player's story or achievement. Neither is available for purchase. Financial support does not affect leaderboard position, moderation access, or standing within the community.
+        </p>
+        <p class="disclaimer-text" style="padding-top:0.9rem;border-top:1px solid rgba(74,222,128,0.08);">
+          There is one exception: <strong style="color:var(--t-primary);">GOD of Suika</strong> — a special profile and role available to those who make a significant financial contribution toward building the league. It is entirely separate from VIP and Premium, carries its own unique visual identity, and exists specifically to recognise patrons who directly fund league development. It does not grant moderation power or competitive advantages — it is a mark of patronage.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- .page -->
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">SUIKA LEAGUE</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="players.html">Players</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="magazine.html">Magazine</a>
+      <a href="about.html">About</a>
+      <a href="support.html">Support</a>
+    </div>
+    <div class="foot-copy">&copy; 2024 Suika League &middot; Founded by Afra</div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+  function toggleDrawer() {
+    document.getElementById('mobileDrawer').classList.toggle('open');
+  }
+</script>
+</body>
+</html>
