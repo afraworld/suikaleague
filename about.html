@@ -192,6 +192,59 @@
     .phil-closing::after{content:'"';opacity:0.4;font-size:1.5em;line-height:0;vertical-align:-0.25em;}
 
     /* ════════════════════════════════════════
+       SECTION 4b — GOALS & MISSION
+    ════════════════════════════════════════ */
+    .s-goals{position:relative;z-index:2;padding:80px 0;border-bottom:1px solid var(--g-border);}
+    .goals-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+    @media(max-width:800px){.goals-grid{grid-template-columns:1fr;gap:2rem;}}
+
+    /* Big target card */
+    .goal-target-card{background:linear-gradient(135deg,rgba(10,40,20,0.7),rgba(6,9,10,0.9));
+      border:1px solid var(--g-border2);border-radius:var(--radius-l);
+      padding:2.5rem 2.8rem;position:relative;overflow:hidden;}
+    .goal-target-card::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;
+      border-radius:50%;background:rgba(74,222,128,0.04);pointer-events:none;}
+    .goal-eyebrow{font-family:var(--font-head);font-size:0.63rem;font-weight:700;letter-spacing:0.18em;
+      text-transform:uppercase;color:var(--g-bright);opacity:0.75;margin-bottom:0.5rem;}
+    .goal-number{font-family:var(--font-head);font-size:clamp(4rem,10vw,7rem);font-weight:900;
+      color:var(--g-bright);line-height:1;margin-bottom:0.2rem;
+      text-shadow:0 0 60px rgba(74,222,128,0.2);}
+    .goal-unit{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--t-secondary);
+      letter-spacing:0.08em;text-transform:uppercase;margin-bottom:1.5rem;}
+    .goal-deadline{display:inline-flex;align-items:center;gap:0.5rem;
+      background:rgba(74,222,128,0.06);border:1px solid var(--g-border);
+      border-radius:50px;padding:0.35rem 0.85rem;
+      font-family:var(--font-head);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+      color:var(--t-secondary);margin-bottom:1.5rem;}
+    .goal-deadline span{color:var(--g-bright);}
+
+    /* Progress bar */
+    .progress-wrap{margin-bottom:1rem;}
+    .progress-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.5rem;}
+    .progress-label{font-family:var(--font-head);font-size:0.62rem;font-weight:700;letter-spacing:0.1em;
+      text-transform:uppercase;color:var(--t-muted);}
+    .progress-pct{font-family:var(--font-head);font-size:0.75rem;font-weight:800;color:var(--g-bright);}
+    .progress-bar{height:6px;background:rgba(74,222,128,0.1);border-radius:3px;overflow:hidden;}
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--g-mid),var(--g-bright));
+      border-radius:3px;transition:width 1.2s var(--ease);}
+    .progress-note{font-size:0.75rem;color:var(--t-muted);margin-top:0.4rem;}
+
+    /* Right side: mission text + accountability */
+    .goals-text .s-label{margin-bottom:0.4rem;}
+    .goals-text .s-title{margin-bottom:1rem;}
+    .goals-body p{font-size:0.95rem;color:var(--t-secondary);line-height:1.85;margin-bottom:0.9rem;}
+    .goals-body p:last-child{margin-bottom:0;}
+    .goals-body strong{color:var(--t-primary);}
+
+    /* Accountability box */
+    .accountability-box{margin-top:1.5rem;background:rgba(251,191,36,0.05);
+      border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius-m);padding:1.2rem 1.4rem;}
+    .acc-label{font-family:var(--font-head);font-size:0.63rem;font-weight:700;letter-spacing:0.14em;
+      text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;}
+    .acc-text{font-size:0.85rem;color:var(--t-secondary);line-height:1.7;}
+    .acc-text strong{color:var(--t-primary);}
+
+    /* ════════════════════════════════════════
        SECTION 5 — GET INVOLVED  (button-first)
     ════════════════════════════════════════ */
     .s-involve{position:relative;z-index:2;padding:70px 0;border-bottom:1px solid var(--g-border);}
@@ -519,6 +572,54 @@
   </section>
 
   <!-- ══════════════════════════════
+       § 4b — GOALS & MISSION
+  ══════════════════════════════ -->
+  <section class="s-goals">
+    <div class="wrap">
+      <div class="goals-grid">
+
+        <!-- Left: big target number + progress -->
+        <div class="goal-target-card">
+          <div class="goal-eyebrow">Community Goal · 2026</div>
+          <div class="goal-number">700</div>
+          <div class="goal-unit">Members</div>
+          <div class="goal-deadline">⏳ Deadline: <span>December 31, 2026</span></div>
+
+          <div class="progress-wrap">
+            <div class="progress-header">
+              <span class="progress-label">Current Progress</span>
+              <!-- Update this percentage as the community grows -->
+              <span class="progress-pct" id="pct">—%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="fill" style="width:0%"></div>
+            </div>
+            <div class="progress-note" id="pnote">Update member count to track progress.</div>
+          </div>
+        </div>
+
+        <!-- Right: mission text + accountability -->
+        <div class="goals-text">
+          <div class="s-label">Goals &amp; Mission</div>
+          <h2 class="s-title">Where We're Going</h2>
+          <div class="goals-body">
+            <p>Suika League was built to be more than a game group. <strong>Our goal is to grow into the largest and most respected competitive Suika Game community in VRChat</strong> — a place where players improve, contributors are recognized, and everyone belongs to something real.</p>
+            <p>700 members by the end of 2026 is a community target — not just a number. It means more players to learn from, more tournaments, more stories, more people who feel at home here.</p>
+            <p>This isn't Afra's goal for the community. <strong>It's the community's goal for itself.</strong> Every member who invites someone, teaches someone, or shows up consistently is part of reaching it.</p>
+          </div>
+
+          <div class="accountability-box">
+            <div class="acc-label">⚖️ Community Accountability</div>
+            <div class="acc-text">If we don't reach 700 by December 31, 2026, <strong>we face a community consequence — decided together.</strong> Not a punishment from above, but something we agreed to as a group. That accountability is what makes the goal real.<br><br>
+            <em style="color:var(--t-muted);font-size:0.8rem;">The specific consequence will be announced and voted on by the community in Discord.</em></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
        § 5 — GET INVOLVED
   ══════════════════════════════ -->
   <section class="s-involve">
@@ -666,6 +767,18 @@
   function toggleDrawer() {
     document.getElementById('mobileDrawer').classList.toggle('open');
   }
+
+  // ── Community goal progress ──
+  // UPDATE this number when member count changes
+  const CURRENT_MEMBERS = 87; // ← change this
+  const GOAL = 700;
+  const pct = Math.min(100, Math.round((CURRENT_MEMBERS / GOAL) * 100));
+  setTimeout(() => {
+    document.getElementById('fill').style.width = pct + '%';
+    document.getElementById('pct').textContent = pct + '%';
+    document.getElementById('pnote').textContent =
+      CURRENT_MEMBERS + ' of ' + GOAL + ' members — ' + (GOAL - CURRENT_MEMBERS) + ' to go.';
+  }, 300);
 </script>
 </body>
 </html>
