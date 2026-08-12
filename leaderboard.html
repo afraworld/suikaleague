@@ -201,7 +201,13 @@
 <div class="page-hero">
   <div class="page-hero-eyebrow">👑 Rankings</div>
   <h1 class="page-hero-title">Leaderboard</h1>
-  <p class="page-hero-sub">The top Suika Game players in the VRChat community — ranked by best score.</p>
+  <p class="page-hero-sub">The top Suika Game players in the VRChat world — ranked by best score.</p>
+  <div style="margin-top:1.5rem;display:inline-block;background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.28);border-radius:14px;padding:0.9rem 1.6rem;max-width:560px;">
+    <div style="font-family:'Exo 2',sans-serif;font-weight:800;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:0.35rem;">🎯 Our Goal</div>
+    <p style="font-size:0.92rem;color:#edfff3;line-height:1.65;margin:0;">
+      Suika League is on a mission to place and <strong style="color:#fbbf24;">keep our members in the Top 30 of the VRChat world rankings</strong>. Every score counts. Every member represents the league.
+    </p>
+  </div>
 </div>
 
 <!-- MAIN CONTENT -->
@@ -210,8 +216,8 @@
 
     <!-- Season Tabs -->
     <div class="season-tabs" id="seasonTabs">
-      <div class="s-tab active" onclick="setTab(this,'current')">Current Season</div>
-      <div class="s-tab" onclick="setTab(this,'alltime')">All-Time</div>
+      <div class="s-tab active" onclick="setTab(this,'current')">🌐 Global Rankings</div>
+      <div class="s-tab" onclick="setTab(this,'members')">🏅 Members Only</div>
     </div>
 
     <!-- Podium -->
@@ -287,9 +293,13 @@ const LEADERBOARD = {
     { rank:30, name:'TheBurntRose',     avatar:null, emoji:'🥀', score:'3,830',  role:'regular',     member:false, profileLink:'players.html' },
     { rank:31, name:'ᨒVEEᨒ',          avatar:null, emoji:'💜', score:'3,812',  role:'regular',     member:false, profileLink:'players.html' },
   ],
-  alltime: [], // will mirror current as placeholder
+  // Members-only leaderboard — filtered & re-ranked from current
+  members: [],
 };
-LEADERBOARD.alltime = LEADERBOARD.current; // placeholder
+// Build members list: only member:true entries, re-ranked 1-N
+LEADERBOARD.members = LEADERBOARD.current
+  .filter(p => p.member)
+  .map((p, i) => ({ ...p, rank: i + 1 }));
 
 const ROLE_MAP = {
   champion:   { label:'🏆 #1 Player',       cls:'role-champion'   },
@@ -299,7 +309,7 @@ const ROLE_MAP = {
   vip:        { label:'💎 VIP',              cls:'role-champion'   },
 };
 
-let activeSet = 'current';
+let activeSet = 'current'; // 'current' = global VRChat ranking | 'members' = SL members only
 
 function setTab(el, key) {
   document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('active'));
