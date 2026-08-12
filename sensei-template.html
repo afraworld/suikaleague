@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sensei [NAME] — Suika Sensei · Suika League</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900&family=Playfair+Display:ital,wght@1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Sensei palette — warm amber/gold instead of green */
+      --bg-base:#07060a;
+      --bg-card:rgba(18,14,22,0.88);
+      --s-bright:#f59e0b;      /* amber */
+      --s-mid:#d97706;
+      --s-glow:rgba(245,158,11,0.4);
+      --s-subtle:rgba(245,158,11,0.07);
+      --s-border:rgba(245,158,11,0.18);
+      --s-border2:rgba(245,158,11,0.4);
+      --avail:#4ade80;          /* green = available */
+      --avail-bg:rgba(74,222,128,0.08);
+      --avail-border:rgba(74,222,128,0.25);
+      --discord:#5865F2;
+      --t-primary:#fff9ed;
+      --t-secondary:#a09070;
+      --t-muted:#5a4e38;
+      --radius-s:8px;--radius-m:14px;--radius-l:22px;
+      --ease:cubic-bezier(0.4,0,0.2,1);--fast:0.2s;
+      --font-head:'Exo 2',system-ui,sans-serif;
+      --font-serif:'Playfair Display',Georgia,serif;
+      --font-body:'Inter',system-ui,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--bg-base);color:var(--t-primary);overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+
+    /* Warm ambient glow — amber, not green */
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 60% 50% at 55% 15%,rgba(120,70,10,0.18) 0%,transparent 65%),
+                 radial-gradient(ellipse 35% 30% at 10% 80%,rgba(90,40,5,0.1) 0%,transparent 60%);}
+
+    h1,h2,h3{font-family:var(--font-head);font-weight:800;line-height:1.15;}
+
+    /* ── Nav ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;padding:0 2rem;
+      background:rgba(5,4,8,0.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--s-border);}
+    .nav.scrolled{background:rgba(4,3,6,0.98);}
+    .nav-inner{width:100%;max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+    .logo-mark{width:40px;height:40px;background:var(--s-subtle);border:1px solid var(--s-border);border-radius:var(--radius-m);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+    .logo-name{font-family:var(--font-head);font-weight:900;font-size:1rem;color:var(--s-bright);letter-spacing:0.06em;display:block;}
+    .logo-sub{font-family:var(--font-head);font-weight:600;font-size:0.55rem;color:var(--t-muted);letter-spacing:0.18em;text-transform:uppercase;display:block;}
+    .nav-links{display:flex;align-items:center;gap:0.1rem;list-style:none;flex:1;}
+    .nav-links a{display:block;padding:0.45rem 0.7rem;font-family:var(--font-head);font-weight:600;font-size:0.78rem;
+      letter-spacing:0.05em;text-transform:uppercase;color:var(--t-secondary);border-radius:var(--radius-s);
+      transition:color var(--fast) var(--ease),background var(--fast) var(--ease);}
+    .nav-links a:hover,.nav-links a.active{color:var(--s-bright);background:var(--s-subtle);}
+    .nav-actions{margin-left:auto;}
+    .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1.2rem;
+      font-family:var(--font-head);font-weight:700;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;
+      border:none;border-radius:50px;cursor:pointer;transition:all var(--fast) var(--ease);}
+    .btn-discord{background:var(--discord);color:#fff;}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem;margin-left:auto;}
+    .hamburger span{width:20px;height:2px;background:var(--t-primary);border-radius:2px;}
+    @media(max-width:900px){.nav-links{display:none;}.hamburger{display:flex;}}
+
+    /* ── Page wrap ── */
+    .page{padding-top:68px;}
+    .wrap{max-width:1000px;margin:0 auto;padding:0 2rem;}
+
+    /* ══════════════════════════════════
+       HERO — Sensei identity
+    ══════════════════════════════════ */
+    .sensei-hero{position:relative;z-index:2;padding:90px 0 50px;}
+
+    .hero-back{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--font-head);font-size:0.68rem;
+      font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t-muted);margin-bottom:1.4rem;
+      transition:color var(--fast) var(--ease);}
+    .hero-back:hover{color:var(--s-bright);}
+
+    .hero-grid{display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:start;}
+
+    /* Avatar with sensei ring */
+    .avi-wrap{position:relative;display:inline-block;}
+    .avi-ph{width:190px;height:190px;border-radius:var(--radius-l);
+      background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(180,100,5,0.06));
+      border:2px solid var(--s-border2);
+      display:flex;align-items:center;justify-content:center;font-size:4.5rem;
+      box-shadow:0 0 0 6px rgba(245,158,11,0.06),0 0 40px rgba(245,158,11,0.08);}
+    /* "SENSEI" arc badge under avatar */
+    .avi-badge{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
+      background:linear-gradient(90deg,var(--s-mid),var(--s-bright));
+      color:#000;font-family:var(--font-head);font-size:0.6rem;font-weight:900;
+      letter-spacing:0.2em;text-transform:uppercase;
+      padding:0.3rem 1rem;border-radius:50px;white-space:nowrap;
+      box-shadow:0 2px 12px rgba(245,158,11,0.4);}
+
+    /* Right side hero text */
+    .hero-role{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.2em;
+      text-transform:uppercase;color:var(--s-bright);opacity:0.8;margin-bottom:0.35rem;margin-top:0.5rem;}
+    .hero-name{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;color:var(--t-primary);
+      margin-bottom:0.3rem;line-height:1.05;}
+    .hero-handle{font-family:var(--font-head);font-size:0.85rem;color:var(--t-muted);margin-bottom:1rem;}
+
+    /* Availability badge — most important element */
+    .avail-badge{display:inline-flex;align-items:center;gap:0.5rem;
+      background:var(--avail-bg);border:1.5px solid var(--avail-border);border-radius:50px;
+      padding:0.4rem 1rem;margin-bottom:1.2rem;cursor:default;}
+    .avail-dot{width:8px;height:8px;border-radius:50%;background:var(--avail);
+      box-shadow:0 0 0 3px rgba(74,222,128,0.2);animation:pulse 2s infinite;}
+    .avail-text{font-family:var(--font-head);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;
+      text-transform:uppercase;color:var(--avail);}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(74,222,128,0.2);}50%{box-shadow:0 0 0 6px rgba(74,222,128,0.05);}}
+
+    /* Unavailable variant */
+    .avail-badge.unavail{background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.1);}
+    .avail-badge.unavail .avail-dot{background:#6b7280;animation:none;box-shadow:none;}
+    .avail-badge.unavail .avail-text{color:#6b7280;}
+
+    /* Teaching tags */
+    .tag-row{display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.4rem;}
+    .tag{padding:0.28rem 0.75rem;border-radius:50px;font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;}
+    .tag-sensei{background:rgba(245,158,11,0.1);border:1px solid var(--s-border2);color:var(--s-bright);}
+    .tag-specialty{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--t-secondary);}
+
+    /* Teaching philosophy card */
+    .phil-card{background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(120,60,5,0.04));
+      border:1px solid var(--s-border);border-radius:var(--radius-l);
+      padding:1.5rem 1.7rem;margin-bottom:1.4rem;}
+    .phil-label{font-family:var(--font-head);font-size:0.63rem;font-weight:700;letter-spacing:0.14em;
+      text-transform:uppercase;color:var(--s-bright);opacity:0.8;margin-bottom:0.6rem;}
+    .phil-quote{font-family:var(--font-serif);font-size:1.15rem;font-style:italic;
+      color:var(--t-primary);line-height:1.6;margin-bottom:0.4rem;}
+    .phil-attr{font-size:0.78rem;color:var(--t-muted);}
+
+    /* Score (secondary) */
+    .score-strip{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+    .score-item{}
+    .score-label{font-family:var(--font-head);font-size:0.6rem;font-weight:700;letter-spacing:0.12em;
+      text-transform:uppercase;color:var(--t-muted);margin-bottom:0.15rem;}
+    .score-val{font-family:var(--font-head);font-size:1.2rem;font-weight:900;color:var(--t-secondary);}
+    .score-note{font-size:0.72rem;color:var(--t-muted);margin-top:0.1rem;}
+
+    @media(max-width:700px){.hero-grid{grid-template-columns:1fr;gap:2rem;}
+      .avi-ph{width:140px;height:140px;}}
+
+    /* ══════════════════════════════════
+       STUDENTS SECTION — the heart of a Sensei profile
+    ══════════════════════════════════ */
+    .s-students{position:relative;z-index:2;padding:50px 0;border-top:1px solid var(--s-border);}
+    .section-label{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.18em;
+      text-transform:uppercase;color:var(--s-bright);opacity:0.75;margin-bottom:0.4rem;}
+    .section-title{font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:900;color:var(--t-primary);margin-bottom:0.5rem;}
+    .section-sub{font-size:0.9rem;color:var(--t-secondary);line-height:1.7;max-width:600px;margin-bottom:2rem;}
+
+    .students-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;}
+    .student-card{background:var(--bg-card);border:1px solid var(--s-border);border-radius:var(--radius-m);
+      padding:1.3rem 1.4rem;position:relative;overflow:hidden;
+      transition:border-color var(--fast) var(--ease),transform var(--fast) var(--ease);}
+    .student-card:hover{border-color:var(--s-border2);transform:translateY(-2px);}
+    .student-card::before{content:'';position:absolute;inset:0;opacity:0;
+      background:linear-gradient(135deg,var(--s-subtle),transparent 60%);
+      transition:opacity var(--fast) var(--ease);}
+    .student-card:hover::before{opacity:1;}
+    /* Rank ribbon */
+    .student-rank{position:absolute;top:1rem;right:1rem;font-family:var(--font-head);font-size:0.65rem;
+      font-weight:800;letter-spacing:0.1em;color:var(--s-bright);
+      background:var(--s-subtle);border:1px solid var(--s-border);
+      padding:0.2rem 0.55rem;border-radius:50px;}
+    .student-avi{font-size:2.2rem;margin-bottom:0.7rem;display:block;}
+    .student-name{font-family:var(--font-head);font-weight:800;font-size:1rem;color:var(--t-primary);margin-bottom:0.2rem;}
+    .student-score{font-family:var(--font-head);font-size:0.78rem;color:var(--t-secondary);margin-bottom:0.5rem;}
+    .student-lesson{font-size:0.78rem;color:var(--t-muted);line-height:1.55;font-style:italic;
+      border-top:1px solid rgba(245,158,11,0.1);padding-top:0.5rem;margin-top:0.3rem;}
+    .student-lesson::before{content:'"';}
+    .student-lesson::after{content:'"';}
+
+    /* Pending slot */
+    .student-card.pending{border-style:dashed;border-color:rgba(245,158,11,0.12);}
+    .student-card.pending::before{display:none;}
+    .student-pending-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;padding:1rem 0;gap:0.4rem;color:var(--t-muted);}
+    .student-pending-inner span{font-size:1.8rem;}
+    .student-pending-inner p{font-family:var(--font-head);font-size:0.68rem;letter-spacing:0.1em;
+      text-transform:uppercase;}
+
+    /* ══════════════════════════════════
+       WHAT I TEACH
+    ══════════════════════════════════ */
+    .s-teach{position:relative;z-index:2;padding:50px 0;border-top:1px solid var(--s-border);}
+    .teach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.75rem;margin-top:1.5rem;}
+    .teach-card{background:var(--bg-card);border:1px solid var(--s-border);border-radius:var(--radius-m);
+      padding:1.1rem 1.2rem;transition:border-color var(--fast) var(--ease);}
+    .teach-card:hover{border-color:var(--s-border2);}
+    .teach-icon{font-size:1.6rem;margin-bottom:0.5rem;display:block;}
+    .teach-name{font-family:var(--font-head);font-weight:800;font-size:0.85rem;color:var(--t-primary);margin-bottom:0.3rem;}
+    .teach-desc{font-size:0.78rem;color:var(--t-secondary);line-height:1.6;}
+
+    /* ══════════════════════════════════
+       REACH OUT — CTA
+    ══════════════════════════════════ */
+    .s-reach{position:relative;z-index:2;padding:50px 0 80px;border-top:1px solid var(--s-border);}
+    .reach-card{background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(88,101,242,0.06));
+      border:1px solid var(--s-border2);border-radius:var(--radius-l);
+      padding:2.8rem 3rem;display:flex;gap:3rem;align-items:center;}
+    .reach-text h3{font-size:clamp(1.2rem,2vw,1.6rem);font-weight:900;color:var(--t-primary);margin-bottom:0.6rem;}
+    .reach-text p{font-size:0.9rem;color:var(--t-secondary);line-height:1.75;max-width:480px;}
+    .reach-cta{flex-shrink:0;display:flex;flex-direction:column;gap:0.6rem;align-items:center;}
+    .btn-amber{background:linear-gradient(135deg,var(--s-mid),var(--s-bright));color:#000;
+      font-family:var(--font-head);font-weight:900;font-size:0.82rem;letter-spacing:0.06em;
+      text-transform:uppercase;padding:0.8rem 1.8rem;border-radius:50px;border:none;cursor:pointer;
+      transition:all var(--fast) var(--ease);box-shadow:0 4px 20px rgba(245,158,11,0.25);}
+    .btn-amber:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(245,158,11,0.4);}
+    .reach-note{font-size:0.7rem;color:var(--t-muted);text-align:center;}
+    @media(max-width:640px){.reach-card{flex-direction:column;padding:1.8rem;text-align:center;}}
+
+    /* ── Footer ── */
+    footer{position:relative;z-index:2;background:rgba(3,2,5,0.97);border-top:1px solid var(--s-border);padding:2rem;}
+    .foot-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .foot-logo{font-family:var(--font-head);font-weight:900;font-size:0.9rem;color:var(--s-bright);letter-spacing:0.1em;}
+    .foot-links{display:flex;gap:1.2rem;flex-wrap:wrap;}
+    .foot-links a{font-size:0.75rem;color:var(--t-muted);letter-spacing:0.06em;text-transform:uppercase;}
+    .foot-links a:hover{color:var(--s-bright);}
+    .foot-copy{font-size:0.72rem;color:var(--t-muted);}
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><img src="logo-circle.png" alt="SL" style="width:34px;height:34px;border-radius:8px;object-fit:cover;"></div>
+      <div><span class="logo-name">SUIKA LEAGUE</span><span class="logo-sub">Official Community</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tournaments.html">Tournaments</a></li>
+      <li><a href="players.html" class="active">Players</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="magazine.html">Magazine</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="https://discord.gg/7frwwTJC54" class="btn btn-discord">💬 Join Discord</a>
+    </div>
+    <div class="hamburger" onclick="toggleDrawer()" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- ══════════════════════════════
+       HERO
+  ══════════════════════════════ -->
+  <section class="sensei-hero">
+    <div class="wrap">
+      <a href="players.html" class="hero-back">← Back to Players</a>
+
+      <div class="hero-grid">
+
+        <!-- Avatar -->
+        <div class="avi-wrap">
+          <div class="avi-ph">
+            <!-- Replace with: <img src="sensei-avatar.png" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-l);"> -->
+            🧑‍🏫
+          </div>
+          <div class="avi-badge">🎓 Suika Sensei</div>
+        </div>
+
+        <!-- Identity -->
+        <div>
+          <div class="hero-role">Suika Sensei</div>
+          <h1 class="hero-name">[SENSEI NAME]</h1>
+          <div class="hero-handle">Known in VRChat as [handle]</div>
+
+          <!-- AVAILABILITY — most visible element -->
+          <div class="avail-badge">
+            <!-- Change class to "avail-badge unavail" when not available -->
+            <div class="avail-dot"></div>
+            <span class="avail-text">Available to teach</span>
+          </div>
+
+          <!-- Teaching tags -->
+          <div class="tag-row">
+            <span class="tag tag-sensei">🎓 Suika Sensei</span>
+            <span class="tag tag-specialty">Positioning</span>
+            <span class="tag tag-specialty">Consistency</span>
+            <span class="tag tag-specialty">Beginner-friendly</span>
+          </div>
+
+          <!-- Philosophy / quote -->
+          <div class="phil-card">
+            <div class="phil-label">Teaching Philosophy</div>
+            <div class="phil-quote">[Insert their teaching philosophy or a quote about why they teach.]</div>
+            <div class="phil-attr">— [Sensei Name], Suika Sensei</div>
+          </div>
+
+          <!-- Score — secondary, not the focus -->
+          <div class="score-strip">
+            <div class="score-item">
+              <div class="score-label">Personal Best</div>
+              <div class="score-val">[SCORE]</div>
+              <div class="score-note">Active player</div>
+            </div>
+            <div class="score-item">
+              <div class="score-label">Students Coached</div>
+              <div class="score-val">3+</div>
+              <div class="score-note">Reached leaderboard</div>
+            </div>
+            <div class="score-item">
+              <div class="score-label">Member Since</div>
+              <div class="score-val">[YEAR]</div>
+              <div class="score-note">Suika League</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       STUDENTS
+  ══════════════════════════════ -->
+  <section class="s-students">
+    <div class="wrap">
+      <div class="section-label">Leaderboard Students</div>
+      <h2 class="section-title">Students Who Reached the Leaderboard</h2>
+      <p class="section-sub">These players were coached by [Sensei Name] and went on to achieve ranked scores in Suika League. Their success is part of what earned this Sensei profile.</p>
+
+      <div class="students-grid">
+
+        <!-- Student 1 -->
+        <div class="student-card">
+          <div class="student-rank">#[RANK]</div>
+          <span class="student-avi">🍉</span>
+          <div class="student-name">[Student Name]</div>
+          <div class="student-score">Best score: [SCORE]</div>
+          <div class="student-lesson">What they learned: [short note, e.g. "positioning and patience under pressure"]</div>
+        </div>
+
+        <!-- Student 2 -->
+        <div class="student-card">
+          <div class="student-rank">#[RANK]</div>
+          <span class="student-avi">🍉</span>
+          <div class="student-name">[Student Name]</div>
+          <div class="student-score">Best score: [SCORE]</div>
+          <div class="student-lesson">What they learned: [short note]</div>
+        </div>
+
+        <!-- Student 3 -->
+        <div class="student-card">
+          <div class="student-rank">#[RANK]</div>
+          <span class="student-avi">🍉</span>
+          <div class="student-name">[Student Name]</div>
+          <div class="student-score">Best score: [SCORE]</div>
+          <div class="student-lesson">What they learned: [short note]</div>
+        </div>
+
+        <!-- Pending slot example -->
+        <div class="student-card pending">
+          <div class="student-pending-inner">
+            <span>✨</span>
+            <p>Next student<br>in progress</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       WHAT I TEACH
+  ══════════════════════════════ -->
+  <section class="s-teach">
+    <div class="wrap">
+      <div class="section-label">Curriculum</div>
+      <h2 class="section-title">What [Sensei Name] Teaches</h2>
+
+      <div class="teach-grid">
+        <div class="teach-card">
+          <span class="teach-icon">🎯</span>
+          <div class="teach-name">Positioning</div>
+          <div class="teach-desc">Where to drop fruits to set up merges and avoid stacking problems early.</div>
+        </div>
+        <div class="teach-card">
+          <span class="teach-icon">🧘</span>
+          <div class="teach-name">Patience & Timing</div>
+          <div class="teach-desc">Learning when to wait, when to move fast, and how to stay calm under pressure.</div>
+        </div>
+        <div class="teach-card">
+          <span class="teach-icon">📈</span>
+          <div class="teach-name">Score Consistency</div>
+          <div class="teach-desc">Moving from lucky high scores to repeatable results above a certain floor.</div>
+        </div>
+        <div class="teach-card">
+          <span class="teach-icon">🍉</span>
+          <div class="teach-name">Watermelon Strategy</div>
+          <div class="teach-desc">How to set up conditions for a Watermelon and maximize points around it.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       REACH OUT
+  ══════════════════════════════ -->
+  <section class="s-reach">
+    <div class="wrap">
+      <div class="reach-card">
+        <div class="reach-text">
+          <h3>Want to learn from [Sensei Name]?</h3>
+          <p>If you're serious about improving your Suika Game score, [Sensei Name] is available for teaching sessions. Reach out in Discord — mention you saw their Sensei profile and what you want to work on.</p>
+        </div>
+        <div class="reach-cta">
+          <a href="https://discord.gg/7frwwTJC54" target="_blank" rel="noopener" class="btn-amber">Find in Discord</a>
+          <div class="reach-note">Look for [Sensei Name] in<br>#training or #general</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">SUIKA LEAGUE</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="players.html">Players</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="magazine.html">Magazine</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="foot-copy">&copy; 2024 Suika League · Founded by Afra</div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+  function toggleDrawer() {
+    document.getElementById('mobileDrawer')?.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
